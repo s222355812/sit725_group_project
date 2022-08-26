@@ -1,71 +1,71 @@
 [
   {
-    "image": "../images/common-conditions/heart-disease.webp",
+    "image": "images/common-conditions/heart-disease.webp",
     "link": "#!",
     "description": "Heart Disease"
   },
   {
-    "image": "../images/common-conditions/hypertension.webp",
+    "image": "images/common-conditions/hypertension.webp",
     "link": "#!",
     "description": "Hypertension"
   },
   {
-    "image": "../images/common-conditions/high-cholesterol.webp",
+    "image": "images/common-conditions/high-cholesterol.webp",
     "link": "#!",
     "description": "High Cholesterol"
   },
   {
-    "image": "../images/common-conditions/mental-health.webp",
+    "image": "images/common-conditions/mental-health.webp",
     "link": "#!",
     "description": "Mental Health"
   },
   {
-    "image": "../images/common-conditions/back-pain.webp",
+    "image": "images/common-conditions/back-pain.webp",
     "link": "#!",
     "description": "Back Pain"
   },
   {
-    "image": "../images/common-conditions/allergy.webp",
+    "image": "images/common-conditions/allergy.webp",
     "link": "#!",
     "description": "Allergy"
   },
   {
-    "image": "../images/common-conditions/pneumonia.webp",
+    "image": "images/common-conditions/pneumonia.webp",
     "link": "#!",
     "description": "Pneumonia"
   },
   {
-    "image": "../images/common-conditions/colds-and-flu.webp",
+    "image": "images/common-conditions/colds-and-flu.webp",
     "link": "#!",
     "description": "Colds & Flu"
   },
   {
-    "image": "../images/common-conditions/migrane.webp",
+    "image": "images/common-conditions/migrane.webp",
     "link": "#!",
     "description": "Migrane"
   },
   {
-    "image": "../images/common-conditions/acne-and-eczema.webp",
+    "image": "images/common-conditions/acne-and-eczema.webp",
     "link": "#!",
     "description": "Acne and Eczema"
   },
   {
-    "image": "../images/common-conditions/pregnancy.webp",
+    "image": "images/common-conditions/pregnancy.webp",
     "link": "#!",
     "description": "Pregnancy"
   },
   {
-    "image": "../images/common-conditions/diabetes.webp",
+    "image": "images/common-conditions/diabetes.webp",
     "link": "#!",
     "description": "Diabetes"
   },
   {
-    "image": "../images/common-conditions/arthritis-and-gout.webp",
+    "image": "images/common-conditions/arthritis-and-gout.webp",
     "link": "#!",
     "description": "Arthritis & Gout"
   },
   {
-    "image": "../images/common-conditions/cancer.webp",
+    "image": "images/common-conditions/cancer.webp",
     "link": "#!",
     "description": "Cancer"
   }

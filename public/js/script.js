@@ -1,48 +1,61 @@
 $(document).ready(() => {
   if (true) {
-    $("#header").load("header-doctor.html"); // Doctor's login?
+    $('#header').load('header-doctor.html'); // Doctor's login?
   } else if (!true) {
-    $("#header").load("header-patient.html"); // Patient login?
+    $('#header').load('header-patient.html'); // Patient login?
   } else {
-    $("#header").load("header-nologin.html"); // No login
+    $('#header').load('header-nologin.html'); // No login
   }
 
-  $("#footer").load("footer.html");
+  $('#footer').load('footer.html');
 
-  $.getScript("/js/dropdown.js");
+  $.getScript('js/dropdown.js');
 
-  $(".carousel").carousel({
+  $('.carousel').carousel({
     fullWidth: true,
     autoplay: true,
   });
   setInterval(function () {
-    $(".carousel").carousel("next");
+    $('.carousel').carousel('next');
   }, 5000);
 
-  const id1 = "specialisation";
-  const id2 = "specialisation-all";
-  const id3 = "common-conditions";
-  const id4 = "common-conditions-all";
-  const id5 = "common-services";
-  const id6 = "common-services-all";
+  // Add images on Hompage and View All Page
+  const id1 = 'specialisation';
+  const id2 = 'specialisation-all';
+  const id3 = 'common-conditions';
+  const id4 = 'common-conditions-all';
+  const id5 = 'common-services';
+  const id6 = 'common-services-all';
 
-  $.getJSON("js/json/specialisation.json", (data) => addEntry(data, id1));
-  $.getJSON("js/json/specialisation.json", (data) => addEntryAll(data, id2));
-  $.getJSON("js/json/common-conditions.json", (data) => addEntry(data, id3));
-  $.getJSON("js/json/common-conditions.json", (data) => addEntryAll(data, id4));
-  $.getJSON("js/json/common-services.json", (data) => addEntry(data, id5));
-  $.getJSON("js/json/common-services.json", (data) => addEntryAll(data, id6));
+  $.getJSON('js/json/specialisation.json', (data) =>
+    addServiceContent(data, id1)
+  );
+  $.getJSON('js/json/specialisation.json', (data) =>
+    addServiceContentAll(data, id2)
+  );
+  $.getJSON('js/json/common-conditions.json', (data) =>
+    addServiceContent(data, id3)
+  );
+  $.getJSON('js/json/common-conditions.json', (data) =>
+    addServiceContentAll(data, id4)
+  );
+  $.getJSON('js/json/common-services.json', (data) =>
+    addServiceContent(data, id5)
+  );
+  $.getJSON('js/json/common-services.json', (data) =>
+    addServiceContentAll(data, id6)
+  );
 
   const addText = (data) => {
     return `
           <div class="row col s6 m4 l3 center-align">
-            <div class="card small hoverable">
+            <div class="card small hoverable service-card">
               <div class="card-image">
                 <a href="${data.link}">
                   <img src="${data.image}" />
                 </a>
               </div>
-              <div class="card-content">
+              <div class="card-content service-content">
                 <p>${data.description}</p>
               </div>
             </div>
@@ -50,22 +63,22 @@ $(document).ready(() => {
         `;
   };
 
-  const addEntry = (data, id) => {
+  const addServiceContent = (data, id) => {
     for (let i = 0; i < 8; i++) {
       if (document.getElementById(id)) {
         document
           .getElementById(id)
-          .insertAdjacentHTML("beforebegin", addText(data[i]));
+          .insertAdjacentHTML('beforebegin', addText(data[i]));
       }
     }
   };
 
-  const addEntryAll = (data, id) => {
+  const addServiceContentAll = (data, id) => {
     data.forEach((data) => {
       if (document.getElementById(id)) {
         document
           .getElementById(id)
-          .insertAdjacentHTML("beforebegin", addText(data));
+          .insertAdjacentHTML('beforebegin', addText(data));
       }
     });
   };
