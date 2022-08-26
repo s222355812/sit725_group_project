@@ -84,13 +84,13 @@ img {
 }
 
 .carousel-item {
-  height: 5vmax;
+  height: 4vmax;
 }
 
-.card-content {
+.service-content {
   font-size: 1.5vmin;
 }
 
-.card {
+.service-card {
   max-height: 35vw;
 }
