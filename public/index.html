@@ -1,90 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Doctor Appointment</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doctor Appointment</title>
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<body>
-  <div id="header"></div>
-  <div id="search-bar">
-    <div class="bg-text1">Need Medical Appointment?</div>
-    <div class="bg-text2">Find a doctor and book your next visit</div>
-    <nav>
-      <div class="nav-wrapper hoverable">
-        <form>
-          <div class="input-field">
-            <input id="search" type="search" placeholder="Search for Doctor's name or Specialty..." />
-            <label class="label-icon" for="search"><i
-                class="large material-icons black-text text-darken-4">search</i></label>
-            <i class="material-icons">close</i>
-          </div>
-        </form>
-      </div>
-    </nav>
-  </div>
-
-  <div class="carousel carousel-slider">
-    <a class="carousel-item" href="#"><img src="images/carousel/bg-image1.webp" /></a>
-    <a class="carousel-item" href="#"><img src="images/carousel/bg-image2.webp" /></a>
-    <a class="carousel-item" href="#"><img src="images/carousel/bg-image3.webp" /></a>
-    <a class="carousel-item" href="#"><img src="images/carousel/bg-image4.webp" /></a>
-    <a class="carousel-item" href="#"><img src="images/carousel/bg-image5.webp" /></a>
-    <a class="carousel-item" href="#"><img src="images/carousel/bg-image6.webp" /></a>
-    <a class="carousel-item" href="#"><img src="images/carousel/bg-image7.webp" /></a>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col s6 bg-text3">Top Specialisation</div>
-      <div class="col s6 bg-text3 right-align">
-        <a href="specialisation.html" class="waves-effect waves-light btn-small blue text-darken-4 hoverable">View
-          All</a>
-      </div>
-      <div class="row" id="specialisation">
-        <span></span>
-      </div>
+  <body>
+    <div id="header"></div>
+    <div id="search-bar">
+      <div class="bg-text1">Need Medical Appointment?</div>
+      <div class="bg-text2">Find a doctor and book your next visit</div>
+      <nav>
+        <div class="nav-wrapper hoverable">
+          <form>
+            <div class="input-field">
+              <input
+                id="search"
+                type="search"
+                placeholder="Search for Doctor's name or Specialty..."
+              />
+              <label class="label-icon" for="search"
+                ><i class="large material-icons black-text text-darken-4"
+                  >search</i
+                ></label
+              >
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+      </nav>
     </div>
-  </div>
 
-  <div class="light-blue lighten-5">
+    <div class="carousel carousel-slider">
+      <a class="carousel-item" href="#"
+        ><img src="images/carousel/bg-image1.webp"
+      /></a>
+      <a class="carousel-item" href="#"
+        ><img src="images/carousel/bg-image2.webp"
+      /></a>
+      <a class="carousel-item" href="#"
+        ><img src="images/carousel/bg-image3.webp"
+      /></a>
+      <a class="carousel-item" href="#"
+        ><img src="images/carousel/bg-image4.webp"
+      /></a>
+      <a class="carousel-item" href="#"
+        ><img src="images/carousel/bg-image5.webp"
+      /></a>
+      <a class="carousel-item" href="#"
+        ><img src="images/carousel/bg-image6.webp"
+      /></a>
+      <a class="carousel-item" href="#"
+        ><img src="images/carousel/bg-image7.webp"
+      /></a>
+    </div>
+
     <div class="container">
       <div class="row">
-        <div class="col s6 bg-text3">Common Conditions</div>
+        <div class="col s6 bg-text3">Top Specialisation</div>
         <div class="col s6 bg-text3 right-align">
-          <a href="common-conditions.html" class="waves-effect waves-light btn-small blue text-darken-4 hoverable">View
-            All</a>
+          <a
+            href="specialisation.html"
+            class="waves-effect waves-light btn-small blue text-darken-4 hoverable"
+            >View All</a
+          >
         </div>
-        <div id="common-conditions" class="row"></div>
+        <div class="row" id="specialisation">
+          <span></span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col s6 bg-text3">Common Services</div>
-      <div class="col s6 bg-text3 right-align">
-        <a href="common-services.html" class="waves-effect waves-light btn-small blue text-darken-4 hoverable">View
-          All</a>
+    <div class="light-blue lighten-5">
+      <div class="container">
+        <div class="row">
+          <div class="col s6 bg-text3">Common Conditions</div>
+          <div class="col s6 bg-text3 right-align">
+            <a
+              href="common-conditions.html"
+              class="waves-effect waves-light btn-small blue text-darken-4 hoverable"
+              >View All</a
+            >
+          </div>
+          <div id="common-conditions" class="row"></div>
+        </div>
       </div>
-      <div id="common-services" class="row"></div>
     </div>
-  </div>
 
-  <div id="footer" class="row"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col s6 bg-text3">Common Services</div>
+        <div class="col s6 bg-text3 right-align">
+          <a
+            href="common-services.html"
+            class="waves-effect waves-light btn-small blue text-darken-4 hoverable"
+            >View All</a
+          >
+        </div>
+        <div id="common-services" class="row"></div>
+      </div>
+    </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="js/script.js"></script>
-</body>
+    <div id="footer" class="row"></div>
 
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
 </html>
