@@ -52,6 +52,11 @@ img {
   box-shadow: none;
   z-index: 2;
   margin-top: 2vmin;
+  width: 95%;
+}
+
+#nav-header {
+  height: 5vmax;
 }
 
 .btn-small {
@@ -99,4 +104,8 @@ img {
 
 .service-card {
   max-height: 35vw;
+}
+
+#doc-schedule {
+  width: auto;
 }

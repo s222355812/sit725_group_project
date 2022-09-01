@@ -1,28 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
     <title>Doctor Schedule</title>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="header"></div>
+    <div id="nav-header"></div>
+    <div class="container">
+      <h1>Manage Weekly Schedule</h1>
+      <p>Select Date</p>
 
+      <div class="row center-align">
+        <div class="input-field col s12 m6">
+          <input type="text" class="datepicker" />
+          <label>From</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+          <input type="text" class="datepicker" />
+          <label>To</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row center-align">
+      <div class="col s12 m6 l3 grey lighten-2 z-depth-5">
+        <div class="card-panel white-text blue lighten-1">Monday</div>
+        <div id="monday"></div>
+        <div class="right-align col s12 card-panel N/A transparent z-depth-0">
+          <a
+            id="add-mon"
+            class="btn-floating btn waves-effect waves-light white darken-2"
+            ><i class="material-icons black-text">add</i></a
+          >
+        </div>
+      </div>
+
+      <div class="col s12 m6 l3 grey lighten-2 z-depth-5">
+        <div class="card-panel white-text blue lighten-1">Tuesday</div>
+        <div id="tuesday"></div>
+        <div class="right-align col s12 card-panel N/A transparent z-depth-0">
+          <a
+            id="add-tue"
+            class="btn-floating btn waves-effect waves-light white darken-2"
+            ><i class="material-icons black-text">add</i></a
+          >
+        </div>
+      </div>
+
+      <div class="col s12 m6 l3 grey lighten-2 z-depth-5">
+        <div class="card-panel white-text blue lighten-1">Wednesday</div>
+        <div id="wednesday"></div>
+        <div class="right-align col s12 card-panel N/A transparent z-depth-0">
+          <a
+            id="add-wed"
+            class="btn-floating btn waves-effect waves-light white darken-2"
+            ><i class="material-icons black-text">add</i></a
+          >
+        </div>
+      </div>
+
+      <div class="col s12 m6 l3 grey lighten-2 z-depth-5">
+        <div class="card-panel white-text blue lighten-1">Thursday</div>
+        <div id="thursday"></div>
+        <div class="right-align col s12 card-panel N/A transparent z-depth-0">
+          <a
+            id="add-thu"
+            class="btn-floating btn waves-effect waves-light white darken-2"
+            ><i class="material-icons black-text">add</i></a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="row center-align">
+      <div class="col s12 m6 l3 grey lighten-2 z-depth-5">
+        <div class="card-panel white-text blue lighten-1">Friday</div>
+        <div id="friday"></div>
+        <div class="right-align col s12 card-panel N/A transparent z-depth-0">
+          <a
+            id="add-fri"
+            class="btn-floating btn waves-effect waves-light white darken-2"
+            ><i class="material-icons black-text">add</i></a
+          >
+        </div>
+      </div>
+
+      <div class="col s12 m6 l3 grey lighten-2 z-depth-5">
+        <div class="card-panel white-text blue lighten-1">Saturday</div>
+        <div id="saturday"></div>
+        <div class="right-align col s12 card-panel N/A transparent z-depth-0">
+          <a
+            id="add-sat"
+            class="btn-floating btn waves-effect waves-light white darken-2"
+            ><i class="material-icons black-text">add</i></a
+          >
+        </div>
+      </div>
+
+      <div class="col s12 m6 l3 grey lighten-3 z-depth-5">
+        <div class="card-panel white-text blue lighten-1">Sunday</div>
+        <div id="sunday"></div>
+        <div class="right-align col s12 card-panel N/A transparent z-depth-0">
+          <a
+            id="add-sun"
+            class="btn-floating btn waves-effect waves-light white darken-2"
+            ><i class="material-icons black-text">add</i></a
+          >
+        </div>
+      </div>
+    </div>
 
     <div id="footer" class="row"></div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- Compiled and minified JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/script.js"></script>
-</body>
-
+  </body>
 </html>
