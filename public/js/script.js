@@ -14,47 +14,50 @@ $(document).ready(() => {
 />
 <link rel="stylesheet" href="css/style.css" />
 `;
-  document.querySelector("head").insertAdjacentHTML("afterbegin", headHTML);
+  document.querySelector('head').insertAdjacentHTML('afterbegin', headHTML);
 
   // Load NavBar
   if (true) {
-    $("#header").load("header-doctor.html"); // Doctor's login?
+    $('#header').load('header-doctor.html'); // Doctor's login?
   } else if (!true) {
-    $("#header").load("header-patient.html"); // Patient login?
+    $('#header').load('header-patient.html'); // Patient login?
   } else {
-    $("#header").load("header-nologin.html"); // No login
+    $('#header').load('header-nologin.html'); // No login
   }
 
   // Load Footer
-  $("#footer").load("footer.html");
+  $('#footer').load('footer.html');
 
   // Add images on Hompage and View All Page
-  $.getScript("js/homepage.js");
+  $.getScript('js/homepage.js');
 
   // Load Navbar dropdown menu
-  $.getScript("js/dropdown.js");
+  $.getScript('js/dropdown.js');
 
   // Load doctor schedule
-  $.getScript("js/doc-sched.js");
+  $.getScript('js/doc-sched.js');
 
   // Load doctor appointment
-  $.getScript("js/doc-appointment.js");
+  $.getScript('js/doc-appointment.js');
+
+  // Load patient ratings
+  $.getScript('js/patient-ratings.js');
 
   // Load Carousel
-  $(".carousel").carousel({
+  $('.carousel').carousel({
     fullWidth: true,
     autoplay: true,
   });
   setInterval(function () {
-    $(".carousel").carousel("next");
+    $('.carousel').carousel('next');
   }, 5000);
 
   $(document).ready(function () {
-    $(".datepicker").datepicker();
+    $('.datepicker').datepicker();
   });
 
   $(document).ready(function () {
-    $(".timepicker").timepicker({
+    $('.timepicker').timepicker({
       showClearBtn: true,
     });
   });
