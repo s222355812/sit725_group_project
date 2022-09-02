@@ -27,6 +27,9 @@ const displayAppointment = (obj) => {
       </a>
       `;
     }
+
+    info.status = "booked";
+
     return `
           <div class="row card-panel grey lighten-2">
             <div>

@@ -6,7 +6,7 @@
       "profileLink": "!#",
       "from": "09:00 AM",
       "to": "09:30 AM",
-      "status": "confirm"
+      "status": "booked"
     },
     {
       "name": "Patient Name 2",
@@ -14,16 +14,32 @@
       "profileLink": "!#",
       "from": "09:30 AM",
       "to": "10:00 AM",
-      "status": "booked"
-    }
-  ],
-  "DD/MM/YYYY 2": [
+      "status": "confirm"
+    },
     {
       "name": "Patient Name 3",
       "picture": "images/sample-patient.jpg",
       "profileLink": "!#",
-      "from": "09:00 AM",
-      "to": "09:30 AM",
+      "from": "10:00 AM",
+      "to": "10:30 AM",
+      "status": "confirm"
+    }
+  ],
+  "DD/MM/YYYY 2": [
+    {
+      "name": "Patient Name 4",
+      "picture": "images/sample-patient.jpg",
+      "profileLink": "!#",
+      "from": "01:00 PM",
+      "to": "01:30 PM",
+      "status": "confirm"
+    },
+    {
+      "name": "Patient Name 5",
+      "picture": "images/sample-patient.jpg",
+      "profileLink": "!#",
+      "from": "02:00 PM",
+      "to": "02:30 PM",
       "status": "confirm"
     }
   ]
