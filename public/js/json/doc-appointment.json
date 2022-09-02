@@ -1,0 +1,30 @@
+{
+  "DD/MM/YYYY 1": [
+    {
+      "name": "Patient Name 1",
+      "picture": "images/sample-patient.jpg",
+      "profileLink": "!#",
+      "from": "09:00 AM",
+      "to": "09:30 AM",
+      "status": "confirm"
+    },
+    {
+      "name": "Patient Name 2",
+      "picture": "images/sample-patient.jpg",
+      "profileLink": "!#",
+      "from": "09:30 AM",
+      "to": "10:00 AM",
+      "status": "booked"
+    }
+  ],
+  "DD/MM/YYYY 2": [
+    {
+      "name": "Patient Name 3",
+      "picture": "images/sample-patient.jpg",
+      "profileLink": "!#",
+      "from": "09:00 AM",
+      "to": "09:30 AM",
+      "status": "confirm"
+    }
+  ]
+}

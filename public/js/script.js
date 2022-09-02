@@ -37,6 +37,9 @@ $(document).ready(() => {
   // Load doctor schedule
   $.getScript("js/doc-sched.js");
 
+  // Load doctor appointment
+  $.getScript("js/doc-appointment.js");
+
   // Load Carousel
   $(".carousel").carousel({
     fullWidth: true,
