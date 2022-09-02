@@ -27,6 +27,9 @@ https://www.freepik.com/free-photo/hands-unrecognizable-female-doctor-writing-fo
 sample-picture-doctor:
 https://www.freepik.com/premium-photo/young-asian-female-doctor-grey_13889727.htm#query=doctor&position=28&from_view=search
 
+sample-patient:
+https://img.freepik.com/premium-vector/man-women-different-avatars-illustration-vector-art-design_666656-112.jpg?w=826
+
 # Specialisation
 
 bg-specialisation:
