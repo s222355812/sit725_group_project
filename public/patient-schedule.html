@@ -1,0 +1,119 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="row">
+        <div id="search-bar-schedule">
+            <form>
+                <div class="input-field">
+                    <input id="search" type="search" placeholder="Search for Doctor's name" />
+                    <label class="label-icon" for="search">
+                        <i class="large material-icons black-text text-darken-4">search</i></label>
+                    <i class="material-icons" style="margin-top: 10px;">close</i>
+                </div>
+            </form>
+        </div>
+        <div class="input-field col s6 m6 l2" style="float: right;">
+            <input type="text" class="datepicker" />
+            <label> Select Date</label>
+        </div>
+
+        <div class="col s12 l12">
+            <div class="card">
+                <div class="infos">
+                    <div class="name">
+                        <h2>My Schedule</h2>
+                        <hr>
+                    </div>
+
+                    <div class="outer-schedule-box">
+                        <h6>DD/MM/YYYY
+                        </h6>
+                        <div class="inner-schedule-box">
+                            <div class="row">
+                                <div class="col l4">
+                                    <div class="schedule-time-box" style="margin-top:10px">
+                                        09:00 AM - 06:00 PM
+                                    </div>
+                                    <div class="schedule-status-box booked">
+                                        BOOKED
+                                    </div>
+                                </div>
+                                <div class="col l8" style="max-height:16%">
+                                    <img class="no-margin" src="images/profile.jpg" />
+                                    <div class="name floating-name">
+                                        <h2>Dr. ABC XYZ</h2>
+                                        <a href="#">View Profile</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="outer-schedule-box">
+                        <h6>DD/MM/YYYY
+                        </h6>
+                        <div class="inner-schedule-box">
+                            <div class="row">
+                                <div class="col l4">
+                                    <div class="schedule-time-box" style="margin-top:10px">
+                                        04:00 PM - 05:00 PM
+                                    </div>
+                                    <div class="schedule-status-box declined">
+                                        Declined
+                                    </div>
+                                </div>
+                                <div class="col l8" style="max-height:16%">
+                                    <img class="no-margin" src="images/profile.jpg" />
+                                    <div class="name floating-name">
+                                        <h2>Dr. ABC XYZ</h2>
+                                        <a href="#">View Profile</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="inner-schedule-box">
+                            <div class="row">
+                                <div class="col l4">
+                                    <div class="schedule-time-box">
+                                        05:00 PM - 06:00 PM
+                                    </div>
+                                    <div class="schedule-status-box booked">
+                                        BOOKED
+                                    </div>
+                                </div>
+                                <div class="col l8" style="max-height:16%">
+                                    <img class="no-margin" src="images/profile.jpg" />
+                                    <div class="name floating-name">
+                                        <h2>Dr. ABC XYZ</h2>
+                                        <a href="#">View Profile</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
