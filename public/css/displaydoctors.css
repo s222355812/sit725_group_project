@@ -1,0 +1,53 @@
+body {
+    background-color: #ADE5F9;
+  }
+
+
+#search-bar {
+    position: absolute;
+    width: 70%;
+    z-index: 1;
+    margin: 5% 0 0 15%;
+  }
+  
+#search-bar nav {
+    height: 4vmax;
+  }
+  
+#search-bar .material-icons {
+    font-size: 1.5vmax;
+    line-height: 4vmax;
+  }
+
+.cardlist{
+    text-align: center;
+    margin-top:15%;
+    margin-bottom:30%;
+}
+.card{
+    display: inline-block;
+    height: 100px;
+    width: 80%;
+}
+.card img{
+    height:100%;
+}
+.card-image{
+    float: left;
+    height: 100px;
+    width: 10%;
+}
+.card-content{
+    position: relative;
+    margin-left:60px;
+    float: left;
+    height: 100px;
+}
+.card-button{
+    float: right;
+    height: 100px;
+    padding-top: 40px;
+}
+.card button{
+    border-radius: 1rem;
+}
