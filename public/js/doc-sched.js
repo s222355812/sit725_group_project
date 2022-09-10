@@ -1,6 +1,6 @@
-// Load doctor schedule
+// Load doctor's schedule
 // -----------------------------------------------------
-$.getJSON("js/json/sample-doc-sched.json", (obj) => displaySched(obj));
+$.getJSON('js/json/sample-doc-sched.json', (obj) => displaySched(obj));
 
 const deleteButtonIds = [];
 
@@ -34,7 +34,7 @@ const displaySched = (obj) => {
 
         document
           .getElementById(day)
-          .insertAdjacentHTML("beforebegin", addText(idFrom, idTo, idDel));
+          .insertAdjacentHTML('beforebegin', addText(idFrom, idTo, idDel));
 
         let timeInstanceFrom = M.Timepicker.init(
           document.getElementById(idFrom),
@@ -57,9 +57,9 @@ const displaySched = (obj) => {
 
   // Delete button
   deleteButtonIds.forEach((deleteId) => {
-    $("#" + deleteId).click(() => {
-      $("#" + deleteId)
-        .closest("div")
+    $('#' + deleteId).click(() => {
+      $('#' + deleteId)
+        .closest('div')
         .remove();
     });
   });
@@ -68,23 +68,23 @@ const displaySched = (obj) => {
 // Add schedule button
 // -----------------------------------------------------
 const buttonIds = [
-  "#add-mon",
-  "#add-tue",
-  "#add-wed",
-  "#add-thu",
-  "#add-fri",
-  "#add-sat",
-  "#add-sun",
+  '#add-mon',
+  '#add-tue',
+  '#add-wed',
+  '#add-thu',
+  '#add-fri',
+  '#add-sat',
+  '#add-sun',
 ];
 
 const dayIds = [
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday",
-  "sunday",
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
 ];
 
 const timePickerHTML = `
@@ -100,7 +100,7 @@ const timePickerHTML = `
 
 buttonIds.forEach((buttonId) => {
   $(buttonId).click(() => {
-    let dayId = "";
+    let dayId = '';
     switch (buttonId) {
       case buttonIds[0]:
         dayId = dayIds[0];
@@ -127,6 +127,6 @@ buttonIds.forEach((buttonId) => {
 
     document
       .getElementById(dayId)
-      .insertAdjacentHTML("beforebegin", timePickerHTML);
+      .insertAdjacentHTML('beforebegin', timePickerHTML);
   });
 });

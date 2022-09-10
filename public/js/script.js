@@ -12,12 +12,11 @@ $(document).ready(() => {
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet"
 />
-<link rel="stylesheet" href="css/styles-abv.css" />
 `;
   document.querySelector('head').insertAdjacentHTML('afterbegin', headHTML);
 
   // Load NavBar
-  if (true) {
+  if (!true) {
     $('#header').load('header-doctor.html'); // Doctor's login?
   } else if (true) {
     $('#header').load('header-patient.html'); // Patient login?
