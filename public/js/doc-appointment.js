@@ -1,4 +1,6 @@
-$.getJSON("js/json/doc-appointment.json", (obj) => displayAppointment(obj));
+// Load doctor's appointments
+// -----------------------------------------------------
+$.getJSON('js/json/doc-appointment.json', (obj) => displayAppointment(obj));
 
 const displayAppointment = (obj) => {
   let addDate = (date) => {
@@ -13,8 +15,8 @@ const displayAppointment = (obj) => {
   };
 
   let addDetails = (info) => {
-    let buttonHTML = "";
-    if (info.status == "booked") {
+    let buttonHTML = '';
+    if (info.status == 'booked') {
       buttonHTML = `
       <a class="col s12 l2 waves-effect waves-light green btn">
         ${info.status}
@@ -28,7 +30,7 @@ const displayAppointment = (obj) => {
       `;
     }
 
-    info.status = "booked";
+    info.status = 'booked';
 
     return `
           <div class="row card-panel grey lighten-2">
@@ -56,15 +58,15 @@ const displayAppointment = (obj) => {
     // date = DD/MM/YYYY 1, DD/MM/YYYY 2, ...
     // obj[date] = patient appointment information on each date
 
-    if (document.getElementById("doc-appointment")) {
+    if (document.getElementById('doc-appointment')) {
       document
-        .getElementById("doc-appointment")
-        .insertAdjacentHTML("beforebegin", addDate(date));
+        .getElementById('doc-appointment')
+        .insertAdjacentHTML('beforebegin', addDate(date));
 
       obj[date].forEach((info) => {
         document
           .getElementById(date)
-          .insertAdjacentHTML("beforebegin", addDetails(info));
+          .insertAdjacentHTML('beforebegin', addDetails(info));
       });
     }
   });
