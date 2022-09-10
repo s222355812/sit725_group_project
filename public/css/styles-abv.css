@@ -1,0 +1,113 @@
+/* Auden's CSS */
+body {
+  background-color: white;
+}
+
+img {
+  object-fit: cover;
+}
+
+.bg-text1 {
+  font-size: 6vmin;
+  line-height: 6vmin;
+  font-weight: 400;
+  margin: 1vmin 0;
+}
+
+.bg-text2 {
+  font-size: 3vmin;
+  line-height: 3vmin;
+  margin: 1vmin 0;
+}
+
+.bg-text3 {
+  font-size: 4vmin;
+  line-height: 4vmin;
+  margin: 3vmin 0;
+}
+
+::placeholder {
+  font-size: 1.5vmax;
+}
+
+#getdoc-logo {
+  width: 20vmin;
+  margin-left: 10vmin;
+}
+
+#dropdown a {
+  width: 200px;
+  color: rgb(24, 24, 97);
+  font-size: 1.5vmax;
+}
+
+#dropdown {
+  height: 15vmax;
+  width: 11vw;
+  background-color: white;
+}
+
+#header nav {
+  background-color: transparent;
+  position: absolute;
+  box-shadow: none;
+  z-index: 2;
+  margin-top: 2vmin;
+  width: 95%;
+}
+
+#nav-header {
+  height: 5vmax;
+}
+
+.btn-small {
+  width: auto;
+  height: auto;
+  font-size: 1.3vmax;
+  font-weight: bolder;
+}
+
+#search-bar {
+  position: absolute;
+  width: 70%;
+  z-index: 1;
+  margin: 20% 0 0 15%;
+}
+
+#search-bar nav {
+  height: 4vmax;
+}
+
+#search-bar .material-icons {
+  font-size: 1.5vmax;
+  line-height: 4vmax;
+}
+
+#search {
+  background-color: white;
+  color: black;
+}
+
+#profile-pic,
+.profile-pic {
+  height: 50px;
+  width: 50px;
+  margin: 0 5% 10% 0;
+  object-fit: cover;
+}
+
+.carousel-item {
+  height: 4vmax;
+}
+
+.service-content {
+  font-size: 1.5vmin;
+}
+
+.service-card {
+  max-height: 35vw;
+}
+
+#doc-schedule {
+  width: auto;
+}
