@@ -1,10 +1,18 @@
 // Load doctor's schedule
 // -----------------------------------------------------
-$.getJSON('js/json/sample-doc-sched.json', (obj) => displaySched(obj));
+const getDocSchedData = () => {
+  $.get('/api/docSched', (response) => {
+    if (response.statusCode == 200) {
+      displayDocSched(response.data[0].docSched);
+    }
+  });
+};
+
+getDocSchedData();
 
 const deleteButtonIds = [];
 
-const displaySched = (obj) => {
+const displayDocSched = (obj) => {
   let addText = (idFrom, idTo, idDel) => {
     return `
       <div>

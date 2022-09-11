@@ -64,7 +64,5 @@ $(document).ready(() => {
     });
   });
 
-  // Add doctor schedule
-
   // ...END
 });
