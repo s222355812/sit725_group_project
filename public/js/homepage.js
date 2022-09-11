@@ -1,29 +1,25 @@
 // Add images on Hompage and View All Page
-const id1 = "specialisation";
-const id2 = "specialisation-all";
-const id3 = "common-conditions";
-const id4 = "common-conditions-all";
-const id5 = "common-services";
-const id6 = "common-services-all";
+const id1 = 'specialisation';
+const id2 = 'specialisation-all';
+const id3 = 'common-conditions';
+const id4 = 'common-conditions-all';
+const id5 = 'common-services';
+const id6 = 'common-services-all';
 
-$.getJSON("js/json/specialisation.json", (data) =>
-  addServiceContent(data, id1)
-);
-$.getJSON("js/json/specialisation.json", (data) =>
-  addServiceContentAll(data, id2)
-);
-$.getJSON("js/json/common-conditions.json", (data) =>
-  addServiceContent(data, id3)
-);
-$.getJSON("js/json/common-conditions.json", (data) =>
-  addServiceContentAll(data, id4)
-);
-$.getJSON("js/json/common-services.json", (data) =>
-  addServiceContent(data, id5)
-);
-$.getJSON("js/json/common-services.json", (data) =>
-  addServiceContentAll(data, id6)
-);
+const getHomepageData = () => {
+  $.get('/api/homepage', (response) => {
+    if (response.statusCode == 200) {
+      displayServiceContent(response.data[0].specialisation, id1);
+      displayServiceContentAll(response.data[0].specialisation, id2);
+      displayServiceContent(response.data[0].commonConditions, id3);
+      displayServiceContentAll(response.data[0].commonConditions, id4);
+      displayServiceContent(response.data[0].commonServices, id5);
+      displayServiceContentAll(response.data[0].commonServices, id6);
+    }
+  });
+};
+
+getHomepageData();
 
 const addText = (data) => {
   return `
@@ -42,22 +38,22 @@ const addText = (data) => {
         `;
 };
 
-const addServiceContent = (data, id) => {
+const displayServiceContent = (data, id) => {
   for (let i = 0; i < 8; i++) {
     if (document.getElementById(id)) {
       document
         .getElementById(id)
-        .insertAdjacentHTML("beforebegin", addText(data[i]));
+        .insertAdjacentHTML('beforebegin', addText(data[i]));
     }
   }
 };
 
-const addServiceContentAll = (data, id) => {
+const displayServiceContentAll = (data, id) => {
   data.forEach((data) => {
     if (document.getElementById(id)) {
       document
         .getElementById(id)
-        .insertAdjacentHTML("beforebegin", addText(data));
+        .insertAdjacentHTML('beforebegin', addText(data));
     }
   });
 };

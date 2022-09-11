@@ -1,4 +1,14 @@
-$.getJSON('js/json/patient-ratings.json', (obj) => displayRatings(obj));
+// Load patient ratings
+// -----------------------------------------------------
+const getPatientRatingsData = () => {
+  $.get('/api/patientRatings', (response) => {
+    if (response.statusCode == 200) {
+      displayRatings(response.data[0].patientRatings);
+    }
+  });
+};
+
+getPatientRatingsData();
 
 const displayRatings = (obj) => {
   let addRating = (doctor, info) => {
