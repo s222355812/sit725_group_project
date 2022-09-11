@@ -1,9 +1,9 @@
-$.getJSON("js/json/patient-ratings.json", (obj) => displayRatings(obj));
+$.getJSON('js/json/patient-ratings.json', (obj) => displayRatings(obj));
 
 const displayRatings = (obj) => {
   let addRating = (doctor, info) => {
-    let docReply = "";
-    let ratings = "";
+    let docReply = '';
+    let ratings = '';
     if (info.replyDate) {
       docReply = `
               <div class="card-panel grey lighten-3 col s12">
@@ -29,9 +29,6 @@ const displayRatings = (obj) => {
       ratings =
         ratings + `<i class="material-icons orange-text">star_border</i>`;
     }
-
-    //   <i class="material-icons orange-text">star_half</i>
-    //   <i class="material-icons orange-text">star_border</i>
 
     return `
             <div class="row card-panel grey lighten-2">
@@ -77,12 +74,10 @@ const displayRatings = (obj) => {
     // doctor = Doctor Name 1, Doctor Name 2, ...
     // obj[doctor] = rating comments and other information
 
-    if (document.getElementById("patient-ratings")) {
-      console.log(doctor);
-      console.log(obj[doctor][0]);
+    if (document.getElementById('patient-ratings')) {
       document
-        .getElementById("patient-ratings")
-        .insertAdjacentHTML("beforebegin", addRating(doctor, obj[doctor][0]));
+        .getElementById('patient-ratings')
+        .insertAdjacentHTML('beforebegin', addRating(doctor, obj[doctor][0]));
     }
   });
 };
