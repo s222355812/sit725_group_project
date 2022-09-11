@@ -42,6 +42,9 @@ $(document).ready(() => {
   // Load patient ratings
   $.getScript('js/patient-ratings.js');
 
+  // Load patient schedule
+  $.getScript('js/patient-schedule.js');
+
   // Load Carousel
   $('.carousel').carousel({
     fullWidth: true,
