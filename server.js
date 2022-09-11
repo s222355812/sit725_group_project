@@ -51,6 +51,26 @@ app.get('/api/patientSched', (req, res) => {
   getCollection('patientSched', res);
 });
 
+// Login
+app.post('/login', (req, res) => {
+  let email = req.body.email;
+  let password = req.body.password;
+  let query = { email: `${email}` };
+
+  database
+    .collection('userClass')
+    .find(query)
+    .toArray((err, result) => {
+      if (err) throw err;
+      if (result[0]) {
+        if (result[0].password == password) {
+          console.log(result[0]);
+          res.sendFile('public/login-welcome.html', { root: __dirname });
+        }
+      }
+    });
+});
+
 const port = process.env.port || 3000;
 
 app.listen(port, () => {
