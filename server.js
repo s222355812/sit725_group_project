@@ -13,7 +13,7 @@ app.use(cors());
 
 // Add database connection
 const uri =
-  'mongodb+srv://auden:admin@mycluster.fw6glvi.mongodb.net/?retryWrites=true&w=majority';
+  'mongodb+srv://getdocteam:admin@mycluster.uawhx6v.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri, { useNewURLParser: true });
 
 const getCollection = (collection, res) => {
