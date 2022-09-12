@@ -13,7 +13,7 @@ app.use(cors());
 
 // Add database connection
 const uri =
-  'mongodb+srv://getdocteam:admin@mycluster.uawhx6v.mongodb.net/?retryWrites=true&w=majority';
+  'mongodb+srv://getdocteam:sit725@mycluster.uawhx6v.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri, { useNewURLParser: true });
 
 const getCollection = (collection, res) => {
@@ -58,7 +58,7 @@ app.post('/login', (req, res) => {
   let query = { email: `${email}` };
 
   database
-    .collection('userClass')
+    .collection('patientClass')
     .find(query)
     .toArray((err, result) => {
       if (err) throw err;
