@@ -1,3 +1,11 @@
+const userLogin = () => {
+  $.post('/login', (response) => {
+    if (response.statusCode == 200) {
+      console.log(response.data);
+    }
+  });
+};
+
 $(document).ready(() => {
   // Add HTML Head components
   const headHTML = `
@@ -18,7 +26,7 @@ $(document).ready(() => {
   // Load NavBar
   if (!true) {
     $('#header').load('header-doctor.html'); // Doctor's login?
-  } else if (true) {
+  } else if (!true) {
     $('#header').load('header-patient.html'); // Patient login?
   } else {
     $('#header').load('header-nologin.html'); // No login
@@ -45,6 +53,11 @@ $(document).ready(() => {
   // Load patient schedule
   $.getScript('js/patient-schedule.js');
 
+  // Login Submit
+  $('#login-submit').click(() => {
+    userLogin();
+  });
+
   // Load Carousel
   $('.carousel').carousel({
     fullWidth: true,
@@ -63,8 +76,6 @@ $(document).ready(() => {
       showClearBtn: true,
     });
   });
-
-  // Add doctor schedule
 
   // ...END
 });

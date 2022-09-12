@@ -1,0 +1,32 @@
+{
+  "name": "sit725_group_project",
+  "version": "1.0.0",
+  "description": "This is a group project for SIT725-T2-2022",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianweerasinghe97/sit725_group_project.git"
+  },
+  "keywords": [
+    "Node"
+  ],
+  "author": "GetDoc Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrianweerasinghe97/sit725_group_project/issues"
+  },
+  "homepage": "https://github.com/adrianweerasinghe97/sit725_group_project#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongodb": "^4.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

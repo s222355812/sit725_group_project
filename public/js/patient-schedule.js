@@ -1,8 +1,16 @@
 // Load patient's schedule
 // -----------------------------------------------------
-$.getJSON('js/json/patient-schedule.json', (obj) => displaySchedule(obj));
+const getPatientSchedData = () => {
+  $.get('/api/patientSched', (response) => {
+    if (response.statusCode == 200) {
+      displayPatientSched(response.data[0].patientSched);
+    }
+  });
+};
 
-const displaySchedule = (obj) => {
+getPatientSchedData();
+
+const displayPatientSched = (obj) => {
   let addDate = (date) => {
     return `
       <div class="row">

@@ -1,0 +1,218 @@
+{
+  "specialisation": [
+    {
+      "image": "images/specialisation/general-medicine.webp",
+      "link": "#!",
+      "description": "General Medicine"
+    },
+    {
+      "image": "images/specialisation/eye-and-vision.webp",
+      "link": "#!",
+      "description": "Eye & Vision"
+    },
+    {
+      "image": "images/specialisation/skin-and-dermatology.webp",
+      "link": "#!",
+      "description": "Skin & Dermatology"
+    },
+    {
+      "image": "images/specialisation/ear-nose-throat.webp",
+      "link": "#!",
+      "description": "Ear, Nose & Throat"
+    },
+    {
+      "image": "images/specialisation/heart-and-cardiology.webp",
+      "link": "#!",
+      "description": "Heart & Cardiology"
+    },
+    {
+      "image": "images/specialisation/lungs-and-chest.webp",
+      "link": "#!",
+      "description": "Lungs & Chest"
+    },
+    {
+      "image": "images/specialisation/brain-and-nerves.webp",
+      "link": "#!",
+      "description": "Brain & Nerves"
+    },
+    {
+      "image": "images/specialisation/kidney-and-urine.webp",
+      "link": "#!",
+      "description": "Kidney & Urine"
+    },
+    {
+      "image": "images/specialisation/stomach-and-digestion.webp",
+      "link": "#!",
+      "description": "Stomach & Digestion"
+    },
+    {
+      "image": "images/specialisation/blood-and-hematology.webp",
+      "link": "#!",
+      "description": "Blood & Hematology"
+    },
+    {
+      "image": "images/specialisation/hepatology.webp",
+      "link": "#!",
+      "description": "Hepaptology"
+    },
+    {
+      "image": "images/specialisation/imaging-and-radiology.webp",
+      "link": "#!",
+      "description": "Imaging & Radiology"
+    },
+    {
+      "image": "images/specialisation/dental-care.webp",
+      "link": "#!",
+      "description": "Dental Care"
+    },
+    {
+      "image": "images/specialisation/pediatrics.webp",
+      "link": "#!",
+      "description": "Pediatrics"
+    },
+    {
+      "image": "images/specialisation/maternal-and-newborn-care.webp",
+      "link": "#!",
+      "description": "Maternal & Newborn Care"
+    },
+    {
+      "image": "images/specialisation/joint-muscles-and-bones.webp",
+      "link": "#!",
+      "description": "Joint, Muscles & Bones"
+    },
+    {
+      "image": "images/specialisation/diet-and-nutrition.webp",
+      "link": "#!",
+      "description": "Diet & Nutrition"
+    }
+  ],
+  "commonConditions": [
+    {
+      "image": "images/common-conditions/heart-disease.webp",
+      "link": "#!",
+      "description": "Heart Disease"
+    },
+    {
+      "image": "images/common-conditions/hypertension.webp",
+      "link": "#!",
+      "description": "Hypertension"
+    },
+    {
+      "image": "images/common-conditions/high-cholesterol.webp",
+      "link": "#!",
+      "description": "High Cholesterol"
+    },
+    {
+      "image": "images/common-conditions/mental-health.webp",
+      "link": "#!",
+      "description": "Mental Health"
+    },
+    {
+      "image": "images/common-conditions/back-pain.webp",
+      "link": "#!",
+      "description": "Back Pain"
+    },
+    {
+      "image": "images/common-conditions/allergy.webp",
+      "link": "#!",
+      "description": "Allergy"
+    },
+    {
+      "image": "images/common-conditions/pneumonia.webp",
+      "link": "#!",
+      "description": "Pneumonia"
+    },
+    {
+      "image": "images/common-conditions/colds-and-flu.webp",
+      "link": "#!",
+      "description": "Colds & Flu"
+    },
+    {
+      "image": "images/common-conditions/migrane.webp",
+      "link": "#!",
+      "description": "Migrane"
+    },
+    {
+      "image": "images/common-conditions/acne-and-eczema.webp",
+      "link": "#!",
+      "description": "Acne and Eczema"
+    },
+    {
+      "image": "images/common-conditions/pregnancy.webp",
+      "link": "#!",
+      "description": "Pregnancy"
+    },
+    {
+      "image": "images/common-conditions/diabetes.webp",
+      "link": "#!",
+      "description": "Diabetes"
+    },
+    {
+      "image": "images/common-conditions/arthritis-and-gout.webp",
+      "link": "#!",
+      "description": "Arthritis & Gout"
+    },
+    {
+      "image": "images/common-conditions/cancer.webp",
+      "link": "#!",
+      "description": "Cancer"
+    }
+  ],
+  "commonServices": [
+    {
+      "image": "images/common-services/medical-certificates.webp",
+      "link": "#!",
+      "description": "Medical Certificates"
+    },
+    {
+      "image": "images/common-services/children-vaccinations.webp",
+      "link": "#!",
+      "description": "Children Vaccinations"
+    },
+    {
+      "image": "images/common-services/vaccination-forms.webp",
+      "link": "#!",
+      "description": "Vaccination Forms"
+    },
+    {
+      "image": "images/common-services/birth-control.webp",
+      "link": "#!",
+      "description": "Birth Control"
+    },
+    {
+      "image": "images/common-services/physical-therapy.webp",
+      "link": "#!",
+      "description": "Physical Therapy"
+    },
+    {
+      "image": "images/common-services/ear-cleaning.webp",
+      "link": "#!",
+      "description": "Ear Cleaning"
+    },
+    {
+      "image": "images/common-services/cortisone-injections.webp",
+      "link": "#!",
+      "description": "Cortisone Injections"
+    },
+    {
+      "image": "images/common-services/covid-19-consultations.webp",
+      "link": "#!",
+      "description": "Covid-19 Consulations"
+    },
+    {
+      "image": "images/common-services/cataract-surgery.webp",
+      "link": "#!",
+      "description": "Cataract Surgery"
+    },
+    {
+      "image": "images/common-services/lasik.webp",
+      "link": "#!",
+      "description": "Lasik"
+    },
+    {
+      "image": "images/common-services/orthodontics.webp",
+      "link": "#!",
+      "description": "Orthodontics"
+    }
+  ]
+}
