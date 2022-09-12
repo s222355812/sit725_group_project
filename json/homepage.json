@@ -86,7 +86,7 @@
       "description": "Diet & Nutrition"
     }
   ],
-  "common-conditions": [
+  "commonConditions": [
     {
       "image": "images/common-conditions/heart-disease.webp",
       "link": "#!",
@@ -158,7 +158,7 @@
       "description": "Cancer"
     }
   ],
-  "common-services": [
+  "commonServices": [
     {
       "image": "images/common-services/medical-certificates.webp",
       "link": "#!",
