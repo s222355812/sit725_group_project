@@ -24,7 +24,7 @@ $(document).ready(() => {
   document.querySelector('head').insertAdjacentHTML('afterbegin', headHTML);
 
   // Load NavBar
-  if (!true) {
+  if (true) {
     $('#header').load('header-doctor.html'); // Doctor's login?
   } else if (!true) {
     $('#header').load('header-patient.html'); // Patient login?
@@ -46,6 +46,9 @@ $(document).ready(() => {
 
   // Load doctor appointment
   $.getScript('js/doc-appointment.js');
+
+  // Load doctor profile
+  $.getScript('js/doc-profile.js');
 
   // Load patient ratings
   $.getScript('js/patient-ratings.js');
