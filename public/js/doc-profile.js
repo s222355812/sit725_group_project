@@ -41,7 +41,7 @@ const displayDocData = (obj) => {
   `;
 
   let addDocProfileData = (doc) => {
-    // tags
+    // Add tags
     let tags = ``;
     doc.specialisation.forEach((item) => {
       tags =
@@ -51,7 +51,7 @@ const displayDocData = (obj) => {
               `;
     });
 
-    // Years of experience
+    // Calculate years of experience
     let years = 0;
     doc.experience.forEach((item) => {
       years = years + Number(item.duration);
@@ -236,7 +236,7 @@ const displayDocData = (obj) => {
 
   //   Doctor Display Information Contoller
   // ------------------------------------------------------------------------------
-  Object.keys(obj).forEach((item) => {
+  Object.keys(obj).some((item) => {
     // obj = whole data object
     // item = object index [0, 1, 2, ...]
     // obj[date] = doctor data object
@@ -264,5 +264,6 @@ const displayDocData = (obj) => {
           addEducationData(obj[item].education)
         );
     }
+    return true;
   });
 };

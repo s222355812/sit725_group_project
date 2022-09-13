@@ -56,6 +56,9 @@ $(document).ready(() => {
   // Load patient schedule
   $.getScript('js/patient-schedule.js');
 
+  // Load doctor list (search function)
+  $.getScript('js/doc-list.js');
+
   // Login Submit
   $('#login-submit').click(() => {
     userLogin();

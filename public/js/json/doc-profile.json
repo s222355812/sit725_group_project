@@ -16,6 +16,34 @@
       {
         "position": "Position 1",
         "hospitalName": "Hospital Name 1",
+        "duration": "3.5"
+      },
+      {
+        "position": "Position 2",
+        "hospitalName": "Hospital Name 2",
+        "duration": "2"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Deegre 1",
+        "schoolName": "University Name 1"
+      },
+      {
+        "degree": "Deegre 2",
+        "schoolName": "University Name 2"
+      }
+    ]
+  },
+  {
+    "name": "Dr. Asd Qwe",
+    "picture": "images/sample-picture-doctor.webp",
+    "specialisation": ["Tag-1", "Tag-2", "Tag-3", "Tag-4"],
+    "fees": "50.00",
+    "experience": [
+      {
+        "position": "Position 1",
+        "hospitalName": "Hospital Name 1",
         "duration": "6.5"
       },
       {
