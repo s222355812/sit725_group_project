@@ -24,9 +24,9 @@ $(document).ready(() => {
   document.querySelector('head').insertAdjacentHTML('afterbegin', headHTML);
 
   // Load NavBar
-  if (true) {
+  if (!true) {
     $('#header').load('header-doctor.html'); // Doctor's login?
-  } else if (!true) {
+  } else if (true) {
     $('#header').load('header-patient.html'); // Patient login?
   } else {
     $('#header').load('header-nologin.html'); // No login
@@ -55,6 +55,9 @@ $(document).ready(() => {
 
   // Load patient schedule
   $.getScript('js/patient-schedule.js');
+
+  // Load patient profile
+  $.getScript('js/patient-profile.js');
 
   // Load doctor list (search function)
   $.getScript('js/doc-list.js');
