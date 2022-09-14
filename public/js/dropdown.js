@@ -1,4 +1,4 @@
-$(".dropdown-trigger").dropdown({
+$('.dropdown-trigger').dropdown({
   constrainWidth: false,
   coverTrigger: false,
 });

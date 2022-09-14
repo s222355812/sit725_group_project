@@ -64,7 +64,8 @@ const displayDocData = (obj) => {
                 <img class="circle" src="${doc.picture}" style="width: 100px; height:100px;">
             </div>
             <div class="col s12 center-align">
-                <a class="waves-effect waves-light btn black">Change Photo</a>
+                <a id="chg-doc-btn" class="waves-effect waves-light btn black">Change Photo</a>
+                <input id="chg-doc-pic" type="file" name="name" style="display: none;" />
             </div>
         </div>
         <hr>
@@ -265,5 +266,20 @@ const displayDocData = (obj) => {
         );
     }
     return true;
+  });
+
+  $('#chg-doc-pic').change((item) => {
+    let file = item.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = (readerEvent) => {
+      let content = readerEvent.target.result;
+      console.log(content);
+    };
+  });
+
+  $('#chg-doc-btn').click(() => {
+    $('#chg-doc-pic').click();
   });
 };

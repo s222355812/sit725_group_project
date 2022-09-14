@@ -11,8 +11,9 @@ const displayPatientProfile = (obj) => {
                 </div>
                 <div class="col s2">
                     <div class="avator">
-                        <img src="${patient.image}">
-                        <a class="waves-effect waves-light btn" style="margin-top:20px;">Change</a>
+                        <img src="${patient.image}" style="width: 100px; height: 100px">
+                        <a id="chg-patient-btn" class="waves-effect waves-light btn" style="margin-top:20px;">Change</a>
+                        <input id="chg-patient-pic" type="file" name="name" style="display: none;" />
                     </div>
                 </div>
                 <div class="col s12 m2">
@@ -49,5 +50,20 @@ const displayPatientProfile = (obj) => {
     }
 
     return true;
+  });
+
+  $('#chg-patient-pic').change((item) => {
+    let file = item.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = (readerEvent) => {
+      let content = readerEvent.target.result;
+      console.log(content);
+    };
+  });
+
+  $('#chg-patient-btn').click(() => {
+    $('#chg-patient-pic').click();
   });
 };
