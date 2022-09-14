@@ -6,6 +6,9 @@ const userLogin = () => {
   });
 };
 
+// let profile = document.getElementById('change-profile').value;
+// console.log(profile);
+
 $(document).ready(() => {
   // Add HTML Head components
   const headHTML = `
@@ -38,9 +41,6 @@ $(document).ready(() => {
   // Add images on Hompage and View All Page
   $.getScript('js/homepage.js');
 
-  // Load Navbar dropdown menu
-  $.getScript('js/dropdown.js');
-
   // Load doctor schedule
   $.getScript('js/doc-sched.js');
 
@@ -66,6 +66,9 @@ $(document).ready(() => {
   $('#login-submit').click(() => {
     userLogin();
   });
+
+  // Load Navbar dropdown menu
+  $.getScript('js/dropdown.js');
 
   // Load Carousel
   $('.carousel').carousel({
