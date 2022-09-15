@@ -7,7 +7,7 @@ const displayPatientProfile = (obj) => {
         <div class="col s12">
             <div class="card">
                 <div class="exitbutton" style="float:right;">
-                    <a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Edit</a>
+                    <a class="waves-effect waves-light btn modal-trigger" href="#edit-patient"><i class="material-icons left">edit</i>Edit</a>
                 </div>
                 <div class="col s2">
                     <div class="avator">
@@ -33,6 +33,38 @@ const displayPatientProfile = (obj) => {
             </div>
         </div>
     </div>    
+    
+  <div id="edit-patient" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="patient-fname" type="text" class="validate">
+              <label for="patient-fname">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="patient-lname" type="text" class="validate">
+              <label for="patient-lname">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="patient-age" type="text" class="validate">
+              <label for="patient-age">Age</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="patient-sex" type="text" class="validate">
+              <label for="patient-sex">Sex</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+    </div>
+  </div>
     `;
   };
 
@@ -52,6 +84,8 @@ const displayPatientProfile = (obj) => {
     return true;
   });
 
+  // Change profile pic
+  // ------------------------------------------------------------------------------
   $('#chg-patient-pic').change((item) => {
     let file = item.target.files[0];
     let reader = new FileReader();
@@ -66,4 +100,7 @@ const displayPatientProfile = (obj) => {
   $('#chg-patient-btn').click(() => {
     $('#chg-patient-pic').click();
   });
+
+  // Modal
+  $.getScript('js/modal.js');
 };
