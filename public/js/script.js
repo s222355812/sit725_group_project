@@ -27,7 +27,7 @@ $(document).ready(() => {
   document.querySelector('head').insertAdjacentHTML('afterbegin', headHTML);
 
   // Load NavBar
-  if (!true) {
+  if (true) {
     $('#header').load('header-doctor.html'); // Doctor's login?
   } else if (true) {
     $('#header').load('header-patient.html'); // Patient login?
@@ -66,9 +66,6 @@ $(document).ready(() => {
   $('#login-submit').click(() => {
     userLogin();
   });
-
-  // Load Navbar dropdown menu
-  $.getScript('js/dropdown.js');
 
   // Load Carousel
   $('.carousel').carousel({

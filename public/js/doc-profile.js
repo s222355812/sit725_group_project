@@ -34,11 +34,20 @@ const getDocSched = (schedObj) => {
 // ------------------------------------------------------------------------------
 const displayDocData = (obj) => {
   let dataEdit = ``;
-  if (allowEdit)
+  let changePic = ``;
+  if (allowEdit) {
     dataEdit = `
-  <a class=" action-link" href="#"><i class="material-icons ">add</i></a>
-  <a class="action-link" href="#"><i class="material-icons ">edit</i></a>
+    <a class="waves-effect waves-light modal-trigger" href="#"><i class="material-icons left">add</i></a>
+    <a class="waves-effect waves-light modal-trigger" href="#edit-doctor"><i class="material-icons left">edit</i></a>
   `;
+
+    changePic = `
+    <div class="col s12 center-align">
+      <a id="chg-doc-btn" class="waves-effect waves-light btn black">Change Photo</a>
+      <input id="chg-doc-pic" type="file" name="name" style="display: none;" />
+    </div>  
+  `;
+  }
 
   let addDocProfileData = (doc) => {
     // Add tags
@@ -63,10 +72,7 @@ const displayDocData = (obj) => {
             <div class="col s12 center-align">
                 <img class="circle" src="${doc.picture}" style="width: 100px; height:100px;">
             </div>
-            <div class="col s12 center-align">
-                <a id="chg-doc-btn" class="waves-effect waves-light btn black">Change Photo</a>
-                <input id="chg-doc-pic" type="file" name="name" style="display: none;" />
-            </div>
+            ${changePic}
         </div>
         <hr>
         <div class="row">
@@ -99,6 +105,29 @@ const displayDocData = (obj) => {
                 <a href=""><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a>
             </div>
         </div>
+    </div>
+
+    <div id="edit-doctor" class="modal">
+      <div class="modal-content">
+          <div class="row">
+              <form class="col s12">
+                  <div class="row">
+                      <div class="input-field col s6">
+                          <input id="doc-name" type="text" class="validate">
+                          <label for="doc-name">Name</label>
+                      </div>
+                      <div class="input-field col s6">
+                          <input id="doc-fees" type="text" class="validate">
+                          <label for="doc-fees">Fees</label>
+                      </div>
+                  </div>
+                  <div class="chips chips-placeholder chips-autocomplete"></div>
+              </form>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+      </div>
     </div>
 
     `;
@@ -166,24 +195,91 @@ const displayDocData = (obj) => {
   //   Display doctor experience information
   // ------------------------------------------------------------------------------
   const addExperienceData = (doc) => {
+    let experienceAdd = ``;
     let experienceEdit = ``;
     let experiences = ``;
+    let i = 0;
+    let id = 'exp-' + i;
 
     if (allowEdit)
-      experienceEdit = `
-        <a class=" action-link" href="#"><i class="material-icons ">add</i></a>
-        <a class="action-link" href="#"><i class="material-icons ">edit</i></a>
+      experienceAdd = `
+        <a class="modal-trigger" href="#exp-add"><i class="material-icons ">add</i></a>
+        <div id="exp-add" class="modal">
+          <div class="modal-content">
+              <div class="row">
+                  <form class="col s12">
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <input id="exp-position" type="text" class="validate">
+                              <label for="exp-position">Position</label>
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="exp-hospital" type="text" class="validate">
+                              <label for="exp-hospital">Hospital Name</label>
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="exp-duration" type="text" class="validate">
+                              <label for="exp-duration">Duration in years</label>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+          </div>
+        </div>
+
   `;
 
     doc.forEach((exp) => {
+      if (allowEdit)
+        experienceEdit = `
+        <div class="right-align">
+          <a class="modal-trigger" href="${
+            '#' + id
+          }"><i class="material-icons blue-text">edit</i></a>
+          <a class="" href=""><i class="material-icons red-text">delete</i></a>
+        </div>
+      `;
+
       experiences =
         experiences +
         `
         <hr>
+        ${experienceEdit}
         <h6>${exp.position}</h6>
         <h6>${exp.hospitalName}</h6>
         <h6>Duration: ${exp.duration} years</h6>
+
+        <div id="${id}" class="modal">
+          <div class="modal-content">
+              <div class="row">
+                  <form class="col s12">
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <input id="exp-position" type="text" class="validate">
+                              <label for="exp-position">Position</label>
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="exp-hospital" type="text" class="validate">
+                              <label for="exp-hospital">Hospital Name</label>
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="exp-duration" type="text" class="validate">
+                              <label for="exp-duration">Duration in years</label>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+          </div>
+        </div>
       `;
+      i++;
+      id = 'exp-' + i;
     });
 
     return `
@@ -191,7 +287,7 @@ const displayDocData = (obj) => {
         <div class="row">
             <h5 class="col s6">Experience</h5>
             <div class="col s6 right-align">
-                ${experienceEdit}
+                ${experienceAdd}
             </div>
         </div>
         ${experiences}
@@ -203,23 +299,81 @@ const displayDocData = (obj) => {
   //   Display doctor education information
   // ------------------------------------------------------------------------------
   const addEducationData = (doc) => {
+    let educationAdd = ``;
     let educationEdit = ``;
     let educations = ``;
+    let i = 0;
+    let id = 'edu-' + i;
 
     if (allowEdit)
-      educationEdit = `
-        <a class=" action-link" href="#"><i class="material-icons ">add</i></a>
-        <a class="action-link" href="#"><i class="material-icons ">edit</i></a>
-  `;
+      educationAdd = `
+        <a class="modal-trigger" href="#edu-add"><i class="material-icons ">add</i></a>
+        <div id="edu-add" class="modal">
+          <div class="modal-content">
+              <div class="row">
+                  <form class="col s12">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input id="edu-degree" type="text" class="validate">
+                          <label for="edu-degree">Degree</label>
+                        </div>
+                        <div class="input-field col s12">
+                          <input id="edu-school" type="text" class="validate">
+                          <label for="edu-school">School Name</label>
+                        </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+          </div>
+        </div>
+      `;
 
     doc.forEach((edu) => {
+      if (allowEdit)
+        educationEdit = `
+        <div class="right-align">
+          <a class="modal-trigger" href="${
+            '#' + id
+          }"><i class="material-icons blue-text">edit</i></a>
+          <a class="" href=""><i class="material-icons red-text">delete</i></a>
+        </div>
+      `;
+
       educations =
         educations +
         `
         <hr>
+        ${educationEdit}
         <h6>${edu.degree}</h6>
-        <h6>${edu.schoolName}</h6>        
+        <h6>${edu.schoolName}</h6>    
+        
+        <div id="${id}" class="modal">
+          <div class="modal-content">
+              <div class="row">
+                  <form class="col s12">
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <input id="edu-degree" type="text" class="validate">
+                              <label for="edu-degree">Degree</label>
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="edu-school" type="text" class="validate">
+                              <label for="edu-school">School Name</label>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+          </div>
+        </div>
       `;
+      i++;
+      id = 'edu-' + i;
     });
 
     return `
@@ -227,7 +381,7 @@ const displayDocData = (obj) => {
         <div class="row">
             <h5 class="col s6">Education</h5>
             <div class="col s6 right-align">
-                ${educationEdit}
+                ${educationAdd}
             </div>
         </div>
         ${educations}
@@ -268,6 +422,63 @@ const displayDocData = (obj) => {
     return true;
   });
 
+  // Tags
+  // ------------------------------------------------------------------------------
+  $('.chips-placeholder').chips({
+    placeholder: 'Enter a tag',
+    secondaryPlaceholder: '+Tag',
+  });
+  $('.chips-autocomplete').chips({
+    autocompleteOptions: {
+      data: {
+        'General Medicine': null,
+        'Eye & Vision': null,
+        'Skin & Dermatology': null,
+        'Ear, Nose & Throat': null,
+        'Heart & Cardiology': null,
+        'Lungs & Chest': null,
+        'Brain & Nerves': null,
+        'Kidney & Urine': null,
+        'Stomach & Digestion': null,
+        'Blood & Hematology': null,
+        Hepaptology: null,
+        'Imaging & Radiology': null,
+        'Dental Care': null,
+        Pediatrics: null,
+        'Maternal & Newborn Care': null,
+        'Joint, Muscles & Bones': null,
+        'Diet & Nutrition': null,
+        'Heart Disease': null,
+        Hypertension: null,
+        'High Cholesterol': null,
+        'Mental Health': null,
+        'Back Pain': null,
+        Allergy: null,
+        'Colds & Flu': null,
+        Migrane: null,
+        'Acne and Eczema': null,
+        Pregnancy: null,
+        Diabetes: null,
+        'Arthritis & Gout': null,
+        Cancer: null,
+        'Medical Certificates': null,
+        'Children Vaccinations': null,
+        'Vaccination Forms': null,
+        'Birth Control': null,
+        'Physical Therapy': null,
+        'Ear Cleaning': null,
+        'Cortisone Injections': null,
+        'Covid-19 Consulations': null,
+        'Cataract Surgery': null,
+        Orthodontics: null,
+      },
+      limit: Infinity,
+      minLength: 1,
+    },
+  });
+
+  // Change profile pic
+  // ------------------------------------------------------------------------------
   $('#chg-doc-pic').change((item) => {
     let file = item.target.files[0];
     let reader = new FileReader();
@@ -282,4 +493,7 @@ const displayDocData = (obj) => {
   $('#chg-doc-btn').click(() => {
     $('#chg-doc-pic').click();
   });
+
+  // Modal
+  $.getScript('js/modal.js');
 };
