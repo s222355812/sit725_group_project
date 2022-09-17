@@ -118,6 +118,19 @@ app.post('/login', (req, res) => {
         }
       }
     });
+
+    Doctor.findOne({_email: email}, function(error, foundUser){
+      if(!error){
+          if(foundUser){
+              if(foundUser._password == password){
+                res.sendFile('public/login-welcome.html', { root: __dirname });
+              }
+          }
+          else{
+              console.log("please sign up first")
+          }
+      }
+  })
 });
 
 const port = process.env.port || 3000;
