@@ -1,0 +1,27 @@
+[
+    {
+        "_email": "Lei@gmail.com",
+        "_name": "Lei",
+        "_password": "123456",
+        "_spespecialisation":["Gereral Medicine", "Eye and Vision"],
+        "_avatar": "public/images/sample-picture-doctor.webp",
+        "_comments": ["Nice doctor", "Pretty nice experience"],
+        "_experience": [{"_HospitalName": "Monash Hosptial", "_Duration": "5 years"}],
+        "_education": [{"_UniName": "Deakin", "_Degree": "Bachelor"},
+                     {"_UniName": "Monash", "_Degree": "PHD"}],
+        "_AvailableTime": [{"_date": "25/09/2022", "_from":"9am", "_to":"9.30am", "_Status": "free"}]
+    },
+
+    {
+        "_email": "David@gmail.com",
+        "_name": "David",
+        "_password": "david123",
+        "_spespecialisation":["Gereral Medicine"],
+        "_avatar": "public/images/sample-picture-doctor.webp",
+        "_comments": ["David is so nice", "he is so patient"],
+        "_experience": [{"_HospitalName": "Melbourne University Hosptial", "_Duration": "2 years"}],
+        "_education": [{"_UniName": "Monash", "_Degree": "Master"},
+                     {"_UniName": "Melbourne University", "_Degree": "PHD"}],
+        "_AvailableTime": [{"_date": "26/09/2022", "_from":"10am", "_to":"10.30am", "_Status": "free"}]
+    }
+]
