@@ -2,7 +2,6 @@
 // -----------------------------------------------------
 const getPatientSchedData = () => {
   $.get('/api/patientSched', (response) => {
-    console.log("slsl")
     if (response.statusCode == 200) {
       displayPatientSched(response.data[0].patientSched);
     }
@@ -10,7 +9,6 @@ const getPatientSchedData = () => {
 };
 
 getPatientSchedData();
-
 
 getPatientSchedData();
 
