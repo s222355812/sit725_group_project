@@ -1,0 +1,195 @@
+
+/* Vrush css */
+
+body {
+    background-color: #ADE5F9;
+  }
+  
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  .card::after,
+  .card img {
+    border-radius: 50%;
+  }
+  
+  .card {
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, .5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .15);
+    margin: auto;
+    margin-bottom: 20px;
+    position: relative;
+    transform-style: preserve-3d;
+    overflow: hidden;
+    padding-bottom: 5%;
+  }
+  
+  .card img {
+    width: 8rem;
+    min-width: 80px;
+    box-shadow: 0 0 0 5px #FFF;
+    margin-left: 43%;
+  }
+  
+  .img {
+    margin-right: 1.5rem;
+  }
+  
+  .infos {
+    margin-left: 1.5rem;
+    margin-right: 2.5rem;
+  }
+  
+  .name h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  
+  .name h4 {
+    font-size: .8rem;
+    color: #333
+  }
+  
+  .text {
+    font-size: .9rem;
+    margin-bottom: 1rem;
+    margin-top: 0px;
+  }
+  
+  .stats {
+    margin-bottom: 1rem;
+  }
+  
+  .stats li {
+    min-width: 5rem;
+    margin-right: 30px;
+  }
+  
+  .stats li h3 {
+    font-size: .99rem;
+  }
+  
+  .stats li h4 {
+    font-size: .75rem;
+  }
+  
+  .profile button {
+    font-family: 'Poppins', sans-serif;
+    min-width: 120px;
+    padding: .5rem;
+    border: 1px solid #222;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .25s linear;
+    margin-top: 1rem;
+  }
+  
+  .profile .change-pic {
+    background-color: #222;
+    color: #FFF;
+  }
+  
+  .profile .change-pic:hover {
+    background-color: transparent;
+    color: #222;
+  }
+  
+  .profile {
+    text-align: center;
+  }
+  
+  .no-margin {
+    margin: 0px;
+  }
+  
+  .stats {
+    display: flex;
+  }
+  
+  .rating-box,
+  .outer-schedule-box {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 4px 3px gray;
+    padding: 10px;
+  }
+  
+  .star-icon {
+    font-size: 20px;
+  }
+  
+  .social-icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .social-link,
+  .action-link {
+    color: black;
+    text-decoration: none;
+  }
+  
+  #search-bar-schedule .material-icons {
+    font-size: 2.3vmax;
+    line-height: 2vmax;
+  }
+  
+  #search-bar-schedule {
+    position: relative;
+    width: 70%;
+    z-index: 1;
+    margin: auto;
+  }
+  
+  .inner-schedule-box {
+    width: 65%;
+    height: auto;
+    border-style: solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 5px;
+  }
+  
+  .schedule-status-box,
+  .schedule-time-box {
+    height: auto;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .booked {
+    background-color: yellowgreen
+  }
+  
+  .declined {
+    background-color: lightcoral
+  }
+  
+  .no-margin {
+    margin: 0!important;
+  }
+  
+  .floating-name {
+    position: relative;
+    top: -110px;
+    left: 150px
+  }
+  
+  /* Ends here */
