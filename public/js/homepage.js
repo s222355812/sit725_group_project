@@ -1,3 +1,13 @@
+const test = () => {
+  $.get('/api/sessions', (res) => {
+    if (res.statusCode == 200) {
+      console.log(res.data[0].session.userData._email);
+    }
+  });
+};
+
+test();
+
 // Add images on Hompage and View All Page
 const id1 = 'specialisation';
 const id2 = 'specialisation-all';
