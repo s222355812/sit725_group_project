@@ -103,24 +103,88 @@ const Doctor = mongoose.model('Doctor', DoctorClassSchema)
 // })
 // doctor.save();
 
+
+const PatientClassSchema = new mongoose.Schema({
+  _email: {type: String},
+  _name: {type: String},
+  _password: {type: String},
+  _sex: {type: String},
+  _dob: {type: String},
+  _age: {type: String},
+  _phone: {type: String},
+  _medicalHistory: {type: Array, 
+      _condition: {type: String},
+      _year: {type: String}
+  },
+  _ratings: {type: Array,
+      _starCount: {type: String},
+      _comment: {type: String}
+    },
+  _schedule: {type: Array,
+      _date: {type: Date},
+      _from: {type: String},
+      _to: {type: String},
+      _status: {type: String},
+      _doctorName: {type: String}}
+},{collection:'Patient'})
+
 // Login
 app.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
-  let query = { email: `${email}` };
-
+  let query = {
+    _email: `${email}`
+  };
   database
-    .collection('patientClass')
+    .collection('Patient')
     .find(query)
     .toArray((err, result) => {
       if (err) throw err;
       if (result[0]) {
-        if (result[0].password == password) {
-          console.log(result[0]);
-          res.sendFile('public/login-welcome.html', { root: __dirname });
+        if (result[0]._password == password) {
+          res.sendFile('public/login-welcome.html', {
+            root: __dirname
+          });
         }
       }
     });
+});
+
+//Sign-Up
+app.post('/signup', (req, res) => {
+  let name = req.body.name;
+  let email = req.body.email;
+  let sex = req.body.sex;
+  let dob = req.body.dob;
+  let password = req.body.password;
+  let phone = req.body.phoneCode + req.body.phone;
+  const birthYear = new Date(dob).getFullYear();
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - birthYear;
+  const Patient = mongoose.model('Patient', PatientClassSchema)
+
+  const patientData = new Patient({
+    _age: `${age}`,
+    _dob: `${dob}`,
+    _email: `${email}`,
+    _name: `${name}`,
+    _phone: `${phone}`,
+    _password: `${password}`,
+    _sex: `${sex}`,
+    _schedule:[{
+      _date: "01/01/2001",
+        _from: "10 AM",
+        _to: "11 AM",
+        _status: "BooKed",
+        _doctorName: "ABC XYZ"
+    }]
+  })
+
+  database.collection('Patient').insertOne(patientData);
+  res.sendFile('public/login.html', {
+    root: __dirname
+  });
+
 
     Doctor.findOne({_email: email}, function(error, foundUser){
       if(!error){
@@ -135,6 +199,7 @@ app.post('/login', (req, res) => {
       }
   })
 });
+
 
 const port = process.env.port || 3000;
 
