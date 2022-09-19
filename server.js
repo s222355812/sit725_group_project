@@ -67,7 +67,8 @@ const DoctorClassSchema = new mongoose.Schema({
   _email: {type: String},
   _name: {type: String},
   _password: {type: String},
-
+  _spespecialisation: {type: Array},
+  _avatar: {type: String},
   _comments: {type: Array},
   _experience: {type: Array, 
       _HospitalName: {type: String},
@@ -81,24 +82,26 @@ const DoctorClassSchema = new mongoose.Schema({
       _date: {type: Date},
       _from: {type: String},
       _to: {type: String},
-      _Status: {type: Boolean}}
+      _Status: {type: String}}
 
 },{collection:'DoctorClass'})
 
 const Doctor = mongoose.model('Doctor', DoctorClassSchema)
 
-const doctor = new Doctor({
-  _email: "123@gmail.com",
-  _name: "Li Lei",
-  _password: "123456",
-  _comments: ["Nice doctor", "Pretty nice experience"],
-  _experience: [{_HospitalName: "RenMin", _Duration: "5 years"},
-               {_HospitalName: "No2", _Duration: "7 years"}],
-  _education: [{_UniName: "Deakin", _Degree: "PHD"},
-               {_UniName: "Monash", _Degree: "PHD"}],
-  _AvailableTime: [{_date: "15/09/2022", _from:"9am", _to:"9.30am", _Status: false}]
-})
-doctor.save();
+// Here you can add doctors by typing below
+// const doctor = new Doctor({
+  // _email: "David@gmail.com",
+  // _name: "David",
+  // _password: "david123",
+  // _spespecialisation:["Gereral Medicine"],
+  // _avatar: "public/images/sample-picture-doctor.webp",
+  // _comments: ["David is so nice", "he is so patient"],
+  // _experience: [{"_HospitalName": "Melbourne University Hosptial", "_Duration": "2 years"}],
+  // _education: [{_UniName: "Monash", _Degree: "Master"},
+  //              {_UniName: "Melbourne University", _Degree: "PHD"}],
+  // _AvailableTime: [{_date: "26/09/2022", _from:"10am", _to:"10.30am", _Status: "free"}]
+// })
+// doctor.save();
 
 // Login
 app.post('/login', (req, res) => {
