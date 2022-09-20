@@ -54,49 +54,58 @@ const isAuth = (req, res, next) => {
   }
 };
 
-const getCollection = (collection, res) => {
+const getCollection = (collection, email, res) => {
   database
     .collection(collection)
-    .find({})
+    .find(email)
     .toArray((err, result) => {
       if (err) res.json({ statusCode: 400, message: err });
       else res.json({ statusCode: 200, data: result, message: 'Success' });
     });
 };
 
-// sessions collection
-app.get('/api/sessions', (req, res) => {
-  getCollection('sessions', res);
+// Collect User Data from session to Patient collection
+app.post('/api/userData', (req, res) => {
+  let email;
+
+  database
+    .collection('sessions')
+    .find({ _id: req.session.id })
+    .toArray((err, result) => {
+      email = result[0].session.userData._email;
+      getCollection('Patient', { _email: email }, res);
+    });
 });
 
 // Landing page
 app.get('/', isAuth, (req, res) => {
+  console.log(req.session.id);
   res.sendFile('public/homepage.html', { root: __dirname });
 });
 
 // homepage collection
 app.get('/api/homepage', (req, res) => {
-  getCollection('homepage', res);
+  getCollection('homepage', {}, res);
 });
 
 // docAppointment collection
 app.get('/api/docAppointment', (req, res) => {
-  getCollection('docAppointment', res);
+  getCollection('docAppointment', {}, res);
 });
 
 // patientRatings collection
 app.get('/api/patientRatings', (req, res) => {
-  getCollection('patientRatings', res);
+  getCollection('patientRatings', {}, res);
 });
 
 // docSched collection
 app.get('/api/docSched', (req, res) => {
-  getCollection('docSched', res);
+  getCollection('docSched', {}, res);
 });
 
 // patientSched collection
 app.get('/api/patientSched', (req, res) => {
-  getCollection('patientSched', res);
+  getCollection('patientSched', {}, res);
 });
 
 // Logout
@@ -202,7 +211,7 @@ app.post('/login', (req, res) => {
         if (result[0]._password == password) {
           req.session.isAuth = true;
           req.session.userData = result[0];
-          res.redirect('/');
+          res.redirect('/?sessionID=' + req.session.id);
         }
       }
     });
@@ -211,7 +220,9 @@ app.post('/login', (req, res) => {
     if (!error) {
       if (foundUser) {
         if (foundUser._password == password) {
-          res.sendFile('public/login-welcome.html', { root: __dirname });
+          req.session.isAuth = true;
+          req.session.userData = foundUser;
+          res.redirect('/?sessionID=' + req.session.id);
         }
       } else {
         console.log('please sign up first');

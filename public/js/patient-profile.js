@@ -1,5 +1,3 @@
-$.getJSON('js/json/patient-profile.json', (obj) => displayPatientProfile(obj));
-
 const displayPatientProfile = (obj) => {
   let addPatientData = (patient) => {
     return `
@@ -11,7 +9,7 @@ const displayPatientProfile = (obj) => {
                 </div>
                 <div class="col s2">
                     <div class="avator">
-                        <img src="${patient.image}" style="width: 100px; height: 100px">
+                        <img src="${patient._picture}" style="width: 100px; height: 100px">
                         <a id="chg-patient-btn" class="waves-effect waves-light btn" style="margin-top:20px;">Change</a>
                         <input id="chg-patient-pic" type="file" name="name" style="display: none;" />
                     </div>
@@ -20,14 +18,14 @@ const displayPatientProfile = (obj) => {
                     <div class="infos">
                         <div class="name">
                             <h6>FirstName</h6>
-                            <p class="text">${patient.firstName}</p>
+                            <p class="text">${patient._fname}</p>
                             <h6>LastName</h6>
-                            <p class="text">${patient.lastName}</p>
+                            <p class="text">${patient._lname}</p>
                         </div>
                         <h6>Age</h6>
-                        <p class="text">${patient.age}</p>
+                        <p class="text">${patient._age}</p>
                         <h6>Sex</h6>
-                        <p class="text">${patient.sex}</p>
+                        <p class="text">${patient._sex}</p>
                     </div>
                 </div>
             </div>
@@ -78,7 +76,7 @@ const displayPatientProfile = (obj) => {
     if (document.getElementById('patient-profile')) {
       document
         .getElementById('patient-profile')
-        .insertAdjacentHTML('beforebegin', addPatientData(obj[item]));
+        .insertAdjacentHTML('beforebegin', addPatientData(obj));
     }
 
     return true;
@@ -104,3 +102,5 @@ const displayPatientProfile = (obj) => {
   // Modal
   $.getScript('js/modal.js');
 };
+
+displayPatientProfile(userData);

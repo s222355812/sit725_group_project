@@ -1,17 +1,5 @@
 // Load patient's schedule
 // -----------------------------------------------------
-const getPatientSchedData = () => {
-  $.get('/api/patientSched', (response) => {
-    if (response.statusCode == 200) {
-      displayPatientSched(response.data[0].patientSched);
-    }
-  });
-};
-
-getPatientSchedData();
-
-getPatientSchedData();
-
 const displayPatientSched = (obj) => {
   let addDate = (date) => {
     return `
@@ -47,13 +35,12 @@ const displayPatientSched = (obj) => {
     `;
   };
 
-  Object.keys(obj).forEach((date) => {
+  Object.keys(obj._schedule).forEach((date) => {
     if (document.getElementById('patient-schedule')) {
       document
         .getElementById('patient-schedule')
         .insertAdjacentHTML('beforebegin', addDate(date));
-
-      obj[date].forEach((info) => {
+      obj._schedule[date].forEach((info) => {
         document
           .getElementById(date)
           .insertAdjacentHTML('beforebegin', addDetails(info));
@@ -61,3 +48,5 @@ const displayPatientSched = (obj) => {
     }
   });
 };
+
+displayPatientSched(userData);
