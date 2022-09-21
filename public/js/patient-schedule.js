@@ -49,4 +49,4 @@ const displayPatientSched = (obj) => {
   });
 };
 
-displayPatientSched(userData);
+if (userData._user == 'patient') displayPatientSched(userData);

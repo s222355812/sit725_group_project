@@ -64,16 +64,21 @@ const getCollection = (collection, email, res) => {
     });
 };
 
-// Collect User Data from session to Patient collection
+// Collect User Data from session to Patient/DoctorClass collection
 app.post('/api/userData', (req, res) => {
-  let email;
-
   database
     .collection('sessions')
     .find({ _id: req.session.id })
     .toArray((err, result) => {
-      email = result[0].session.userData._email;
-      getCollection('Patient', { _email: email }, res);
+      if (err) throw err;
+      if (result[0]) {
+        let email = result[0].session.userData._email;
+        if (result[0].session.userData._user == 'patient')
+          getCollection('Patient', { _email: email }, res);
+        else if (result[0].session.userData._user == 'doctor')
+          getCollection('DoctorClass', { _email: email }, res);
+        else console.log('No user found');
+      }
     });
 });
 
@@ -83,29 +88,9 @@ app.get('/', isAuth, (req, res) => {
   res.sendFile('public/homepage.html', { root: __dirname });
 });
 
-// homepage collection
+// Homepage collection
 app.get('/api/homepage', (req, res) => {
   getCollection('homepage', {}, res);
-});
-
-// docAppointment collection
-app.get('/api/docAppointment', (req, res) => {
-  getCollection('docAppointment', {}, res);
-});
-
-// patientRatings collection
-app.get('/api/patientRatings', (req, res) => {
-  getCollection('patientRatings', {}, res);
-});
-
-// docSched collection
-app.get('/api/docSched', (req, res) => {
-  getCollection('docSched', {}, res);
-});
-
-// patientSched collection
-app.get('/api/patientSched', (req, res) => {
-  getCollection('patientSched', {}, res);
 });
 
 // Logout
@@ -216,19 +201,33 @@ app.post('/login', (req, res) => {
       }
     });
 
-  Doctor.findOne({ _email: email }, function (error, foundUser) {
-    if (!error) {
-      if (foundUser) {
-        if (foundUser._password == password) {
+  database
+    .collection('DoctorClass')
+    .find(query)
+    .toArray((err, result) => {
+      if (err) throw err;
+      if (result[0]) {
+        if (result[0]._password == password) {
           req.session.isAuth = true;
-          req.session.userData = foundUser;
+          req.session.userData = result[0];
           res.redirect('/?sessionID=' + req.session.id);
         }
-      } else {
-        console.log('please sign up first');
       }
-    }
-  });
+    });
+
+  // Doctor.findOne({ _email: email }, function (error, foundUser) {
+  //   if (!error) {
+  //     if (foundUser) {
+  //       if (foundUser._password == password) {
+  //         req.session.isAuth = true;
+  //         req.session.userData = foundUser;
+  //         res.redirect('/?sessionID=' + req.session.id);
+  //       }
+  //     } else {
+  //       console.log('please sign up first');
+  //     }
+  //   }
+  // });
 });
 
 //Sign-Up

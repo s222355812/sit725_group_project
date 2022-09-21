@@ -39,12 +39,10 @@ const doNextTask = () => {
     document.querySelector('head').insertAdjacentHTML('afterbegin', headHTML);
 
     // Load NavBar
-    if ('_degree' in userData) {
-      $('#header').load('../header-doctor.html');
-    } else {
+    if (userData._user == 'doctor') $('#header').load('../header-doctor.html');
+    else if (userData._user == 'patient')
       $('#header').load('header-patient.html');
-      // $.getScript('js/header.js');
-    }
+    else console.log('No user found');
 
     // Load Footer
     $('#footer').load('footer.html');

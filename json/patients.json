@@ -1,5 +1,6 @@
 [
   {
+    "_user": "patient",
     "_email": "AbcXyz@gmail.com",
     "_fname": "Abc",
     "_lname": "Xyz",
@@ -91,6 +92,7 @@
     }
   },
   {
+    "_user": "patient",
     "_email": "QweRty@gmail.com",
     "_fname": "Qwe",
     "_lname": "Rty",

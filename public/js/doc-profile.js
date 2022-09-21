@@ -1,13 +1,11 @@
-$.getJSON('js/json/sample-doc-sched.json', (schedObj) => getDocSched(schedObj));
-$.getJSON('js/json/doc-profile.json', (obj) => displayDocData(obj));
+let allowEdit = false;
+let allowDisplaySchedule = false;
 
 // If user is a Doctor, allow profile edit
-// ------------------------------------------------------------------------------
-let allowEdit = true;
+if (userData._user == 'doctor') allowEdit = true;
 
 // If user is a patient, display schedules
-// ------------------------------------------------------------------------------
-let allowDisplaySchedule = true;
+if (userData._user == 'patient') allowDisplaySchedule = true;
 
 // Get doctor available schedule
 // ------------------------------------------------------------------------------
@@ -24,10 +22,11 @@ const weekday = [
 ];
 let today = weekday[dateToday.getDay()];
 
-const getDocSched = (schedObj) => {
-  schedToday = schedObj.docSched[today];
+const getDocSched = (userData) => {
+  schedToday = userData._docSched[today];
   availableSchedFrom = schedToday[0].from;
   availableSchedTo = schedToday[schedToday.length - 1].to;
+  displayDocData(userData);
 };
 
 // Display doctor profile data
@@ -52,7 +51,7 @@ const displayDocData = (obj) => {
   let addDocProfileData = (doc) => {
     // Add tags
     let tags = ``;
-    doc.specialisation.forEach((item) => {
+    doc._specialisation.forEach((item) => {
       tags =
         tags +
         `
@@ -62,21 +61,21 @@ const displayDocData = (obj) => {
 
     // Calculate years of experience
     let years = 0;
-    doc.experience.forEach((item) => {
-      years = years + Number(item.duration);
+    doc._experience.forEach((item) => {
+      years = years + Number(item._Duration);
     });
 
     return `
     <div class="card card-panel grey lighten-4">
         <div class="row">
             <div class="col s12 center-align">
-                <img class="circle" src="${doc.picture}" style="width: 100px; height:100px;">
+                <img class="circle" src="${doc._picture}" style="width: 100px; height:100px;">
             </div>
             ${changePic}
         </div>
         <hr>
         <div class="row">
-            <h5 class="col s6">${doc.name}</h5>
+            <h5 class="col s6">${doc._name}</h5>
             <div class="col s6 right-align">
                 ${dataEdit}
             </div>
@@ -96,7 +95,7 @@ const displayDocData = (obj) => {
             <h6 class="col s12 l4">Available Schedule:</h6>
             <h6 class="col s12 l8 teal-text">${availableSchedFrom} - ${availableSchedTo}</h6>
             <h6 class="col s4">Fees:</h6>
-            <h6 class="col s8 teal-text">$${doc.fees}</h6>
+            <h6 class="col s8 teal-text">$${doc._fees}</h6>
             <h6 class="col s12">Socials:</h6>
             <div class="col s12">
                 <a href=""><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
@@ -136,7 +135,7 @@ const displayDocData = (obj) => {
   //   Display doctor available schedules
   // ------------------------------------------------------------------------------
   const addSchedData = () => {
-    if (!allowDisplaySchedule) return '';
+    if (allowDisplaySchedule) return '';
 
     let allAMSched = ``;
     let allPMSched = ``;
@@ -248,9 +247,9 @@ const displayDocData = (obj) => {
         `
         <hr>
         ${experienceEdit}
-        <h6>${exp.position}</h6>
-        <h6>${exp.hospitalName}</h6>
-        <h6>Duration: ${exp.duration} years</h6>
+        <h6>Position: ${exp._Position}</h6>
+        <h6>Company: ${exp._HospitalName}</h6>
+        <h6>Duration: ${exp._Duration} years</h6>
 
         <div id="${id}" class="modal">
           <div class="modal-content">
@@ -347,8 +346,8 @@ const displayDocData = (obj) => {
         `
         <hr>
         ${educationEdit}
-        <h6>${edu.degree}</h6>
-        <h6>${edu.schoolName}</h6>    
+        <h6>Degree: ${edu._Degree}</h6>
+        <h6>School: ${edu._UniName}</h6>    
         
         <div id="${id}" class="modal">
           <div class="modal-content">
@@ -399,25 +398,16 @@ const displayDocData = (obj) => {
     if (document.getElementById('doc-profile')) {
       document
         .getElementById('doc-profile')
-        .insertAdjacentHTML('beforebegin', addDocProfileData(obj[item]));
-
+        .insertAdjacentHTML('beforebegin', addDocProfileData(obj));
       document
         .getElementById('doc-profile')
         .insertAdjacentHTML('beforebegin', addSchedData());
-
       document
         .getElementById('doc-profile')
-        .insertAdjacentHTML(
-          'beforebegin',
-          addExperienceData(obj[item].experience)
-        );
-
+        .insertAdjacentHTML('beforebegin', addExperienceData(obj._experience));
       document
         .getElementById('doc-profile')
-        .insertAdjacentHTML(
-          'beforebegin',
-          addEducationData(obj[item].education)
-        );
+        .insertAdjacentHTML('beforebegin', addEducationData(obj._education));
     }
     return true;
   });
@@ -497,3 +487,5 @@ const displayDocData = (obj) => {
   // Modal
   $.getScript('js/modal.js');
 };
+
+if (userData._user == 'doctor') getDocSched(userData);
