@@ -3,7 +3,6 @@ let userData;
 const userLogin = () => {
   $.post('/login', (response) => {
     if (response.statusCode == 200) {
-      console.log(response.data);
     }
   });
 };

@@ -1,16 +1,81 @@
-$.getJSON('js/json/doc-profile.json', (obj) => displayDocList(obj));
+//  Search Function
+// ------------------------------------------------------------------------
+let searchResults = '';
+const search = () => {
+  $.post('/searchResults', (res) => {
+    if ('searchResults' in res.data[0].session) {
+      searchResults = res.data[0].session.searchResults[0];
+      displayDocList(searchResults);
+    }
+  });
+};
+
+search();
+
+$(document).ready(function () {
+  $('input.autocomplete').autocomplete({
+    data: {
+      'General Medicine': null,
+      'Eye & Vision': null,
+      'Skin & Dermatology': null,
+      'Ear, Nose & Throat': null,
+      'Heart & Cardiology': null,
+      'Lungs & Chest': null,
+      'Brain & Nerves': null,
+      'Kidney & Urine': null,
+      'Stomach & Digestion': null,
+      'Blood & Hematology': null,
+      Hepaptology: null,
+      'Imaging & Radiology': null,
+      'Dental Care': null,
+      Pediatrics: null,
+      'Maternal & Newborn Care': null,
+      'Joint, Muscles & Bones': null,
+      'Diet & Nutrition': null,
+      'Heart Disease': null,
+      Hypertension: null,
+      'High Cholesterol': null,
+      'Mental Health': null,
+      'Back Pain': null,
+      Allergy: null,
+      'Colds & Flu': null,
+      Migrane: null,
+      'Acne and Eczema': null,
+      Pregnancy: null,
+      Diabetes: null,
+      'Arthritis & Gout': null,
+      Cancer: null,
+      'Medical Certificates': null,
+      'Children Vaccinations': null,
+      'Vaccination Forms': null,
+      'Birth Control': null,
+      'Physical Therapy': null,
+      'Ear Cleaning': null,
+      'Cortisone Injections': null,
+      'Covid-19 Consulations': null,
+      'Cataract Surgery': null,
+      Orthodontics: null,
+    },
+    limit: Infinity,
+    minLength: 1,
+  });
+});
+
+// ------------------------------------------------------------------------
+
+// $.getJSON('js/json/doc-profile.json', (obj) => displayDocList(obj));
 
 const displayDocList = (obj) => {
   let addDocList = (doc) => {
     // Calculate years of experience
     let years = 0;
-    doc.experience.forEach((item) => {
-      years = years + Number(item.duration);
+    doc._experience.forEach((item) => {
+      years = years + Number(item._Duration);
     });
 
     // Add tags
     let tags = ``;
-    doc.specialisation.forEach((item) => {
+    doc._specialisation.forEach((item) => {
       tags =
         tags +
         `
@@ -22,12 +87,12 @@ const displayDocList = (obj) => {
     <div class="card-panel grey lighten-3">
       <div class="row">
           <div class="col l2 center-align">
-              <img class="circle" src="${doc.picture}" alt="doc-pic"
+              <img class="circle" src="${doc._picture}" alt="doc-pic"
                   style="width: 75px; height: 75px;">
           </div>
           <div class="col s12 l7">
-              <h6 class="col s12">${doc.name}</h6>
-              <h6 class="col s12">Experience:${years} years</h6>
+              <h6 class="col s12">${doc._name}</h6>
+              <h6 class="col s12">Experience: ${years} years</h6>
           </div>
           <a class="waves-effect waves-teal btn-flat blue-text" href="./doctor-profile.html">View
               Profile</a>
