@@ -1,6 +1,16 @@
 let allowEdit = false;
 let allowDisplaySchedule = false;
 
+const viewDocProfile = () => {
+  $.post('/sessions', (res) => {
+    if ('viewProfile' in res.data[0].session) {
+      getDocSched(res.data[0].session.viewProfile[0][0]);
+    }
+  });
+};
+
+viewDocProfile();
+
 // If user is a Doctor, allow profile edit
 if (userData._user == 'doctor') allowEdit = true;
 
@@ -135,7 +145,7 @@ const displayDocData = (obj) => {
   //   Display doctor available schedules
   // ------------------------------------------------------------------------------
   const addSchedData = () => {
-    if (allowDisplaySchedule) return '';
+    if (!allowDisplaySchedule) return '';
 
     let allAMSched = ``;
     let allPMSched = ``;

@@ -1,11 +1,9 @@
 //  Search Function
 // ------------------------------------------------------------------------
-let searchResults = '';
 const search = () => {
-  $.post('/searchResults', (res) => {
+  $.post('/sessions', (res) => {
     if ('searchResults' in res.data[0].session) {
-      searchResults = res.data[0].session.searchResults[0];
-      displayDocList(searchResults);
+      displayDocList(res.data[0].session.searchResults[0]);
     }
   });
 };
@@ -94,8 +92,12 @@ const displayDocList = (obj) => {
               <h6 class="col s12">${doc._name}</h6>
               <h6 class="col s12">Experience: ${years} years</h6>
           </div>
-          <a class="waves-effect waves-teal btn-flat blue-text" href="./doctor-profile.html">View
-              Profile</a>
+
+          <form action="/viewProfile" method="POST">
+            <input type="hidden" name="email" value="${doc._email}" />
+            <button class="btn waves-effect waves-light transparent blue-text z-depth-0" type="submit" name="action">View Profile</button>
+          </form>
+
           <div class="col s12">
               <h6 class="col s12 l2 offset-l2">Specialisation:</h6>
               <div class="col l8">
@@ -120,4 +122,7 @@ const displayDocList = (obj) => {
         .insertAdjacentHTML('beforebegin', addDocList(obj[item]));
     }
   });
+
+  //  See Doctor profiles using View Profile
+  // ------------------------------------------------------------------------------
 };

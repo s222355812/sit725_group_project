@@ -83,20 +83,16 @@ app.post('/api/userData', (req, res) => {
     });
 });
 
-// Landing page
 app.get('/', isAuth, (req, res) => {
   console.log(req.session.id);
   res.sendFile('public/homepage.html', { root: __dirname });
 });
 
-// Homepage collection
 app.get('/api/homepage', (req, res) => {
   getCollection('homepage', {}, res);
 });
 
-// Search
 app.get('/search', (req, res) => {
-  console.log('get search called');
   res.sendFile('public/doctor-list.html', { root: __dirname });
 });
 
@@ -105,23 +101,44 @@ app.post('/search', (req, res) => {
     .collection('DoctorClass')
     .find({ _specialisation: { $all: [req.body.search] } })
     .toArray((err, result) => {
+      let query = { _id: req.session.id };
+      let newValue = { $set: { 'session.searchResults': [result] } };
       if (err) throw err;
       else
         database
           .collection('sessions')
-          .updateOne(
-            { _id: req.session.id },
-            { $set: { 'session.searchResults': [result] } },
-            (err, result) => {
-              if (err) throw err;
-              else console.log('Session search results updated');
-            }
-          );
+          .updateOne(query, newValue, (err, result) => {
+            if (err) throw err;
+            else console.log('Session searchResults updated');
+          });
     });
   res.redirect('/search');
 });
 
-app.post('/searchResults', (req, res) => {
+app.get('/viewProfile', (req, res) => {
+  res.sendFile('public/doctor-profile.html', { root: __dirname });
+});
+
+app.post('/viewProfile', (req, res) => {
+  database
+    .collection('DoctorClass')
+    .find({ _email: req.body.email })
+    .toArray((err, result) => {
+      let query = { _id: req.session.id };
+      let newValue = { $set: { 'session.viewProfile': [result] } };
+      if (err) throw err;
+      else
+        database
+          .collection('sessions')
+          .updateOne(query, newValue, (err, result) => {
+            if (err) throw err;
+            else console.log('Session viewProfile updated');
+          });
+    });
+  res.redirect('/viewProfile');
+});
+
+app.post('/sessions', (req, res) => {
   database
     .collection('sessions')
     .find({ _id: req.session.id })
@@ -131,7 +148,6 @@ app.post('/searchResults', (req, res) => {
     });
 });
 
-// Logout
 app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) throw err;
