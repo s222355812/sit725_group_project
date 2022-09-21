@@ -1,15 +1,5 @@
 // Load doctor's schedule
 // -----------------------------------------------------
-const getDocSchedData = () => {
-  $.get('/api/docSched', (response) => {
-    if (response.statusCode == 200) {
-      displayDocSched(response.data[0].docSched);
-    }
-  });
-};
-
-getDocSchedData();
-
 const deleteButtonIds = [];
 
 const displayDocSched = (obj) => {
@@ -138,3 +128,5 @@ buttonIds.forEach((buttonId) => {
       .insertAdjacentHTML('beforebegin', timePickerHTML);
   });
 });
+
+if (userData._user == 'doctor') displayDocSched(userData._docSched);

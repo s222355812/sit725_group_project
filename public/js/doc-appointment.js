@@ -1,15 +1,5 @@
 // Load doctor's appointments
 // -----------------------------------------------------
-const getDocAppointmentData = () => {
-  $.get('/api/docAppointment', (response) => {
-    if (response.statusCode == 200) {
-      displayAppointment(response.data[0].docAppointments);
-    }
-  });
-};
-
-getDocAppointmentData();
-
 const displayAppointment = (obj) => {
   let addDate = (date) => {
     return `
@@ -79,3 +69,5 @@ const displayAppointment = (obj) => {
     }
   });
 };
+
+if (userData._user == 'doctor') displayAppointment(userData._appointments);
