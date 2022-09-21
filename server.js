@@ -32,6 +32,7 @@ MongoClient.connect(uri, { useNewURLParser: true }, (err, result) => {
 });
 
 // Sessions
+// ---------------------------------------------------
 const store = new MongoDBSession({
   uri: uri,
   collection: 'sessions',
@@ -91,6 +92,43 @@ app.get('/', isAuth, (req, res) => {
 // Homepage collection
 app.get('/api/homepage', (req, res) => {
   getCollection('homepage', {}, res);
+});
+
+// Search
+app.get('/search', (req, res) => {
+  console.log('get search called');
+  res.sendFile('public/doctor-list.html', { root: __dirname });
+});
+
+app.post('/search', (req, res) => {
+  database
+    .collection('DoctorClass')
+    .find({ _specialisation: { $all: [req.body.search] } })
+    .toArray((err, result) => {
+      if (err) throw err;
+      else
+        database
+          .collection('sessions')
+          .updateOne(
+            { _id: req.session.id },
+            { $set: { 'session.searchResults': [result] } },
+            (err, result) => {
+              if (err) throw err;
+              else console.log('Session search results updated');
+            }
+          );
+    });
+  res.redirect('/search');
+});
+
+app.post('/searchResults', (req, res) => {
+  database
+    .collection('sessions')
+    .find({ _id: req.session.id })
+    .toArray((err, result) => {
+      if (err) throw err;
+      else res.json({ statusCode: 200, data: result, message: 'Success' });
+    });
 });
 
 // Logout
@@ -180,6 +218,7 @@ const PatientClassSchema = new mongoose.Schema(
 );
 
 // Login
+// -----------------------------------------------------
 app.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
@@ -231,6 +270,7 @@ app.post('/login', (req, res) => {
 });
 
 //Sign-Up
+// ---------------------------------------------------------
 app.post('/signup', (req, res) => {
   let name = req.body.name;
   let email = req.body.email;
