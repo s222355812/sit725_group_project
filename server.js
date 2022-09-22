@@ -6,8 +6,12 @@ const app = express();
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
 
+let { uri } = require('./dbConnect');
 let projectRoutes = require('./routes/projectRoutes');
-let { uri, getDB } = require('./dbConnect');
+let search = require('./routes/search');
+let viewProfile = require('./routes/viewProfile');
+let sessions = require('./routes/sessions');
+let signup = require('./routes/signup');
 
 app.use(
   session({
@@ -24,8 +28,11 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-
 app.use(projectRoutes);
+app.use(search);
+app.use(viewProfile);
+app.use(sessions);
+app.use(signup);
 
 //Doctor collection created
 const DoctorClassSchema = new mongoose.Schema(
