@@ -35,30 +35,30 @@ const displayPatientProfile = (obj) => {
   <div id="edit-patient" class="modal">
     <div class="modal-content">
       <div class="row">
-        <form class="col s12">
+        <form action="/patientupdate" method="POST" class="col s12">
           <div class="row">
             <div class="input-field col s6">
-              <input id="patient-fname" type="text" class="validate">
+              <input id="patient-fname" type="text" name="firstName" class="validate">
               <label for="patient-fname">First Name</label>
             </div>
             <div class="input-field col s6">
-              <input id="patient-lname" type="text" class="validate">
+              <input id="patient-lname" type="text" name="lastName" class="validate">
               <label for="patient-lname">Last Name</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="patient-age" type="text" class="validate">
+              <input id="patient-age" type="text" name="age" class="validate">
               <label for="patient-age">Age</label>
             </div>
             <div class="input-field col s6">
-              <input id="patient-sex" type="text" class="validate">
+              <input id="patient-sex" type="text" name="sex" class="validate">
               <label for="patient-sex">Sex</label>
             </div>
           </div>
           <div class="row">
           <div class="input-field col s12 center-align">
-           <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+          <button type="submit" class="btn" value="Submit" id="submit">Done</button>
           </div>
           </div>
         </form>
