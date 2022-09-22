@@ -12,6 +12,7 @@ let search = require('./routes/search');
 let viewProfile = require('./routes/viewProfile');
 let sessions = require('./routes/sessions');
 let signup = require('./routes/signup');
+let book = require('./routes/book');
 
 app.use(
   session({
@@ -33,6 +34,7 @@ app.use(search);
 app.use(viewProfile);
 app.use(sessions);
 app.use(signup);
+app.use(book);
 
 //Doctor collection created
 const DoctorClassSchema = new mongoose.Schema(

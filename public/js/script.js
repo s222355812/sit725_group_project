@@ -83,17 +83,6 @@ const doNextTask = () => {
     setInterval(function () {
       $('.carousel').carousel('next');
     }, 5000);
-
-    $(document).ready(function () {
-      $('.datepicker').datepicker();
-    });
-
-    $(document).ready(function () {
-      $('.timepicker').timepicker({
-        showClearBtn: true,
-      });
-    });
-
     // ...END
   });
 };
