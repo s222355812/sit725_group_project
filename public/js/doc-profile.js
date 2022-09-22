@@ -171,32 +171,85 @@ const displayDocData = (obj) => {
 
     let allAMSched = ``;
     let allPMSched = ``;
-
-    selectSched.forEach((sched) => {
-      // AM schedule
-      if (sched.from.match('AM'))
-        allAMSched =
-          allAMSched +
-          `
-      <div class="card-panel grey lighten-3 z-depth-5 col s12">
-        <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
-        <a class="col s12 l3 offset-l1 waves-effect waves-light blue btn">Book </a>
-        <br>
-      </div>
-      `;
-
-      //  PM Schedule
-      if (sched.from.match('PM'))
-        allPMSched =
-          allPMSched +
-          `
-    <div class="card-panel grey lighten-3 z-depth-5 col s12">
-      <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
-      <a class="col s12 l3 offset-l1 waves-effect waves-light blue btn">Book </a>
-      <br>
-    </div>
+    let schedBoard = ``;
+    let bookBtn = `
+      <button class="btn waves-effect waves-light blue white-text z-depth-0" type="submit" name="action">book</button>
     `;
-    });
+
+    if (obj.hasOwnProperty('selectDate')) {
+      selectSched.forEach((sched) => {
+        // Check schedule if alreay booked
+        if (myDate in obj._appointments) {
+          obj._appointments[myDate].some((item) => {
+            if (item.from == sched.from) {
+              bookBtn = `
+                <button class="btn waves-effect waves-light blue white-text z-depth-0 disabled" type="submit" name="action">booked</button>
+                `;
+              return true;
+            } else {
+              bookBtn = `
+                <button class="btn waves-effect waves-light blue white-text z-depth-0" type="submit" name="action">book</button>
+                `;
+            }
+          });
+        }
+
+        // AM schedule
+        if (sched.from.match('AM'))
+          allAMSched =
+            allAMSched +
+            `
+            <form action="/book/appointment" method="POST">
+              <div class="card-panel grey lighten-3 z-depth-5 col s12">
+                <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
+                <input type="hidden" name="myName" value="${userData._fname} ${userData._lname}"/>
+                <input type="hidden" name="myEmail" value="${userData._email}"/>
+                <input type="hidden" name="docEmail" value="${obj._email}"/>
+                <input type="hidden" name="date" value="${myDate}"/>
+                <input type="hidden" name="from" value="${sched.from}"/>
+                <input type="hidden" name="to" value="${sched.to}"/>
+                ${bookBtn}
+                <br>
+              </div>
+            </form>
+            `;
+
+        //  PM Schedule
+        if (sched.from.match('PM'))
+          allPMSched =
+            allPMSched +
+            `
+            <form action="/book/appointment" method="POST">
+              <div class="card-panel grey lighten-3 z-depth-5 col s12">
+                <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
+                <input type="hidden" name="myName" value="${userData._fname} ${userData._lname}"/>
+                <input type="hidden" name="myEmail" value="${userData._email}"/>
+                <input type="hidden" name="docEmail" value="${obj._email}"/>
+                <input type="hidden" name="date" value="${myDate}"/>
+                <input type="hidden" name="from" value="${sched.from}"/>
+                <input type="hidden" name="to" value="${sched.to}"/>
+                ${bookBtn}
+                <br>
+              </div>
+            </form>
+            `;
+      });
+
+      // Schedule Board
+      schedBoard = `
+        <div class="row">
+          <div class="card-panel grey lighten-2 col s12 l6">
+              <h5>AM</h5>
+              ${allAMSched}
+
+          </div>
+          <div class="card-panel grey lighten-2 col s12 l6">
+              <h5>PM</h5>
+              ${allPMSched}
+          </div>
+        </div>    
+        `;
+    }
 
     return `
     <div class="card-panel grey lighten-4">
@@ -210,18 +263,7 @@ const displayDocData = (obj) => {
               </div>
             </form>
         </div>
-        
-        <div class="row">
-            <div class="card-panel grey lighten-2 col s12 l6">
-                <h5>AM</h5>
-                ${allAMSched}
-    
-            </div>
-            <div class="card-panel grey lighten-2 col s12 l6">
-                <h5>PM</h5>
-                ${allPMSched}
-            </div>
-        </div>
+        ${schedBoard}
     </div>    
     `;
   };
