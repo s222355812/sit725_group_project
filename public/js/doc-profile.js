@@ -17,10 +17,17 @@ if (userData._user == 'doctor') allowEdit = true;
 // If user is a patient, display schedules
 if (userData._user == 'patient') allowDisplaySchedule = true;
 
+// ------------------------------------------------------------------------------------------------------------
 // Get doctor available schedule
-// ------------------------------------------------------------------------------
-let docSched, schedToday, availableSchedFrom, availableSchedTo;
+// ------------------------------------------------------------------------------------------------------------
+let myDate,
+  myDay,
+  selectSched,
+  schedToday,
+  availableSchedFrom,
+  availableSchedTo;
 let dateToday = new Date();
+
 const weekday = [
   'sunday',
   'monday',
@@ -32,15 +39,29 @@ const weekday = [
 ];
 let today = weekday[dateToday.getDay()];
 
-const getDocSched = (userData) => {
-  schedToday = userData._docSched[today];
+const getDocSched = (obj) => {
+  // Schedule for today
+  schedToday = obj._docSched[today];
   availableSchedFrom = schedToday[0].from;
   availableSchedTo = schedToday[schedToday.length - 1].to;
-  displayDocData(userData);
+
+  myDay = today;
+  myDate = dateToday;
+  selectSched = schedToday;
+
+  // Selected Schedule
+  if (obj.hasOwnProperty('selectDate')) {
+    myDate = obj.selectDate.date;
+    myDay = obj.selectDate.day;
+    selectSched = obj._docSched[myDay];
+  }
+
+  displayDocData(obj);
 };
 
+// ------------------------------------------------------------------------------------------------------------
 // Display doctor profile data
-// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 const displayDocData = (obj) => {
   let dataEdit = ``;
   let changePic = ``;
@@ -142,15 +163,16 @@ const displayDocData = (obj) => {
     `;
   };
 
+  // ------------------------------------------------------------------------------------------------------------
   //   Display doctor available schedules
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   const addSchedData = () => {
     if (!allowDisplaySchedule) return '';
 
     let allAMSched = ``;
     let allPMSched = ``;
 
-    schedToday.forEach((sched) => {
+    selectSched.forEach((sched) => {
       // AM schedule
       if (sched.from.match('AM'))
         allAMSched =
@@ -181,11 +203,14 @@ const displayDocData = (obj) => {
         <div class="row">
             <h5>Schedule</h5>
             <hr>
-            <div class="input-field col s12 l6">
-                <input type="text" class="datepicker" />
+            <form action="/book" method="POST">
+              <div class="input-field col s12 l6">
+                <input name="selectedDate" type="text" class="datepicker" placeholder="${myDate} ${myDay}"/>
                 <label>Select Date</label>
-            </div>
+              </div>
+            </form>
         </div>
+        
         <div class="row">
             <div class="card-panel grey lighten-2 col s12 l6">
                 <h5>AM</h5>
@@ -201,8 +226,10 @@ const displayDocData = (obj) => {
     `;
   };
 
+  // ------------------------------------------------------------------------------------------------------------
   //   Display doctor experience information
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
+
   const addExperienceData = (doc) => {
     let experienceAdd = ``;
     let experienceEdit = ``;
@@ -304,9 +331,9 @@ const displayDocData = (obj) => {
    
     `;
   };
-
+  // ------------------------------------------------------------------------------------------------------------
   //   Display doctor education information
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   const addEducationData = (doc) => {
     let educationAdd = ``;
     let educationEdit = ``;
@@ -398,8 +425,9 @@ const displayDocData = (obj) => {
     `;
   };
 
+  // ------------------------------------------------------------------------------------------------------------
   //   Doctor Display Information Contoller
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   Object.keys(obj).some((item) => {
     // obj = whole data object
     // item = object index [0, 1, 2, ...]
@@ -422,8 +450,9 @@ const displayDocData = (obj) => {
     return true;
   });
 
+  // ------------------------------------------------------------------------------------------------------------
   // Tags
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   $('.chips-placeholder').chips({
     placeholder: 'Enter a tag',
     secondaryPlaceholder: '+Tag',
@@ -477,8 +506,9 @@ const displayDocData = (obj) => {
     },
   });
 
+  // ------------------------------------------------------------------------------------------------------------
   // Change profile pic
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   $('#chg-doc-pic').change((item) => {
     let file = item.target.files[0];
     let reader = new FileReader();
@@ -496,6 +526,35 @@ const displayDocData = (obj) => {
 
   // Modal
   $.getScript('js/modal.js');
+
+  // Date picker
+  // Time picker
+  $(document).ready(function () {
+    $('.datepicker').datepicker();
+    $('.timepicker').timepicker({
+      showClearBtn: true,
+    });
+    $('.datepicker-done').type = 'submit';
+
+    $('.datepicker-done').click(() => {
+      let pickerDate = $('.datepicker').val();
+      let myDate = new Date(pickerDate);
+      let myDay = weekday[myDate.getDay()];
+
+      $.ajax({
+        url: '/book',
+        data: { date: pickerDate, day: myDay },
+        type: 'POST',
+        success: (result) => {
+          location.reload();
+        },
+      });
+
+      // ...End
+    });
+  });
+
+  // ...End
 };
 
 if (userData._user == 'doctor') getDocSched(userData);

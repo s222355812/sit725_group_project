@@ -61,8 +61,6 @@ $(document).ready(function () {
 
 // ------------------------------------------------------------------------
 
-// $.getJSON('js/json/doc-profile.json', (obj) => displayDocList(obj));
-
 const displayDocList = (obj) => {
   let addDocList = (doc) => {
     // Calculate years of experience
