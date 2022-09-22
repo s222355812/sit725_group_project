@@ -56,12 +56,15 @@ const displayPatientProfile = (obj) => {
               <label for="patient-sex">Sex</label>
             </div>
           </div>
+          <div class="row">
+          <div class="input-field col s12 center-align">
+           <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+          </div>
+          </div>
         </form>
       </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
-    </div>
+
   </div>
     `;
   };
