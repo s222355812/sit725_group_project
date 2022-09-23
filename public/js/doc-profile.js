@@ -67,7 +67,6 @@ const displayDocData = (obj) => {
   let changePic = ``;
   if (allowEdit) {
     dataEdit = `
-    <a class="waves-effect waves-light modal-trigger" href="#"><i class="material-icons left">add</i></a>
     <a class="waves-effect waves-light modal-trigger" href="#edit-doctor"><i class="material-icons left">edit</i></a>
   `;
 
@@ -559,7 +558,14 @@ const displayDocData = (obj) => {
 
     reader.onload = (readerEvent) => {
       let content = readerEvent.target.result;
-      console.log(content);
+      $.ajax({
+        url: '/docUpdate/pic',
+        data: { picture: content },
+        type: 'POST',
+        success: (result) => {
+          location.reload();
+        },
+      });
     };
   });
 

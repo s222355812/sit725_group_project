@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const app = express();
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
-// const bodyParser = require('body-parser');
 
 let { uri } = require('./dbConnect');
 let projectRoutes = require('./routes/projectRoutes');
@@ -15,6 +14,7 @@ let sessions = require('./routes/sessions');
 let signup = require('./routes/signup');
 let book = require('./routes/book');
 let patientUpdate = require('./routes/patientUpdate');
+let docUpdate = require('./routes/docUpdate');
 
 app.use(
   session({
@@ -44,6 +44,7 @@ app.use(sessions);
 app.use(signup);
 app.use(book);
 app.use(patientUpdate);
+app.use(docUpdate);
 
 //Doctor collection created
 const DoctorClassSchema = new mongoose.Schema(
