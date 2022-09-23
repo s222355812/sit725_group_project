@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const app = express();
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
+// const bodyParser = require('body-parser');
 
 let { uri } = require('./dbConnect');
 let projectRoutes = require('./routes/projectRoutes');
@@ -13,6 +14,7 @@ let viewProfile = require('./routes/viewProfile');
 let sessions = require('./routes/sessions');
 let signup = require('./routes/signup');
 let book = require('./routes/book');
+let patientUpdate = require('./routes/patientUpdate');
 
 app.use(
   session({
@@ -26,8 +28,14 @@ app.use(
   })
 );
 app.use(express.static(__dirname + '/public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(
+  express.urlencoded({
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
+app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 app.use(projectRoutes);
 app.use(search);
@@ -35,6 +43,7 @@ app.use(viewProfile);
 app.use(sessions);
 app.use(signup);
 app.use(book);
+app.use(patientUpdate);
 
 //Doctor collection created
 const DoctorClassSchema = new mongoose.Schema(

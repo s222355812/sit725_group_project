@@ -94,7 +94,16 @@ const displayPatientProfile = (obj) => {
 
     reader.onload = (readerEvent) => {
       let content = readerEvent.target.result;
-      console.log(content);
+      // console.log(content);
+
+      $.ajax({
+        url: '/patientupdate/pic',
+        data: { picture: content },
+        type: 'POST',
+        success: (result) => {
+          location.reload();
+        },
+      });
     };
   });
 

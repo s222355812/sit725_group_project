@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/adrianweerasinghe97/sit725_group_project#readme",
   "dependencies": {
-    "body-parser": "^1.20.0",
     "connect-mongodb-session": "^3.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
