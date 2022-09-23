@@ -18,7 +18,7 @@ router.post('/viewProfile', (req, res) => {
     .find({ _email: req.body.email })
     .toArray((err, result) => {
       let query = { _id: req.session.id };
-      let newValue = { $set: { 'session.viewProfile': [result] } };
+      let newValue = { $set: { 'session.viewProfile': [result][0][0] } };
       if (err) throw err;
       else
         database

@@ -38,7 +38,7 @@ const displayAppointment = (obj) => {
             <span class="col s12 l2 center-align">
               <img
                 class="circle responsive-img profile-pic"
-                src="${info.picture}"
+                src="images/profile.jpg"
                 alt="profile-pic"
               />
             </span>

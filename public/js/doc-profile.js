@@ -4,7 +4,7 @@ let allowDisplaySchedule = false;
 const viewDocProfile = () => {
   $.post('/sessions', (res) => {
     if ('viewProfile' in res.data[0].session) {
-      getDocSched(res.data[0].session.viewProfile[0][0]);
+      getDocSched(res.data[0].session.viewProfile);
     }
   });
 };
@@ -205,6 +205,7 @@ const displayDocData = (obj) => {
                 <input type="hidden" name="myName" value="${userData._fname} ${userData._lname}"/>
                 <input type="hidden" name="myEmail" value="${userData._email}"/>
                 <input type="hidden" name="docEmail" value="${obj._email}"/>
+                <input type="hidden" name="docName" value="${obj._name}"/>
                 <input type="hidden" name="date" value="${myDate}"/>
                 <input type="hidden" name="from" value="${sched.from}"/>
                 <input type="hidden" name="to" value="${sched.to}"/>
