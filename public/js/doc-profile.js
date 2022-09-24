@@ -42,8 +42,13 @@ let today = weekday[dateToday.getDay()];
 const getDocSched = (obj) => {
   // Schedule for today
   schedToday = obj._docSched[today];
-  availableSchedFrom = schedToday[0].from;
-  availableSchedTo = schedToday[schedToday.length - 1].to;
+  if (schedToday[0]) {
+    availableSchedFrom = schedToday[0].from;
+    availableSchedTo = schedToday[schedToday.length - 1].to;
+  } else {
+    availableSchedFrom = '--:-- AM';
+    availableSchedTo = '--:-- PM';
+  }
 
   myDay = today;
   myDate = dateToday;
