@@ -25,13 +25,17 @@ const addText = (data) => {
   return `
           <div class="row col s6 m4 l3 center-align">
             <div class="card small hoverable service-card">
-              <div class="card-image">
-                <a href="${data.link}">
-                  <img src="${data.image}" />
-                </a>
+              <div class="card-image">                
+              <img src="${data.image}" />                 
               </div>
               <div class="card-content service-content">
-                <p>${data.description}</p>
+                <form action="/search" method="POST">
+                  <input type="hidden" name="search" value="${data.description}"/>
+                  <div class="row">
+                    <button class="col s12 btn waves-effect waves-light cyan white-text z-depth-0" type="submit" name="action">
+                      ${data.description}</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

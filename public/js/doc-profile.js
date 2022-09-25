@@ -1,6 +1,3 @@
-let allowEdit = false;
-let allowDisplaySchedule = false;
-
 const viewDocProfile = () => {
   $.post('/sessions', (res) => {
     if ('viewProfileDoctor' in res.data[0].session) {

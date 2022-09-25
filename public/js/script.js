@@ -1,4 +1,6 @@
 let userData;
+let allowEdit = false;
+let allowDisplaySchedule = false;
 
 const userLogin = () => {
   $.post('/login', (response) => {
