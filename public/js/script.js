@@ -11,7 +11,7 @@ const getUserData = () => {
   $.post(`/api/userData`, (res) => {
     if (res.statusCode == 200) {
       userData = res.data[0];
-      console.log(userData);
+      // console.log(userData);
       doNextTask();
     }
   });

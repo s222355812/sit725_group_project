@@ -9,13 +9,15 @@ getDB.then((result) => {
 });
 
 router.post('/book/appointment', (req, res) => {
-  let { myName, myEmail, docEmail, docName, date, from, to } = req.body;
+  let { myName, myEmail, myPic, docEmail, docName, docPic, date, from, to } =
+    req.body;
   let query = { _email: docEmail };
   let addAppointment = {
     $push: {
       ['_appointments.' + date]: {
         name: myName,
         email: myEmail,
+        picture: myPic,
         from: from,
         to: to,
         status: 'booked',
@@ -32,7 +34,7 @@ router.post('/book/appointment', (req, res) => {
   let query2 = { _id: req.session.id };
   let addAppointment2 = {
     $push: {
-      ['session.viewProfile._appointments.' + date]: {
+      ['session.viewProfileDoctor._appointments.' + date]: {
         name: myName,
         email: myEmail,
         from: from,
@@ -54,6 +56,7 @@ router.post('/book/appointment', (req, res) => {
       ['_schedule.' + date]: {
         name: docName,
         email: docEmail,
+        picture: docPic,
         from: from,
         to: to,
         status: 'booked',
@@ -82,7 +85,7 @@ router.post('/book', (req, res) => {
         let query = { _id: req.session.id };
         let newValue = {
           $set: {
-            'session.viewProfile.selectDate': { date: date, day: day },
+            'session.viewProfileDoctor.selectDate': { date: date, day: day },
           },
         };
         database
