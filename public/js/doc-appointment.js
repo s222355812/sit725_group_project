@@ -32,19 +32,21 @@ const displayAppointment = (obj) => {
 
     return `
           <div class="row card-panel grey lighten-2">
-            <div>
-              <h6 class="col s12 l3 white center-align">${info.from} - ${info.to}</h6>
-            </div>
+            <h6 class="col s12 l3 white center-align">${info.from} - ${info.to}</h6>
             <span class="col s12 l2 center-align">
               <img
                 class="circle responsive-img profile-pic"
-                src="images/profile.jpg"
+                src="${info.picture}"
                 alt="profile-pic"
+                style="width: 100px; height: 100px;"
               />
             </span>
-            <h6 class="col s12 l3">${info.name}</h6>
-            <h6 class="col s12 l2">
-              <a href="${info.profileLink}">View Profile</a>
+            <h6 class="col s12 l2">${info.name}</h6>
+            <h6 class="col s12 l3 left-align">
+              <form action="/viewProfile/patient" method="POST">
+                <input type="hidden" name="email" value="${info.email}" />
+                <button class="btn waves-effect waves-light transparent blue-text z-depth-0 left-align" type="submit" name="action">View Profile</button>
+              </form>
             </h6>
             ${buttonHTML}
           </div>    

@@ -3,13 +3,11 @@ let allowDisplaySchedule = false;
 
 const viewDocProfile = () => {
   $.post('/sessions', (res) => {
-    if ('viewProfile' in res.data[0].session) {
-      getDocSched(res.data[0].session.viewProfile);
+    if ('viewProfileDoctor' in res.data[0].session) {
+      getDocSched(res.data[0].session.viewProfileDoctor);
     }
   });
 };
-
-viewDocProfile();
 
 // If user is a Doctor, allow profile edit
 if (userData._user == 'doctor') allowEdit = true;
@@ -41,8 +39,8 @@ let today = weekday[dateToday.getDay()];
 
 const getDocSched = (obj) => {
   // Schedule for today
-  schedToday = obj._docSched[today];
-  if (schedToday[0]) {
+  if ('from' in obj._docSched[today]) {
+    schedToday = obj._docSched[today];
     availableSchedFrom = schedToday[0].from;
     availableSchedTo = schedToday[schedToday.length - 1].to;
   } else {
@@ -208,8 +206,10 @@ const displayDocData = (obj) => {
                 <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
                 <input type="hidden" name="myName" value="${userData._fname} ${userData._lname}"/>
                 <input type="hidden" name="myEmail" value="${userData._email}"/>
+                <input type="hidden" name="myPic" value="${userData._picture}"/>
                 <input type="hidden" name="docEmail" value="${obj._email}"/>
                 <input type="hidden" name="docName" value="${obj._name}"/>
+                <input type="hidden" name="docPic" value="${obj._picture}"/>
                 <input type="hidden" name="date" value="${myDate}"/>
                 <input type="hidden" name="from" value="${sched.from}"/>
                 <input type="hidden" name="to" value="${sched.to}"/>
@@ -226,15 +226,18 @@ const displayDocData = (obj) => {
             `
             <form action="/book/appointment" method="POST">
               <div class="card-panel grey lighten-3 z-depth-5 col s12">
-                <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
-                <input type="hidden" name="myName" value="${userData._fname} ${userData._lname}"/>
-                <input type="hidden" name="myEmail" value="${userData._email}"/>
-                <input type="hidden" name="docEmail" value="${obj._email}"/>
-                <input type="hidden" name="date" value="${myDate}"/>
-                <input type="hidden" name="from" value="${sched.from}"/>
-                <input type="hidden" name="to" value="${sched.to}"/>
-                ${bookBtn}
-                <br>
+              <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
+              <input type="hidden" name="myName" value="${userData._fname} ${userData._lname}"/>
+              <input type="hidden" name="myEmail" value="${userData._email}"/>
+              <input type="hidden" name="myPic" value="${userData._picture}"/>
+              <input type="hidden" name="docEmail" value="${obj._email}"/>
+              <input type="hidden" name="docName" value="${obj._name}"/>
+              <input type="hidden" name="docPic" value="${obj._picture}"/>
+              <input type="hidden" name="date" value="${myDate}"/>
+              <input type="hidden" name="from" value="${sched.from}"/>
+              <input type="hidden" name="to" value="${sched.to}"/>
+              ${bookBtn}
+              <br>
               </div>
             </form>
             `;
@@ -612,3 +615,4 @@ const displayDocData = (obj) => {
 };
 
 if (userData._user == 'doctor') getDocSched(userData);
+else viewDocProfile();

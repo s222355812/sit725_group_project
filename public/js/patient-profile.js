@@ -1,16 +1,31 @@
+const viewPatientProfile = () => {
+  $.post('/sessions', (res) => {
+    if ('viewProfilePatient' in res.data[0].session) {
+      displayPatientProfile(res.data[0].session.viewProfilePatient);
+    }
+  });
+};
+
 const displayPatientProfile = (obj) => {
+  let editBtn = ``;
+  let changeBtn = ``;
+
+  if (!allowEdit) {
+    editBtn = `<a class="waves-effect waves-light btn modal-trigger" href="#edit-patient"><i class="material-icons left">edit</i>Edit</a> `;
+    changeBtn = `<a id="chg-patient-btn" class="waves-effect waves-light btn" style="margin-top:20px;">Change</a>`;
+  }
   let addPatientData = (patient) => {
     return `
     <div class="row">
         <div class="col s12">
             <div class="card">
                 <div class="exitbutton" style="float:right;">
-                    <a class="waves-effect waves-light btn modal-trigger" href="#edit-patient"><i class="material-icons left">edit</i>Edit</a>
+                    ${editBtn}
                 </div>
                 <div class="col s2">
                     <div class="avator">
                         <img src="${patient._picture}" style="width: 100px; height: 100px">
-                        <a id="chg-patient-btn" class="waves-effect waves-light btn" style="margin-top:20px;">Change</a>
+                        ${changeBtn}
                         <input id="chg-patient-pic" type="file" name="name" style="display: none;" />
                     </div>
                 </div>
@@ -113,4 +128,5 @@ const displayPatientProfile = (obj) => {
   $.getScript('js/modal.js');
 };
 
-displayPatientProfile(userData);
+if (userData._user == 'patient') displayPatientProfile(userData);
+else viewPatientProfile();
