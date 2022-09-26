@@ -54,6 +54,14 @@ router.post('/docexpadd', (req, res) =>{
        _Duration:duration}
       }
   }
+  let addexp1 = {
+    $push:{
+      ['session.userData._experience']:
+      {_Position:position, 
+       _HospitalName:hospital, 
+       _Duration:duration}
+      }
+  }
 
   database
    .collection('sessions')
@@ -74,15 +82,15 @@ router.post('/docexpadd', (req, res) =>{
         res.redirect('doctor-profile.html')
     });
 
-      // database
-      //  .collection('DoctorClass')
-      //  .updateone(query, {$push:{['_experience']:{_Position:postion, _HospitalName:hospital, _Duration:duration}}}, (err, result) =>{
-      //   if (err) throw err;
-      //   else{
-      //     console.log("Experiences added");
-      //     res.redirect('doctor-profile.html');
-      //   }
-      //  });
+
+    let query2 = { _id: req.session.id };
+
+    database
+    .collection('sessions')
+    .updateOne(query2, addexp1, (err, result) => {
+      if (err) throw err;
+      else console.log('Session Exp updated');
+    });
 
 
     }
