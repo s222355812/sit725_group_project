@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const { isBuffer } = require('util');
 
 let { getDB } = require('../dbConnect');
 let database;
@@ -46,6 +47,16 @@ router.post('/patientupdate', (req, res) => {
                 });
             }
           });
+
+        database
+          .collection('sessions')
+          .updateMany(email, newValue, (err, result) =>{
+            if(err) throw err;
+            else{
+              console.log("Session info updated");
+            }
+          })
+        
       }
     });
 });
