@@ -290,26 +290,26 @@ const displayDocData = (obj) => {
         <div id="exp-add" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form class="col s12">
+                  <form action="/docexpadd" method="POST" class="col s12">
                       <div class="row">
                           <div class="input-field col s12">
-                              <input id="exp-position" type="text" class="validate">
+                              <input id="exp-position" type="text" name="position" class="validate">
                               <label for="exp-position">Position</label>
                           </div>
                           <div class="input-field col s12">
-                              <input id="exp-hospital" type="text" class="validate">
+                              <input id="exp-hospital" type="text" name="hospital" class="validate">
                               <label for="exp-hospital">Hospital Name</label>
                           </div>
                           <div class="input-field col s12">
-                              <input id="exp-duration" type="text" class="validate">
+                              <input id="exp-duration" type="text" name="duration" class="validate">
                               <label for="exp-duration">Duration in years</label>
+                          </div>
+                          <div class="input-field col s12 center-align">
+                              <button type="submit" class="btn" value="Submit" id="submit">Done</button>
                           </div>
                       </div>
                   </form>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+            </div>
           </div>
         </div>
 
@@ -332,7 +332,7 @@ const displayDocData = (obj) => {
         <hr>
         ${experienceEdit}
         <h6>Position: ${exp._Position}</h6>
-        <h6>Company: ${exp._HospitalName}</h6>
+        <h6>HospitalName: ${exp._HospitalName}</h6>
         <h6>Duration: ${exp._Duration} years</h6>
 
         <div id="${id}" class="modal">
