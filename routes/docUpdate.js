@@ -91,10 +91,61 @@ router.post('/docexpadd', (req, res) =>{
       if (err) throw err;
       else console.log('Session Exp updated');
     });
-
-
     }
    })
+})
+
+router.post('/doceduadd', (req,res)=>{
+  let degree = req.body.degree;
+  let school = req.body.school;
+  let addedu = {
+    $push:{
+      ['_education']:
+      {_UniName:school, 
+       _Degree:degree 
+      }
+    }
+  }
+  let addedu1 = {
+    $push:{
+      ['session.userData._education']:
+      {_UniName:school, 
+        _Degree:degree
+      }
+    }
+  }
+  database
+   .collection('sessions')
+   .find({ _id: req.session.id })
+   .toArray((err, result) =>{
+    if (err) throw err;
+    if(result[0]){
+      let email = result[0].session.userData._email;
+      let query = {
+        _email: `${email}`,
+      };
+
+    database
+     .collection('DoctorClass')
+     .updateOne(query, addedu, (err, result) => {
+        if (err) throw err;
+        else console.log('Doctor Education updated');
+        res.redirect('doctor-profile.html')
+    });
+
+
+    let query2 = { _id: req.session.id };
+
+    database
+    .collection('sessions')
+    .updateOne(query2, addedu1, (err, result) => {
+      if (err) throw err;
+      else console.log('Session Exp updated');
+    });
+    }
+   })
+  
+
 })
 
 module.exports = router;
