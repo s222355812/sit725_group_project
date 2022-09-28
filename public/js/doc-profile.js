@@ -276,7 +276,7 @@ const displayDocData = (obj) => {
   // ------------------------------------------------------------------------------------------------------------
   //   Display doctor experience information
   // ------------------------------------------------------------------------------------------------------------
-
+  
   const addExperienceData = (doc) => {
     let experienceAdd = ``;
     let experienceEdit = ``;
@@ -394,22 +394,23 @@ const displayDocData = (obj) => {
         <div id="edu-add" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form class="col s12">
+                  <form action="/doceduadd" method="POST" class="col s12">
                       <div class="row">
                         <div class="input-field col s12">
-                          <input id="edu-degree" type="text" class="validate">
+                          <input id="edu-degree" type="text" name="degree" class="validate">
                           <label for="edu-degree">Degree</label>
                         </div>
                         <div class="input-field col s12">
-                          <input id="edu-school" type="text" class="validate">
+                          <input id="edu-school" type="text" name="school" class="validate">
                           <label for="edu-school">School Name</label>
                         </div>
+                        <div class="input-field col s12 center-align">
+                          <button type="submit" class="btn" value="Submit" id="submit">Done</button>
+                        </div>
                       </div>
+                      
                   </form>
               </div>
-          </div>
-          <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
           </div>
         </div>
       `;
