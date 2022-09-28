@@ -46,7 +46,11 @@ router.post('/login', (req, res) => {
       if (result[0]) {
         if (result[0]._password == password) {
           req.session.isAuth = true;
-          req.session.userData = result[0];
+          req.session.userData = {
+            _email: result[0]._email,
+            _user: result[0]._user,
+          };
+          console.log(result[0]._email);
           res.redirect('/?sessionID=' + req.session.id);
         }
       }
@@ -60,7 +64,10 @@ router.post('/login', (req, res) => {
       if (result[0]) {
         if (result[0]._password == password) {
           req.session.isAuth = true;
-          req.session.userData = result[0];
+          req.session.userData = {
+            _email: result[0]._email,
+            _user: result[0]._user,
+          };
           res.redirect('/?sessionID=' + req.session.id);
         }
       }
