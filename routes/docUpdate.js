@@ -231,4 +231,41 @@ router.post("/deleteexp", (req,res)=>{
     })
 })
 
+
+
+//doctor update edu
+router.post("/updateedu", (req,res)=>{
+  let eduindex = req.body.index;
+  let eduuni = req.body.eduuni;
+  let edudegree = req.body.edudegree;
+  let newValue = {
+    $set: {
+      ['_education.'+ eduindex] :{
+        _UniName:eduuni,
+        _Degree:edudegree
+      } 
+    }
+  };
+  database
+    .collection("sessions")
+    .find({_id: req.session.id})
+    .toArray((err,result)=>{
+      if(err) throw err;
+      if(result[0]){
+        let email = result[0].session.userData._email;
+        let query = {
+          _email: `${email}`,
+        };
+
+        database
+        .collection("DoctorClass")
+        .updateOne(query,newValue,(err,result)=>{
+          if(err) throw err;
+          else console.log("Edu Updated");
+          res.redirect('doctor-profile.html')
+        })
+      }
+    })
+})
+
 module.exports = router;
