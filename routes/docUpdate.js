@@ -185,4 +185,50 @@ router.post("/updateexp", (req,res)=>{
     })
 })
 
+
+//doctor delete exp
+router.post("/deleteexp", (req,res)=>{
+  let expindex = req.body.index;
+  let hospital = req.body.hospital;
+  let nullvalue = {
+    $unset:{
+      ['_experience.'+expindex] : 1
+    }
+  }
+  let removevalue = {
+    $pull:{
+      _experience:null
+    }
+  }
+  database
+    .collection("sessions")
+    .find({_id: req.session.id})
+    .toArray((err,result)=>{
+      if(err) throw err;
+      if(result[0]){
+        let email = result[0].session.userData._email;
+        let query = {
+          _email: `${email}`,
+        };
+
+        database
+        .collection("DoctorClass")
+        .updateOne(query,nullvalue,(err,result)=>{
+          if(err) throw err;
+          else {
+            database
+            .collection("DoctorClass")
+            .updateOne(query,removevalue, (err,result) =>{
+              if(err) throw err;
+              else console.log("deleted");
+              res.redirect('doctor-profile.html')
+            })
+          }
+        })
+
+
+      }
+    })
+})
+
 module.exports = router;
