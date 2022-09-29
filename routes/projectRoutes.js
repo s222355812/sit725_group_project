@@ -50,7 +50,6 @@ router.post('/login', (req, res) => {
             _email: result[0]._email,
             _user: result[0]._user,
           };
-          console.log(result[0]._email);
           res.redirect('/?sessionID=' + req.session.id);
         }
       }
