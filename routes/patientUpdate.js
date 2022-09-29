@@ -18,14 +18,14 @@ router.post('/patientupdate', (req, res) => {
     $set: { _fname: firstName, _lname: lastName, _age: age, _sex: sex },
   };
 
-  let newValue1 = {
-    $set: {
-      ['session.userData._fname']:firstName,
-      ['session.userData._lname']:lastName,
-      ['session.userData._age']:age,
-      ['session.userData._sex']:sex,
-    }
-  };
+  // let newValue1 = {
+  //   $set: {
+  //     ['session.userData._fname']:firstName,
+  //     ['session.userData._lname']:lastName,
+  //     ['session.userData._age']:age,
+  //     ['session.userData._sex']:sex,
+  //   }
+  // };
   database
     .collection('sessions')
     .find({ _id: req.session.id })
@@ -57,14 +57,14 @@ router.post('/patientupdate', (req, res) => {
             }
           });
 
-          let query2 = { _id: req.session.id };
+          // let query2 = { _id: req.session.id };
 
-          database
-          .collection('sessions')
-          .updateMany(query2, newValue1, (err, result) => {
-            if (err) throw err;
-            else console.log('Session Exp updated');
-          });
+          // database
+          // .collection('sessions')
+          // .updateMany(query2, newValue1, (err, result) => {
+          //   if (err) throw err;
+          //   else console.log('Session Exp updated');
+          // });
         
       }
     });
