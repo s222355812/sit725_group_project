@@ -8,6 +8,7 @@ getDB.then((result) => {
   database = result;
 });
 
+//doc change pic
 router.post('/docUpdate/pic', (req, res) => {
   let picture = req.body.picture;
   database
@@ -42,6 +43,7 @@ router.post('/docUpdate/pic', (req, res) => {
   res.redirect('back');
 });
 
+//doc add exp
 router.post('/docexpadd', (req, res) =>{
   let position = req.body.position;
   let hospital = req.body.hospital;
@@ -54,14 +56,14 @@ router.post('/docexpadd', (req, res) =>{
        _Duration:duration}
       }
   }
-  let addexp1 = {
-    $push:{
-      ['session.userData._experience']:
-      {_Position:position, 
-       _HospitalName:hospital, 
-       _Duration:duration}
-      }
-  }
+  // let addexp1 = {
+  //   $push:{
+  //     ['session.userData._experience']:
+  //     {_Position:position, 
+  //      _HospitalName:hospital, 
+  //      _Duration:duration}
+  //     }
+  // }
 
   database
    .collection('sessions')
@@ -83,18 +85,19 @@ router.post('/docexpadd', (req, res) =>{
     });
 
 
-    let query2 = { _id: req.session.id };
+    // let query2 = { _id: req.session.id };
 
-    database
-    .collection('sessions')
-    .updateOne(query2, addexp1, (err, result) => {
-      if (err) throw err;
-      else console.log('Session Exp updated');
-    });
+    // database
+    // .collection('sessions')
+    // .updateOne(query2, addexp1, (err, result) => {
+    //   if (err) throw err;
+    //   else console.log('Session Exp updated');
+    // });
     }
    })
 })
 
+//doc add edu
 router.post('/doceduadd', (req,res)=>{
   let degree = req.body.degree;
   let school = req.body.school;
@@ -106,14 +109,14 @@ router.post('/doceduadd', (req,res)=>{
       }
     }
   }
-  let addedu1 = {
-    $push:{
-      ['session.userData._education']:
-      {_UniName:school, 
-        _Degree:degree
-      }
-    }
-  }
+  // let addedu1 = {
+  //   $push:{
+  //     ['session.userData._education']:
+  //     {_UniName:school, 
+  //       _Degree:degree
+  //     }
+  //   }
+  // }
   database
    .collection('sessions')
    .find({ _id: req.session.id })
@@ -134,18 +137,52 @@ router.post('/doceduadd', (req,res)=>{
     });
 
 
-    let query2 = { _id: req.session.id };
+    // let query2 = { _id: req.session.id };
 
-    database
-    .collection('sessions')
-    .updateOne(query2, addedu1, (err, result) => {
-      if (err) throw err;
-      else console.log('Session Exp updated');
-    });
+    // database
+    // .collection('sessions')
+    // .updateOne(query2, addedu1, (err, result) => {
+    //   if (err) throw err;
+    //   else console.log('Session Exp updated');
+    // });
     }
    })
-  
+})
+//doctor update exp
+router.post("/updateexp", (req,res)=>{
+  let expindex = req.body.index;
+  let expposition = req.body.expposition;
+  let exphospital = req.body.exphospital;
+  let expduration = req.body.expduration;
+  let newValue = {
+    $set: {
+      ['_experience.'+ expindex] :{
+        _Position: expposition,
+        _HospitalName: exphospital,
+        _Duration: expduration
+      } 
+    }
+  };
+  database
+    .collection("sessions")
+    .find({_id: req.session.id})
+    .toArray((err,result)=>{
+      if(err) throw err;
+      if(result[0]){
+        let email = result[0].session.userData._email;
+        let query = {
+          _email: `${email}`,
+        };
 
+        database
+        .collection("DoctorClass")
+        .updateOne(query,newValue,(err,result)=>{
+          if(err) throw err;
+          else console.log("Updated");
+          res.redirect('doctor-profile.html')
+        })
+      }
+    })
 })
 
 module.exports = router;
