@@ -322,7 +322,9 @@ const displayDocData = (obj) => {
           <a class="modal-trigger" href="${
             '#' + id
           }"><i class="material-icons blue-text">edit</i></a>
-          <a class="" href=""><i class="material-icons red-text">delete</i></a>
+          <a class="modal-trigger" href="${
+            '#D' + id
+          }"><i class="material-icons red-text">delete</i></a>
         </div>
       `;
 
@@ -357,6 +359,31 @@ const displayDocData = (obj) => {
                           </div>
                           <div class="input-field col s12 center-align">
                               <button type="submit" class="btn" value="Submit" id="submit">Done</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+        </div>
+
+
+
+        <div id="${'D'+id}" class="modal">
+          <div class="modal-content">
+              <div class="row">
+                  <form action="/deleteexp" method="POST" class="col s12">
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <input id="index" type="hidden" name="index" value="${i}" class="validate">
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="index" type="hidden" name="hospital" value="${exp._HospitalName}" class="validate">
+                          </div>
+                          <div class="col s12 center-align">
+                              <h2>Are you sure you want to delete it?</h2>
+                          </div>
+                          <div class="col s12 center-align">
+                              <button type="submit" class="btn" value="Submit" id="submit">Delete</button>
                           </div>
                       </div>
                   </form>
