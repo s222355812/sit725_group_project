@@ -1,6 +1,6 @@
 const viewDocProfile = () => {
   $.post('/sessions', (res) => {
-    if ('viewProfileDoctor' in res.data[0].session) {
+    if ('_user' in res.data[0].session.viewProfileDoctor) {
       getDocSched(res.data[0].session.viewProfileDoctor);
     }
   });
@@ -36,7 +36,7 @@ let today = weekday[dateToday.getDay()];
 
 const getDocSched = (obj) => {
   // Schedule for today
-  if ('from' in obj._docSched[today]) {
+  if (obj._docSched[today].length != 0) {
     schedToday = obj._docSched[today];
     availableSchedFrom = schedToday[0].from;
     availableSchedTo = schedToday[schedToday.length - 1].to;
@@ -276,7 +276,7 @@ const displayDocData = (obj) => {
   // ------------------------------------------------------------------------------------------------------------
   //   Display doctor experience information
   // ------------------------------------------------------------------------------------------------------------
-  
+
   const addExperienceData = (doc) => {
     let experienceAdd = ``;
     let experienceEdit = ``;
@@ -368,7 +368,7 @@ const displayDocData = (obj) => {
 
 
 
-        <div id="${'D'+id}" class="modal">
+        <div id="${'D' + id}" class="modal">
           <div class="modal-content">
               <div class="row">
                   <form action="/deleteexp" method="POST" class="col s12">
@@ -377,7 +377,9 @@ const displayDocData = (obj) => {
                               <input id="index" type="hidden" name="index" value="${i}" class="validate">
                           </div>
                           <div class="input-field col s12">
-                              <input id="index" type="hidden" name="hospital" value="${exp._HospitalName}" class="validate">
+                              <input id="index" type="hidden" name="hospital" value="${
+                                exp._HospitalName
+                              }" class="validate">
                           </div>
                           <div class="col s12 center-align">
                               <h2>Are you sure you want to delete it?</h2>
@@ -601,10 +603,11 @@ const displayDocData = (obj) => {
         url: '/docUpdate/pic',
         data: { picture: content },
         type: 'POST',
-        success: (result) => {
-          location.reload();
-        },
+        success: (result) => {},
       });
+      setTimeout(function () {
+        location.reload();
+      }, 5000);
     };
   });
 
