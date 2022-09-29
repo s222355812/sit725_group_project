@@ -467,22 +467,25 @@ const displayDocData = (obj) => {
         <div id="${id}" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form class="col s12">
+                   <form action="/updateedu" method="POST" class="col s12">
                       <div class="row">
                           <div class="input-field col s12">
-                              <input id="edu-degree" type="text" class="validate">
-                              <label for="edu-degree">Degree</label>
+                              <input id="index" type="hidden" name="index" value="${i}" class="validate">
                           </div>
                           <div class="input-field col s12">
-                              <input id="edu-school" type="text" class="validate">
-                              <label for="edu-school">School Name</label>
+                              <input id="eduuni" type="text" name="eduuni" class="validate">
+                              <label for="eduuni">Uni Name</label>
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="edudegree" type="text" name="edudegree" class="validate">
+                              <label for="edudegree">Degree</label>
+                          </div>
+                          <div class="input-field col s12 center-align">
+                              <button type="submit" class="btn" value="Submit" id="submit">Done</button>
                           </div>
                       </div>
                   </form>
               </div>
-          </div>
-          <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
           </div>
         </div>
       `;
