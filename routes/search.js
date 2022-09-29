@@ -15,10 +15,21 @@ router.get('/search', (req, res) => {
 router.post('/search', (req, res) => {
   database
     .collection('DoctorClass')
-    .find({ _specialisation: { $all: [req.body.search] } })
+    .find(
+      { _specialisation: { $all: [req.body.search] } },
+      {
+        projection: {
+          _email: 1,
+          _experience: 1,
+          _name: 1,
+          _specialisation: 1,
+          _picture: 1,
+        },
+      }
+    )
     .toArray((err, result) => {
       let query = { _id: req.session.id };
-      let newValue = { $set: { 'session.searchResults': [result] } };
+      let newValue = { $set: { 'session.searchResults': result } };
       if (err) throw err;
       else
         database

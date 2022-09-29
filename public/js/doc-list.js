@@ -3,7 +3,7 @@
 const search = () => {
   $.post('/sessions', (res) => {
     if ('searchResults' in res.data[0].session) {
-      displayDocList(res.data[0].session.searchResults[0]);
+      displayDocList(res.data[0].session.searchResults);
     }
   });
 };
