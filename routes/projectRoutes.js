@@ -28,6 +28,11 @@ const getCollection = (collection, email, res) => {
 
 router.get('/', isAuth, (req, res) => {
   console.log(req.session.id);
+
+  req.session.searchResults = {};
+  req.session.viewProfileDoctor = {};
+
+  req.session.viewProfilePatient = {};
   res.sendFile(path.resolve('public/homepage.html'));
 });
 
@@ -81,20 +86,12 @@ router.post('/logout', (req, res) => {
 });
 
 router.post('/api/userData', (req, res) => {
-  database
-    .collection('sessions')
-    .find({ _id: req.session.id })
-    .toArray((err, result) => {
-      if (err) throw err;
-      if (result[0]) {
-        let email = result[0].session.userData._email;
-        if (result[0].session.userData._user == 'patient')
-          getCollection('Patient', { _email: email }, res);
-        else if (result[0].session.userData._user == 'doctor')
-          getCollection('DoctorClass', { _email: email }, res);
-        else console.log('No user found');
-      }
-    });
+  let email = req.session.userData._email;
+  if (req.session.userData._user == 'patient')
+    getCollection('Patient', { _email: email }, res);
+  else if (req.session.userData._user == 'doctor')
+    getCollection('DoctorClass', { _email: email }, res);
+  else console.log('No user found');
 });
 
 router.get('/api/homepage', (req, res) => {

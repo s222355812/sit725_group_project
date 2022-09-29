@@ -57,51 +57,44 @@ router.post('/patientupdate', (req, res) => {
             }
           });
 
-          // let query2 = { _id: req.session.id };
+        // let query2 = { _id: req.session.id };
 
-          // database
-          // .collection('sessions')
-          // .updateMany(query2, newValue1, (err, result) => {
-          //   if (err) throw err;
-          //   else console.log('Session Exp updated');
-          // });
-        
+        // database
+        // .collection('sessions')
+        // .updateMany(query2, newValue1, (err, result) => {
+        //   if (err) throw err;
+        //   else console.log('Session Exp updated');
+        // });
       }
     });
 });
 
 router.post('/patientupdate/pic', (req, res) => {
   let picture = req.body.picture;
+  let email = req.session.userData._email;
+  let query = {
+    _email: `${email}`,
+  };
+  let newPic = { $set: { _picture: picture } };
   database
-    .collection('sessions')
-    .find({ _id: req.session.id })
-    .toArray((err, result) => {
+    .collection('Patient')
+    .find(query)
+    .toArray((err, patient) => {
       if (err) throw err;
-      if (result[0]) {
-        let email = result[0].session.userData._email;
-        let query = {
-          _email: `${email}`,
-        };
-        let newPic = { $set: { _picture: picture } };
+      else {
         database
           .collection('Patient')
-          .find(query)
-          .toArray((err, patient) => {
+          .updateOne(query, newPic, (err, result) => {
             if (err) throw err;
             else {
-              database
-                .collection('Patient')
-                .updateOne(query, newPic, (err, result) => {
-                  if (err) throw err;
-                  else {
-                    console.log('Picture updated');
-                  }
-                });
+              console.log('Picture updated');
             }
           });
       }
     });
-  res.redirect('back');
+
+  // res.redirect('back');
+  res.redirect('http://localhost:3000/patient-profile.html');
 });
 
 module.exports = router;

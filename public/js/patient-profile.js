@@ -113,10 +113,11 @@ const displayPatientProfile = (obj) => {
         url: '/patientupdate/pic',
         data: { picture: content },
         type: 'POST',
-        success: (result) => {
-          location.reload();
-        },
+        success: (result) => {},
       });
+      setTimeout(function () {
+        location.reload();
+      }, 5000);
     };
   });
 
