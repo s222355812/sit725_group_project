@@ -648,5 +648,6 @@ const displayDocData = (obj) => {
   // ...End
 };
 
-if (userData._user == 'doctor') getDocSched(userData);
-else viewDocProfile();
+if (userData._user == 'doctor' && '_name' in userData) {
+  getDocSched(userData);
+} else viewDocProfile();

@@ -129,4 +129,6 @@ buttonIds.forEach((buttonId) => {
   });
 });
 
-if (userData._user == 'doctor') displayDocSched(userData._docSched);
+if (userData._user == 'doctor' && userData._page == 'doctor-schedule') {
+  displayDocSched(userData._docSched);
+}

@@ -72,4 +72,6 @@ const displayAppointment = (obj) => {
   });
 };
 
-if (userData._user == 'doctor') displayAppointment(userData._appointments);
+if (userData._user == 'doctor' && '_appointments' in userData) {
+  displayAppointment(userData._appointments);
+}

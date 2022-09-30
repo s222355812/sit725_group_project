@@ -12,7 +12,65 @@ const userLogin = () => {
 const getUserData = () => {
   $.post(`/api/userData`, (res) => {
     if (res.statusCode == 200) {
-      userData = res.data[0];
+      let url = window.location.href;
+      console.log(url);
+
+      userData = {
+        _user: res.data[0]._user,
+        _picture: res.data[0]._picture,
+      };
+
+      if (res.data[0]._user == 'patient') {
+        if (url.match(/patient-profile/gm)) {
+          userData = {
+            _user: res.data[0]._user,
+            _picture: res.data[0]._picture,
+            _fname: res.data[0]._fname,
+            _lname: res.data[0]._lname,
+            _age: res.data[0]._age,
+            _sex: res.data[0]._sex,
+          };
+        } else if (url.match(/patient-ratings/gm)) {
+          userData = {
+            _user: res.data[0]._user,
+            _picture: res.data[0]._picture,
+            _patientRatings: res.data[0]._patientRatings,
+          };
+        } else if (url.match(/patient-schedule/gm)) {
+          userData = {
+            _user: res.data[0]._user,
+            _picture: res.data[0]._picture,
+            _schedule: res.data[0]._schedule,
+          };
+        }
+      } else if (res.data[0]._user == 'doctor') {
+        if (url.match(/doctor-profile/gm)) {
+          userData = {
+            _user: res.data[0]._user,
+            _name: res.data[0]._name,
+            _picture: res.data[0]._picture,
+            _fees: res.data[0]._fees,
+            _docSched: res.data[0]._docSched,
+            _specialisation: res.data[0]._specialisation,
+            _experience: res.data[0]._experience,
+            _education: res.data[0]._education,
+          };
+        } else if (url.match(/doctor-schedule/gm)) {
+          userData = {
+            _page: 'doctor-schedule',
+            _user: res.data[0]._user,
+            _picture: res.data[0]._picture,
+            _docSched: res.data[0]._docSched,
+          };
+        } else if (url.match(/doctor-appointment/gm)) {
+          userData = {
+            _user: res.data[0]._user,
+            _picture: res.data[0]._picture,
+            _appointments: res.data[0]._appointments,
+          };
+        }
+      }
+
       console.log(userData);
       doNextTask();
     }
