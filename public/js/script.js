@@ -20,6 +20,7 @@ const getUserData = () => {
         _picture: res.data[0]._picture,
       };
 
+      // If user is patient
       if (res.data[0]._user == 'patient') {
         if (url.match(/patient-profile/gm)) {
           userData = {
@@ -42,7 +43,16 @@ const getUserData = () => {
             _picture: res.data[0]._picture,
             _schedule: res.data[0]._schedule,
           };
+        } else if (url.match(/doctor-profile/gm)) {
+          userData = {
+            _user: res.data[0]._user,
+            _email: res.data[0]._email,
+            _picture: res.data[0]._picture,
+            _fname: res.data[0]._fname,
+            _lname: res.data[0]._lname,
+          };
         }
+        // If user is doctor
       } else if (res.data[0]._user == 'doctor') {
         if (url.match(/doctor-profile/gm)) {
           userData = {

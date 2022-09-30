@@ -93,37 +93,6 @@ const Doctor = mongoose.model('Doctor', DoctorClassSchema);
 // })
 // doctor.save();
 
-const PatientClassSchema = new mongoose.Schema(
-  {
-    _email: { type: String },
-    _name: { type: String },
-    _password: { type: String },
-    _sex: { type: String },
-    _dob: { type: String },
-    _age: { type: String },
-    _phone: { type: String },
-    _medicalHistory: {
-      type: Array,
-      _condition: { type: String },
-      _year: { type: String },
-    },
-    _ratings: {
-      type: Array,
-      _starCount: { type: String },
-      _comment: { type: String },
-    },
-    _schedule: {
-      type: Array,
-      _date: { type: Date },
-      _from: { type: String },
-      _to: { type: String },
-      _status: { type: String },
-      _doctorName: { type: String },
-    },
-  },
-  { collection: 'Patient' }
-);
-
 const port = process.env.port || 3000;
 
 app.listen(port, () => {

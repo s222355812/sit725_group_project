@@ -51,6 +51,7 @@ router.post('/book/appointment', (req, res) => {
     });
 
   let query3 = { _email: myEmail };
+  console.log(myEmail);
   let addAppointment3 = {
     $push: {
       ['_schedule.' + date]: {
