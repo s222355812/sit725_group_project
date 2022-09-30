@@ -82,4 +82,6 @@ const displayRatings = (obj) => {
   });
 };
 
-if (userData._user == 'patient') displayRatings(userData._patientRatings);
+if (userData._user == 'patient' && '_patientRatings' in userData) {
+  displayRatings(userData._patientRatings);
+}

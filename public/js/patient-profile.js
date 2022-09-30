@@ -129,5 +129,6 @@ const displayPatientProfile = (obj) => {
   $.getScript('js/modal.js');
 };
 
-if (userData._user == 'patient') displayPatientProfile(userData);
-else viewPatientProfile();
+if (userData._user == 'patient') {
+  displayPatientProfile(userData);
+} else viewPatientProfile();

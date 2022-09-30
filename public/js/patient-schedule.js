@@ -1,4 +1,3 @@
-// Load patient's schedule
 // -----------------------------------------------------
 const displayPatientSched = (obj) => {
   let addDate = (date) => {
@@ -53,4 +52,6 @@ const displayPatientSched = (obj) => {
   });
 };
 
-if (userData._user == 'patient') displayPatientSched(userData);
+if (userData._user == 'patient' && '_schedule' in userData) {
+  displayPatientSched(userData);
+}
