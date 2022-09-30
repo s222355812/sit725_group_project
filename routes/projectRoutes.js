@@ -31,8 +31,8 @@ router.get('/', isAuth, (req, res) => {
 
   req.session.searchResults = {};
   req.session.viewProfileDoctor = {};
-
   req.session.viewProfilePatient = {};
+
   res.sendFile(path.resolve('public/homepage.html'));
 });
 

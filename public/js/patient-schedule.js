@@ -52,6 +52,10 @@ const displayPatientSched = (obj) => {
   });
 };
 
-if (userData._user == 'patient' && '_schedule' in userData) {
+if (
+  userData._user == 'patient' &&
+  '_schedule' in userData &&
+  userData._schedule != undefined
+) {
   displayPatientSched(userData);
 }
