@@ -1,17 +1,23 @@
-<ul id="dropdown" class="dropdown-content s12">
+<ul id="dropdown" class="dropdown-content s12 align-left">
   <li><a href="./doctor-profile.html">Profile</a></li>
   <li><a href="./doctor-schedule.html">My Schedule</a></li>
   <li><a href="./doctor-appointment.html">Appointments</a></li>
-  <li><a href="#!">Logout</a></li>
+  <li class="align-center">
+    <form action="/logout" method="POST">
+      <button class="btn waves-effect waves-light transparent black-text z-depth-0" type="submit"
+        name="action">Logout</a></button>
+    </form>
+  </li>
+
+
 </ul>
 
 <nav>
-  <div class="nav-wrapper">
-    <a href="./index.html" class="responsive-img"><img id="getdoc-logo" src="./images/getdoc-logo.png"
-        alt="getdoc-logo" /></a>
+  <div class=" nav-wrapper">
+    <a href="/" class="responsive-img"><img id="getdoc-logo" src="./images/getdoc-logo.png" alt="getdoc-logo" /></a>
     <ul class="right">
       <li>
-        <img id="profile-pic" class="circle responsive-img" src="images/sample-picture-doctor.webp" alt="profile-pic" />
+        <div id="user-pic"></div>
       </li>
 
       <li>
@@ -24,3 +30,4 @@
 
 <!-- Load Navbar dropdown menu -->
 <script src="js/dropdown.js"></script>
+<script src="js/header.js"></script>
