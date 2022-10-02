@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GetDoc</title>
+    <link rel="stylesheet" href="styles-abv.css" />
+
+    <link rel="stylesheet" href="chat.css">
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="search-bar">
+        <div class="bg-text1">Need Medical Appointment?</div>
+        <div class="bg-text2">Find a doctor and book your next visit</div>
+        <nav>
+            <div class="nav-wrapper hoverable">
+                <!-- Search bar -->
+                <form action="/search" method="POST">
+                    <div class="input-field" style="background-color: white;">
+                        <input name="search" type="text" id="autocomplete-input" class="autocomplete"
+                            placeholder="Search for Doctor's name or Specialty..." style="background-color: white;" />
+                </form>
+                <!-- End of Search bar -->
+            </div>
+        </nav>
+    </div>
+
+    <div class="carousel carousel-slider">
+        <a class="carousel-item" href="#"><img src="images/carousel/bg-image1.webp" /></a>
+        <a class="carousel-item" href="#"><img src="images/carousel/bg-image2.webp" /></a>
+        <a class="carousel-item" href="#"><img src="images/carousel/bg-image3.webp" /></a>
+        <a class="carousel-item" href="#"><img src="images/carousel/bg-image4.webp" /></a>
+        <a class="carousel-item" href="#"><img src="images/carousel/bg-image5.webp" /></a>
+        <a class="carousel-item" href="#"><img src="images/carousel/bg-image6.webp" /></a>
+        <a class="carousel-item" href="#"><img src="images/carousel/bg-image7.webp" /></a>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s6 bg-text3">Top Specialisation</div>
+            <div class="col s6 bg-text3 right-align">
+                <a href="specialisation.html"
+                    class="waves-effect waves-light btn-small blue text-darken-4 hoverable">View
+                    All</a>
+            </div>
+            <div class="row" id="specialisation">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="light-blue lighten-5">
+        <div class="container">
+            <div class="row">
+                <div class="col s6 bg-text3">Common Conditions</div>
+                <div class="col s6 bg-text3 right-align">
+                    <a href="common-conditions.html"
+                        class="waves-effect waves-light btn-small blue text-darken-4 hoverable">View
+                        All</a>
+                </div>
+                <div id="common-conditions" class="row"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s6 bg-text3">Common Services</div>
+            <div class="col s6 bg-text3 right-align">
+                <a href="common-services.html"
+                    class="waves-effect waves-light btn-small blue text-darken-4 hoverable">View
+                    All</a>
+            </div>
+            <div id="common-services" class="row"></div>
+        </div>
+    </div>
+
+    <div id="footer" class="row"></div>
+
+
+
+    <!-- Chatbot -->
+    <div class="container">
+        <div class="chatbox">
+            <div class="chatbox__support">
+                <div class="chatbox__header">
+                    <div class="chatbox__image--header">
+                        <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png"
+                            alt="image">
+                    </div>
+                    <div class="chatbox__content--header">
+                        <h4 class="chatbox__heading--header">Chat support</h4>
+                        <p class="chatbox__description--header">Hi. My name is GetDoc. How can I help you?</p>
+                    </div>
+                </div>
+                <div class="chatbox__messages">
+                    <div></div>
+                </div>
+                <div class="chatbox__footer">
+                    <input type="text" placeholder="Write a message..." style="font-size: 18px;">
+                    <button class="chatbox__send--footer send__button" style="font-size: 20px;">Send</button>
+                </div>
+            </div>
+            <div class="chatbox__button">
+                <button><img src="./chatbox-icon.svg" /></button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
