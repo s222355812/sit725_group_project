@@ -1,0 +1,116 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day"
+      ],
+      "responses": [
+        "Hey :-)",
+        "Hello, thanks for visiting",
+        "Hi there, what can I do for you?",
+        "Hi there, how can I help?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": [
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    },
+    {
+      "tag": "illness",
+      "patterns": [
+        "not feeling well",
+        "not well",
+        "do not feel good",
+        "don't feel healthy",
+        "don't feel good"
+      ],
+      "responses": [
+        "We recommend consulting a General Physician"
+      ]
+    },
+    {
+      "tag": "illness_head",
+      "patterns": [
+        "headache",
+        "head pain",
+        "head hurts",
+        "pain in head",
+        "pain head"
+      ],
+      "responses": [
+        "We recommend consulting a General Physician"
+      ]
+    },
+    {
+      "tag": "illness_joint",
+      "patterns": [
+        "shoulder hurts",
+        "shoulder pain",
+        "joint hurts",
+        "joint pain",
+        "knee pain",
+        "knee hurts",
+        "elbow pain",
+        "elbow hurts"
+      ],
+      "responses": [
+        "We recommend consulting a Orthopaedist "
+      ]
+    },
+    {
+      "tag": "payments",
+      "patterns": [
+        "Do you take credit cards?",
+        "Do you accept Mastercard?",
+        "Can I pay with Paypal?",
+        "Are you cash only?"
+      ],
+      "responses": [
+        "We accept VISA, Mastercard and Paypal",
+        "We accept most major credit cards, and Paypal"
+      ]
+    },
+    {
+      "tag": "appoint",
+      "patterns": [
+        "How to make an appoint?",
+        "How to get a consultation with a doctor?",
+        "How to get a consultation?",
+        "How to book an appointment?",
+        "How to book a consultation?",
+        "How to meet a doctor?"
+      ],
+      "responses": [
+        "Register with us and select your illness"
+      ]
+    },
+    {
+      "tag": "funny",
+      "patterns": [
+        "Tell me a joke!",
+        "Tell me something funny!",
+        "Do you know a joke?"
+      ],
+      "responses": [
+        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
+        "What did the buffalo say when his son left for college? Bison."
+      ]
+    }
+  ]
+}
