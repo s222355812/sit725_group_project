@@ -2,12 +2,33 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const mongoose = require('mongoose');
-
-let { getDB } = require('../dbConnect');
+let {
+  getDB
+} = require('../dbConnect');
 let database;
 getDB.then((result) => {
   database = result;
 });
+
+//Patients schema
+const PatientClassSchema = new mongoose.Schema(
+{
+    _user: { type: String },
+    _email: { type: String },
+    _fname: { type: String },
+    _lname: { type: String },
+    _password: { type: String },
+    _picture: { type: String },
+    _sex: { type: String },
+    _dob: { type: String },
+    _age: { type: String },
+    _phone: { type: String },
+    _medicalHistory: { type: Array },
+    _schedule: { type: Object },
+    _patientRatings: { type: Object },
+  },
+  { collection: 'Patient', minimize: false }
+);
 
 router.post('/signup', (req, res) => {
   let email = req.body.email;
@@ -22,7 +43,7 @@ router.post('/signup', (req, res) => {
   const currentYear = new Date().getFullYear();
   const age = currentYear - birthYear;
   const Patient = mongoose.model('Patient', PatientClassSchema);
-
+  
   const patientData = new Patient({
     _user: 'patient',
     _email: `${email}`,
@@ -53,24 +74,5 @@ router.post('/signup', (req, res) => {
   database.collection('Patient').insertOne(patientData);
   res.redirect('/login.html');
 });
-
-const PatientClassSchema = new mongoose.Schema(
-  {
-    _user: { type: String },
-    _email: { type: String },
-    _fname: { type: String },
-    _lname: { type: String },
-    _password: { type: String },
-    _picture: { type: String },
-    _sex: { type: String },
-    _dob: { type: String },
-    _age: { type: String },
-    _phone: { type: String },
-    _medicalHistory: { type: Array },
-    _schedule: { type: Object },
-    _patientRatings: { type: Object },
-  },
-  { collection: 'Patient', minimize: false }
-);
 
 module.exports = router;
