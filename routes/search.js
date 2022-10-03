@@ -36,9 +36,11 @@ router.post('/search', (req, res) => {
           .collection('sessions')
           .updateOne(query, newValue, (err, result) => {
             if (err) throw err;
-            else console.log('Session searchResults updated');
+            else {
+              console.log('Session searchResults updated');
+              res.redirect('/search');
+            }
           });
     });
-  res.redirect('/search');
 });
 module.exports = router;
