@@ -13,14 +13,14 @@ Run the program with live reload
 npm run start:dev
 ```
 
-**In order to run the chatbot with the standalone front-end**
+**In order to run the chatbot with the standalone front-end a python editor should be used to run the files as well**
 
 **1. Dependencies and Packages that should be installed in the terminal**
 
 ```
-a). pip install Flask torch torchvision nltk
-b). pip install nltk
-
+pip install flask
+pip install flask-cors
+pip install nltk
 ```
 
 If you want to train the model with differenet data then the intents.json file should be updated

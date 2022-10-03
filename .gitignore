@@ -108,3 +108,6 @@ package-lock.json
 
 # VS Code settings
 .vscode
+
+# python cache
+__pycache__
