@@ -1,4 +1,4 @@
-**In order to run the chatbot with the standalone front-end**
+**In order to run the chatbot with the standalone front-end a python editor should be used to run the files as well**
 
 **1. Dependencies and Packages that should be installed in the terminal**
 ```
