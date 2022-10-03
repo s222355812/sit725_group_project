@@ -69,7 +69,19 @@ router.post('/signup', (req, res) => {
       _to: '11 AM',
       _status: 'BooKed',
       _doctorName: 'ABC XYZ',
-    }]
+    }],
+    _ratings: {
+      'Doctor Name 1': [
+        {
+          commentDate: 'DD/MM/YYYY',
+          docPicture: 'images/sample-picture-doctor.webp',
+          docProfileLink: '!#',
+          rating: '3.5',
+          patientComment:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis scelerisque tincidunt. Praesent blandit tempor vestibulum.',
+        },
+      ],
+    },
   });
 
   database.collection('Patient').insertOne(patientData);
