@@ -27,8 +27,8 @@ const PatientClassSchema = new mongoose.Schema(
     },
     _ratings: {
       type: Array,
-      _starCount: { type: String },
-      _comment: { type: String },
+      _rating: { type: String },
+          patientComment:{ type: String },
     },
     _schedule: {
       type: Array,
