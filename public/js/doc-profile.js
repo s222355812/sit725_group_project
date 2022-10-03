@@ -1,18 +1,28 @@
-$.getJSON('js/json/sample-doc-sched.json', (schedObj) => getDocSched(schedObj));
-$.getJSON('js/json/doc-profile.json', (obj) => displayDocData(obj));
+const viewDocProfile = () => {
+  $.post('/sessions', (res) => {
+    if ('_user' in res.data[0].session.viewProfileDoctor) {
+      getDocSched(res.data[0].session.viewProfileDoctor);
+    }
+  });
+};
 
 // If user is a Doctor, allow profile edit
-// ------------------------------------------------------------------------------
-let allowEdit = true;
+if (userData._user == 'doctor') allowEdit = true;
 
 // If user is a patient, display schedules
-// ------------------------------------------------------------------------------
-let allowDisplaySchedule = true;
+if (userData._user == 'patient') allowDisplaySchedule = true;
 
+// ------------------------------------------------------------------------------------------------------------
 // Get doctor available schedule
-// ------------------------------------------------------------------------------
-let docSched, schedToday, availableSchedFrom, availableSchedTo;
+// ------------------------------------------------------------------------------------------------------------
+let myDate,
+  myDay,
+  selectSched,
+  schedToday,
+  availableSchedFrom,
+  availableSchedTo;
 let dateToday = new Date();
+
 const weekday = [
   'sunday',
   'monday',
@@ -24,20 +34,39 @@ const weekday = [
 ];
 let today = weekday[dateToday.getDay()];
 
-const getDocSched = (schedObj) => {
-  schedToday = schedObj.docSched[today];
-  availableSchedFrom = schedToday[0].from;
-  availableSchedTo = schedToday[schedToday.length - 1].to;
+const getDocSched = (obj) => {
+  // Schedule for today
+  if (obj._docSched[today].length != 0) {
+    schedToday = obj._docSched[today];
+    availableSchedFrom = schedToday[0].from;
+    availableSchedTo = schedToday[schedToday.length - 1].to;
+  } else {
+    availableSchedFrom = '--:-- AM';
+    availableSchedTo = '--:-- PM';
+  }
+
+  myDay = today;
+  myDate = dateToday;
+  selectSched = schedToday;
+
+  // Selected Schedule
+  if (obj.hasOwnProperty('selectDate')) {
+    myDate = obj.selectDate.date;
+    myDay = obj.selectDate.day;
+    selectSched = obj._docSched[myDay];
+  }
+
+  displayDocData(obj);
 };
 
+// ------------------------------------------------------------------------------------------------------------
 // Display doctor profile data
-// ------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 const displayDocData = (obj) => {
   let dataEdit = ``;
   let changePic = ``;
   if (allowEdit) {
     dataEdit = `
-    <a class="waves-effect waves-light modal-trigger" href="#"><i class="material-icons left">add</i></a>
     <a class="waves-effect waves-light modal-trigger" href="#edit-doctor"><i class="material-icons left">edit</i></a>
   `;
 
@@ -52,7 +81,7 @@ const displayDocData = (obj) => {
   let addDocProfileData = (doc) => {
     // Add tags
     let tags = ``;
-    doc.specialisation.forEach((item) => {
+    doc._specialisation.forEach((item) => {
       tags =
         tags +
         `
@@ -62,21 +91,21 @@ const displayDocData = (obj) => {
 
     // Calculate years of experience
     let years = 0;
-    doc.experience.forEach((item) => {
-      years = years + Number(item.duration);
+    doc._experience.forEach((item) => {
+      years = years + Number(item._Duration);
     });
 
     return `
     <div class="card card-panel grey lighten-4">
         <div class="row">
             <div class="col s12 center-align">
-                <img class="circle" src="${doc.picture}" style="width: 100px; height:100px;">
+                <img class="circle" src="${doc._picture}" style="width: 100px; height:100px;">
             </div>
             ${changePic}
         </div>
         <hr>
         <div class="row">
-            <h5 class="col s6">${doc.name}</h5>
+            <h5 class="col s6">${doc._name}</h5>
             <div class="col s6 right-align">
                 ${dataEdit}
             </div>
@@ -96,7 +125,7 @@ const displayDocData = (obj) => {
             <h6 class="col s12 l4">Available Schedule:</h6>
             <h6 class="col s12 l8 teal-text">${availableSchedFrom} - ${availableSchedTo}</h6>
             <h6 class="col s4">Fees:</h6>
-            <h6 class="col s8 teal-text">$${doc.fees}</h6>
+            <h6 class="col s8 teal-text">$${doc._fees}</h6>
             <h6 class="col s12">Socials:</h6>
             <div class="col s12">
                 <a href=""><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
@@ -133,67 +162,121 @@ const displayDocData = (obj) => {
     `;
   };
 
+  // ------------------------------------------------------------------------------------------------------------
   //   Display doctor available schedules
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   const addSchedData = () => {
     if (!allowDisplaySchedule) return '';
 
     let allAMSched = ``;
     let allPMSched = ``;
-
-    schedToday.forEach((sched) => {
-      // AM schedule
-      if (sched.from.match('AM'))
-        allAMSched =
-          allAMSched +
-          `
-      <div class="card-panel grey lighten-3 z-depth-5 col s12">
-        <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
-        <a class="col s12 l3 offset-l1 waves-effect waves-light blue btn">Book </a>
-        <br>
-      </div>
-      `;
-
-      //  PM Schedule
-      if (sched.from.match('PM'))
-        allPMSched =
-          allPMSched +
-          `
-    <div class="card-panel grey lighten-3 z-depth-5 col s12">
-      <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
-      <a class="col s12 l3 offset-l1 waves-effect waves-light blue btn">Book </a>
-      <br>
-    </div>
+    let schedBoard = ``;
+    let bookBtn = `
+      <button class="btn waves-effect waves-light blue white-text z-depth-0" type="submit" name="action">book</button>
     `;
-    });
+
+    if (obj.hasOwnProperty('selectDate')) {
+      selectSched.forEach((sched) => {
+        // Check schedule if alreay booked
+        if (myDate in obj._appointments) {
+          obj._appointments[myDate].some((item) => {
+            if (item.from == sched.from) {
+              bookBtn = `
+                <button class="btn waves-effect waves-light blue white-text z-depth-0 disabled" type="submit" name="action">booked</button>
+                `;
+              return true;
+            } else {
+              bookBtn = `
+                <button class="btn waves-effect waves-light blue white-text z-depth-0" type="submit" name="action">book</button>
+                `;
+            }
+          });
+        }
+
+        // AM schedule
+        if (sched.from.match('AM'))
+          allAMSched =
+            allAMSched +
+            `
+            <form action="/book/appointment" method="POST">
+              <div class="card-panel grey lighten-3 z-depth-5 col s12">
+                <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
+                <input type="hidden" name="myName" value="${userData._fname} ${userData._lname}"/>
+                <input type="hidden" name="myEmail" value="${userData._email}"/>
+                <input type="hidden" name="myPic" value="${userData._picture}"/>
+                <input type="hidden" name="docEmail" value="${obj._email}"/>
+                <input type="hidden" name="docName" value="${obj._name}"/>
+                <input type="hidden" name="docPic" value="${obj._picture}"/>
+                <input type="hidden" name="date" value="${myDate}"/>
+                <input type="hidden" name="from" value="${sched.from}"/>
+                <input type="hidden" name="to" value="${sched.to}"/>
+                ${bookBtn}
+                <br>
+              </div>
+            </form>
+            `;
+
+        //  PM Schedule
+        if (sched.from.match('PM'))
+          allPMSched =
+            allPMSched +
+            `
+            <form action="/book/appointment" method="POST">
+              <div class="card-panel grey lighten-3 z-depth-5 col s12">
+              <h6 class="col s12 l8 center-align">${sched.from} - ${sched.to}</h6>
+              <input type="hidden" name="myName" value="${userData._fname} ${userData._lname}"/>
+              <input type="hidden" name="myEmail" value="${userData._email}"/>
+              <input type="hidden" name="myPic" value="${userData._picture}"/>
+              <input type="hidden" name="docEmail" value="${obj._email}"/>
+              <input type="hidden" name="docName" value="${obj._name}"/>
+              <input type="hidden" name="docPic" value="${obj._picture}"/>
+              <input type="hidden" name="date" value="${myDate}"/>
+              <input type="hidden" name="from" value="${sched.from}"/>
+              <input type="hidden" name="to" value="${sched.to}"/>
+              ${bookBtn}
+              <br>
+              </div>
+            </form>
+            `;
+      });
+
+      // Schedule Board
+      schedBoard = `
+        <div class="row">
+          <div class="card-panel grey lighten-2 col s12 l6">
+              <h5>AM</h5>
+              ${allAMSched}
+
+          </div>
+          <div class="card-panel grey lighten-2 col s12 l6">
+              <h5>PM</h5>
+              ${allPMSched}
+          </div>
+        </div>    
+        `;
+    }
 
     return `
     <div class="card-panel grey lighten-4">
         <div class="row">
             <h5>Schedule</h5>
             <hr>
-            <div class="input-field col s12 l6">
-                <input type="text" class="datepicker" />
+            <form action="/book" method="POST">
+              <div class="input-field col s12 l6">
+                <input name="selectedDate" type="text" class="datepicker" placeholder="${myDate} ${myDay}"/>
                 <label>Select Date</label>
-            </div>
+              </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="card-panel grey lighten-2 col s12 l6">
-                <h5>AM</h5>
-                ${allAMSched}
-    
-            </div>
-            <div class="card-panel grey lighten-2 col s12 l6">
-                <h5>PM</h5>
-                ${allPMSched}
-            </div>
-        </div>
+        ${schedBoard}
     </div>    
     `;
   };
 
+  // ------------------------------------------------------------------------------------------------------------
   //   Display doctor experience information
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
+
   const addExperienceData = (doc) => {
     let experienceAdd = ``;
     let experienceEdit = ``;
@@ -207,26 +290,26 @@ const displayDocData = (obj) => {
         <div id="exp-add" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form class="col s12">
+                  <form action="/docexpadd" method="POST" class="col s12">
                       <div class="row">
                           <div class="input-field col s12">
-                              <input id="exp-position" type="text" class="validate">
+                              <input id="exp-position" type="text" name="position" class="validate">
                               <label for="exp-position">Position</label>
                           </div>
                           <div class="input-field col s12">
-                              <input id="exp-hospital" type="text" class="validate">
+                              <input id="exp-hospital" type="text" name="hospital" class="validate">
                               <label for="exp-hospital">Hospital Name</label>
                           </div>
                           <div class="input-field col s12">
-                              <input id="exp-duration" type="text" class="validate">
+                              <input id="exp-duration" type="text" name="duration" class="validate">
                               <label for="exp-duration">Duration in years</label>
+                          </div>
+                          <div class="input-field col s12 center-align">
+                              <button type="submit" class="btn" value="Submit" id="submit">Done</button>
                           </div>
                       </div>
                   </form>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+            </div>
           </div>
         </div>
 
@@ -239,7 +322,9 @@ const displayDocData = (obj) => {
           <a class="modal-trigger" href="${
             '#' + id
           }"><i class="material-icons blue-text">edit</i></a>
-          <a class="" href=""><i class="material-icons red-text">delete</i></a>
+          <a class="modal-trigger" href="${
+            '#D' + id
+          }"><i class="material-icons red-text">delete</i></a>
         </div>
       `;
 
@@ -248,33 +333,58 @@ const displayDocData = (obj) => {
         `
         <hr>
         ${experienceEdit}
-        <h6>${exp.position}</h6>
-        <h6>${exp.hospitalName}</h6>
-        <h6>Duration: ${exp.duration} years</h6>
+        <h6>Position: ${exp._Position}</h6>
+        <h6>HospitalName: ${exp._HospitalName}</h6>
+        <h6>Duration: ${exp._Duration} years</h6>
 
         <div id="${id}" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form class="col s12">
+                  <form action="/updateexp" method="POST" class="col s12">
                       <div class="row">
                           <div class="input-field col s12">
-                              <input id="exp-position" type="text" class="validate">
+                              <input id="index" type="hidden" name="index" value="${i}" class="validate">
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="exp-position" type="text" name="expposition" class="validate">
                               <label for="exp-position">Position</label>
                           </div>
                           <div class="input-field col s12">
-                              <input id="exp-hospital" type="text" class="validate">
+                              <input id="exp-hospital" type="text" name="exphospital" class="validate">
                               <label for="exp-hospital">Hospital Name</label>
                           </div>
                           <div class="input-field col s12">
-                              <input id="exp-duration" type="text" class="validate">
+                              <input id="exp-duration" type="text" name="expduration" class="validate">
                               <label for="exp-duration">Duration in years</label>
+                          </div>
+                          <div class="input-field col s12 center-align">
+                              <button type="submit" class="btn" value="Submit" id="submit">Done</button>
                           </div>
                       </div>
                   </form>
               </div>
           </div>
-          <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+        </div>
+
+
+
+        <div id="${'D' + id}" class="modal">
+          <div class="modal-content">
+              <div class="row">
+                  <form action="/deleteexp" method="POST" class="col s12">
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <input id="index" type="hidden" name="index" value="${i}" class="validate">
+                          </div>
+                          <div class="col s12 center-align">
+                              <h2>Are you sure you want to delete it?</h2>
+                          </div>
+                          <div class="col s12 center-align">
+                              <button type="submit" class="btn" value="Submit" id="submit">Delete</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
           </div>
         </div>
       `;
@@ -295,9 +405,9 @@ const displayDocData = (obj) => {
    
     `;
   };
-
+  // ------------------------------------------------------------------------------------------------------------
   //   Display doctor education information
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   const addEducationData = (doc) => {
     let educationAdd = ``;
     let educationEdit = ``;
@@ -311,22 +421,23 @@ const displayDocData = (obj) => {
         <div id="edu-add" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form class="col s12">
+                  <form action="/doceduadd" method="POST" class="col s12">
                       <div class="row">
                         <div class="input-field col s12">
-                          <input id="edu-degree" type="text" class="validate">
+                          <input id="edu-degree" type="text" name="degree" class="validate">
                           <label for="edu-degree">Degree</label>
                         </div>
                         <div class="input-field col s12">
-                          <input id="edu-school" type="text" class="validate">
+                          <input id="edu-school" type="text" name="school" class="validate">
                           <label for="edu-school">School Name</label>
                         </div>
+                        <div class="input-field col s12 center-align">
+                          <button type="submit" class="btn" value="Submit" id="submit">Done</button>
+                        </div>
                       </div>
+                      
                   </form>
               </div>
-          </div>
-          <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
           </div>
         </div>
       `;
@@ -338,7 +449,9 @@ const displayDocData = (obj) => {
           <a class="modal-trigger" href="${
             '#' + id
           }"><i class="material-icons blue-text">edit</i></a>
-          <a class="" href=""><i class="material-icons red-text">delete</i></a>
+          <a class="modal-trigger" href="${
+            '#D' + id
+          }"><i class="material-icons red-text">delete</i></a>
         </div>
       `;
 
@@ -347,30 +460,55 @@ const displayDocData = (obj) => {
         `
         <hr>
         ${educationEdit}
-        <h6>${edu.degree}</h6>
-        <h6>${edu.schoolName}</h6>    
+        <h6>Degree: ${edu._Degree}</h6>
+        <h6>School: ${edu._UniName}</h6>    
         
         <div id="${id}" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form class="col s12">
+                   <form action="/updateedu" method="POST" class="col s12">
                       <div class="row">
                           <div class="input-field col s12">
-                              <input id="edu-degree" type="text" class="validate">
-                              <label for="edu-degree">Degree</label>
+                              <input id="index" type="hidden" name="index" value="${i}" class="validate">
                           </div>
                           <div class="input-field col s12">
-                              <input id="edu-school" type="text" class="validate">
-                              <label for="edu-school">School Name</label>
+                              <input id="eduuni" type="text" name="eduuni" class="validate">
+                              <label for="eduuni">Uni Name</label>
+                          </div>
+                          <div class="input-field col s12">
+                              <input id="edudegree" type="text" name="edudegree" class="validate">
+                              <label for="edudegree">Degree</label>
+                          </div>
+                          <div class="input-field col s12 center-align">
+                              <button type="submit" class="btn" value="Submit" id="submit">Done</button>
                           </div>
                       </div>
                   </form>
               </div>
           </div>
-          <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
+        </div>
+
+
+        <div id="${'D' + id}" class="modal">
+          <div class="modal-content">
+              <div class="row">
+                  <form action="/deleteedu" method="POST" class="col s12">
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <input id="index" type="hidden" name="index" value="${i}" class="validate">
+                          </div>
+                          <div class="col s12 center-align">
+                              <h2>Are you sure you want to delete it?</h2>
+                          </div>
+                          <div class="col s12 center-align">
+                              <button type="submit" class="btn" value="Submit" id="submit">Delete</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
           </div>
         </div>
+
       `;
       i++;
       id = 'edu-' + i;
@@ -389,8 +527,9 @@ const displayDocData = (obj) => {
     `;
   };
 
+  // ------------------------------------------------------------------------------------------------------------
   //   Doctor Display Information Contoller
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   Object.keys(obj).some((item) => {
     // obj = whole data object
     // item = object index [0, 1, 2, ...]
@@ -399,31 +538,23 @@ const displayDocData = (obj) => {
     if (document.getElementById('doc-profile')) {
       document
         .getElementById('doc-profile')
-        .insertAdjacentHTML('beforebegin', addDocProfileData(obj[item]));
-
+        .insertAdjacentHTML('beforebegin', addDocProfileData(obj));
       document
         .getElementById('doc-profile')
         .insertAdjacentHTML('beforebegin', addSchedData());
-
       document
         .getElementById('doc-profile')
-        .insertAdjacentHTML(
-          'beforebegin',
-          addExperienceData(obj[item].experience)
-        );
-
+        .insertAdjacentHTML('beforebegin', addExperienceData(obj._experience));
       document
         .getElementById('doc-profile')
-        .insertAdjacentHTML(
-          'beforebegin',
-          addEducationData(obj[item].education)
-        );
+        .insertAdjacentHTML('beforebegin', addEducationData(obj._education));
     }
     return true;
   });
 
+  // ------------------------------------------------------------------------------------------------------------
   // Tags
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   $('.chips-placeholder').chips({
     placeholder: 'Enter a tag',
     secondaryPlaceholder: '+Tag',
@@ -477,8 +608,9 @@ const displayDocData = (obj) => {
     },
   });
 
+  // ------------------------------------------------------------------------------------------------------------
   // Change profile pic
-  // ------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------------------
   $('#chg-doc-pic').change((item) => {
     let file = item.target.files[0];
     let reader = new FileReader();
@@ -486,7 +618,15 @@ const displayDocData = (obj) => {
 
     reader.onload = (readerEvent) => {
       let content = readerEvent.target.result;
-      console.log(content);
+      $.ajax({
+        url: '/docUpdate/pic',
+        data: { picture: content },
+        type: 'POST',
+        success: (result) => {},
+      });
+      setTimeout(function () {
+        location.reload();
+      }, 5000);
     };
   });
 
@@ -496,4 +636,37 @@ const displayDocData = (obj) => {
 
   // Modal
   $.getScript('js/modal.js');
+
+  // Date picker
+  // Time picker
+  $(document).ready(function () {
+    $('.datepicker').datepicker();
+    $('.timepicker').timepicker({
+      showClearBtn: true,
+    });
+    $('.datepicker-done').type = 'submit';
+
+    $('.datepicker-done').click(() => {
+      let pickerDate = $('.datepicker').val();
+      let myDate = new Date(pickerDate);
+      let myDay = weekday[myDate.getDay()];
+
+      $.ajax({
+        url: '/book',
+        data: { date: pickerDate, day: myDay },
+        type: 'POST',
+        success: (result) => {
+          location.reload();
+        },
+      });
+
+      // ...End
+    });
+  });
+
+  // ...End
 };
+
+if (userData._user == 'doctor' && '_name' in userData) {
+  getDocSched(userData);
+} else viewDocProfile();

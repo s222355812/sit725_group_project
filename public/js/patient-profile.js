@@ -1,18 +1,31 @@
-$.getJSON('js/json/patient-profile.json', (obj) => displayPatientProfile(obj));
+const viewPatientProfile = () => {
+  $.post('/sessions', (res) => {
+    if ('viewProfilePatient' in res.data[0].session) {
+      displayPatientProfile(res.data[0].session.viewProfilePatient);
+    }
+  });
+};
 
 const displayPatientProfile = (obj) => {
+  let editBtn = ``;
+  let changeBtn = ``;
+
+  if (!allowEdit) {
+    editBtn = `<a class="waves-effect waves-light btn modal-trigger" href="#edit-patient"><i class="material-icons left">edit</i>Edit</a> `;
+    changeBtn = `<a id="chg-patient-btn" class="waves-effect waves-light btn" style="margin-top:20px;">Change</a>`;
+  }
   let addPatientData = (patient) => {
     return `
     <div class="row">
         <div class="col s12">
             <div class="card">
                 <div class="exitbutton" style="float:right;">
-                    <a class="waves-effect waves-light btn modal-trigger" href="#edit-patient"><i class="material-icons left">edit</i>Edit</a>
+                    ${editBtn}
                 </div>
                 <div class="col s2">
                     <div class="avator">
-                        <img src="${patient.image}" style="width: 100px; height: 100px">
-                        <a id="chg-patient-btn" class="waves-effect waves-light btn" style="margin-top:20px;">Change</a>
+                        <img src="${patient._picture}" style="width: 100px; height: 100px">
+                        ${changeBtn}
                         <input id="chg-patient-pic" type="file" name="name" style="display: none;" />
                     </div>
                 </div>
@@ -20,14 +33,14 @@ const displayPatientProfile = (obj) => {
                     <div class="infos">
                         <div class="name">
                             <h6>FirstName</h6>
-                            <p class="text">${patient.firstName}</p>
+                            <p class="text">${patient._fname}</p>
                             <h6>LastName</h6>
-                            <p class="text">${patient.lastName}</p>
+                            <p class="text">${patient._lname}</p>
                         </div>
                         <h6>Age</h6>
-                        <p class="text">${patient.age}</p>
+                        <p class="text">${patient._age}</p>
                         <h6>Sex</h6>
-                        <p class="text">${patient.sex}</p>
+                        <p class="text">${patient._sex}</p>
                     </div>
                 </div>
             </div>
@@ -37,33 +50,36 @@ const displayPatientProfile = (obj) => {
   <div id="edit-patient" class="modal">
     <div class="modal-content">
       <div class="row">
-        <form class="col s12">
+        <form action="/patientupdate" method="POST" class="col s12">
           <div class="row">
             <div class="input-field col s6">
-              <input id="patient-fname" type="text" class="validate">
+              <input id="patient-fname" type="text" name="firstName" class="validate">
               <label for="patient-fname">First Name</label>
             </div>
             <div class="input-field col s6">
-              <input id="patient-lname" type="text" class="validate">
+              <input id="patient-lname" type="text" name="lastName" class="validate">
               <label for="patient-lname">Last Name</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="patient-age" type="text" class="validate">
+              <input id="patient-age" type="text" name="age" class="validate">
               <label for="patient-age">Age</label>
             </div>
             <div class="input-field col s6">
-              <input id="patient-sex" type="text" class="validate">
+              <input id="patient-sex" type="text" name="sex" class="validate">
               <label for="patient-sex">Sex</label>
             </div>
+          </div>
+          <div class="row">
+          <div class="input-field col s12 center-align">
+          <button type="submit" class="btn" value="Submit" id="submit">Done</button>
+          </div>
           </div>
         </form>
       </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
-    </div>
+
   </div>
     `;
   };
@@ -78,7 +94,7 @@ const displayPatientProfile = (obj) => {
     if (document.getElementById('patient-profile')) {
       document
         .getElementById('patient-profile')
-        .insertAdjacentHTML('beforebegin', addPatientData(obj[item]));
+        .insertAdjacentHTML('beforebegin', addPatientData(obj));
     }
 
     return true;
@@ -93,7 +109,15 @@ const displayPatientProfile = (obj) => {
 
     reader.onload = (readerEvent) => {
       let content = readerEvent.target.result;
-      console.log(content);
+      $.ajax({
+        url: '/patientupdate/pic',
+        data: { picture: content },
+        type: 'POST',
+        success: (result) => {},
+      });
+      setTimeout(function () {
+        location.reload();
+      }, 5000);
     };
   });
 
@@ -104,3 +128,7 @@ const displayPatientProfile = (obj) => {
   // Modal
   $.getScript('js/modal.js');
 };
+
+if (userData._user == 'patient') {
+  displayPatientProfile(userData);
+} else viewPatientProfile();

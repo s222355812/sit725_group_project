@@ -1,15 +1,5 @@
 // Load patient ratings
 // -----------------------------------------------------
-const getPatientRatingsData = () => {
-  $.get('/api/patientRatings', (response) => {
-    if (response.statusCode == 200) {
-      displayRatings(response.data[0].patientRatings);
-    }
-  });
-};
-
-getPatientRatingsData();
-
 const displayRatings = (obj) => {
   let addRating = (doctor, info) => {
     let docReply = '';
@@ -91,3 +81,7 @@ const displayRatings = (obj) => {
     }
   });
 };
+
+if (userData._user == 'patient' && '_patientRatings' in userData) {
+  displayRatings(userData._patientRatings);
+}
