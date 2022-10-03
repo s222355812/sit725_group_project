@@ -2,8 +2,9 @@
 
 **1. Dependencies and Packages that should be installed in the terminal**
 ```
-a). pip install Flask torch torchvision nltk
-b). pip install nltk
+a). pip install flask
+b). pip install flask-cors
+c). pip install nltk
 
 ```
 If you want to train the model with differenet data then the intents.json file should be updated
