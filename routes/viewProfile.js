@@ -8,10 +8,6 @@ getDB.then((result) => {
   database = result;
 });
 
-// router.get('/viewProfile', (req, res) => {
-//   res.sendFile(path.resolve('public/doctor-profile.html'));
-// });
-
 router.post('/viewProfile', (req, res) => {
   req.session.searchResults = {};
   req.session.viewProfileDoctor = { _user: 'patient' };

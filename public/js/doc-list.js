@@ -23,7 +23,7 @@ $(document).ready(function () {
       'Kidney & Urine': null,
       'Stomach & Digestion': null,
       'Blood & Hematology': null,
-      Hepaptology: null,
+      Hepatology: null,
       'Imaging & Radiology': null,
       'Dental Care': null,
       Pediatrics: null,
