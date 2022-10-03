@@ -17,6 +17,16 @@ let patientUpdate = require('./routes/patientUpdate');
 let docUpdate = require('./routes/docUpdate');
 
 app.use(
+  cors({
+    allowedHeaders: ['Content-Type'],
+    origin: '*',
+    credentials: true,
+    preflightContinue: true,
+    optionSuccessStatus: 200,
+  })
+);
+app.options('*', cors());
+app.use(
   session({
     secret: 'key that will sign cookie',
     resave: false,
