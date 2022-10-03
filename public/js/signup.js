@@ -10,6 +10,7 @@ getDB.then((result) => {
   database = result;
 });
 
+//Patients schema
 const PatientClassSchema = new mongoose.Schema(
   {
     _email: { type: String },
