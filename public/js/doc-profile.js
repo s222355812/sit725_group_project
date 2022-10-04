@@ -289,8 +289,8 @@ const displayDocData = (obj) => {
         <div id="exp-add" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form  class="col s12">
-                      <div class="row">action="/docexpadd" method="POST"
+                  <form  class="col s12" action="/docexpadd" method="POST">
+                      <div class="row">
                           <div class="input-field col s12">
                               <input id="exp-position" type="text" name="position" class="validate">
                               <label for="exp-position">Position</label>
