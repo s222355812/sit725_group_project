@@ -139,23 +139,22 @@ const displayDocData = (obj) => {
     <div id="edit-doctor" class="modal">
       <div class="modal-content">
           <div class="row">
-              <form class="col s12">
+              <form action="/docinfo" method="POST" class="col s12">
                   <div class="row">
                       <div class="input-field col s6">
-                          <input id="doc-name" type="text" class="validate">
+                          <input id="doc-name" type="text" name="docname" class="validate">
                           <label for="doc-name">Name</label>
                       </div>
                       <div class="input-field col s6">
-                          <input id="doc-fees" type="text" class="validate">
+                          <input id="doc-fees" type="text" name="docfee" class="validate">
                           <label for="doc-fees">Fees</label>
                       </div>
+                      <div class="input-field col s12 center-align">
+                          <button type="submit" class="btn" value="Submit" id="submit">Done</button>
+                      </div>
                   </div>
-                  <div class="chips chips-placeholder chips-autocomplete"></div>
               </form>
           </div>
-      </div>
-      <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat blue">Done</a>
       </div>
     </div>
 
@@ -290,8 +289,8 @@ const displayDocData = (obj) => {
         <div id="exp-add" class="modal">
           <div class="modal-content">
               <div class="row">
-                  <form action="/docexpadd" method="POST" class="col s12">
-                      <div class="row">
+                  <form  class="col s12">
+                      <div class="row">action="/docexpadd" method="POST"
                           <div class="input-field col s12">
                               <input id="exp-position" type="text" name="position" class="validate">
                               <label for="exp-position">Position</label>

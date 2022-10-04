@@ -297,4 +297,43 @@ router.post('/deleteedu', (req, res) => {
     });
 });
 
+router.post('/docinfo', (req,res)=>{
+  let docname = req.body.docname;
+  let docfee = req.body.docfee;
+  let newValue = {
+    $set: { _name: docname, _fees: docfee},
+  };
+
+  database
+    .collection('sessions')
+    .find({ _id: req.session.id })
+    .toArray((err, result) => {
+      if (err) throw err;
+      if (result[0]) {
+        let email = result[0].session.userData._email;
+        let query = {
+          _email: `${email}`,
+        };
+        database
+          .collection('DoctorClass')
+          .find(query)
+          .toArray((err, patient) => {
+            if (err) throw err;
+            else {
+              database
+                .collection('DoctorClass')
+                .updateMany(query, newValue, (err, result) => {
+                  if (err) throw err;
+                  else {
+                    console.log('personal info updated');
+                  }
+
+                  res.redirect('/doctor-profile.html');
+                });
+            }
+          });
+      }
+    });
+})
+
 module.exports = router;
