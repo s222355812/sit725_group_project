@@ -16,6 +16,13 @@ let book = require('./routes/book');
 let patientUpdate = require('./routes/patientUpdate');
 let docUpdate = require('./routes/docUpdate');
 
+//Using Controller to create Doc
+// let doccreate = require('./Controller/DocController');
+// doccreate.createdoc((req,res)=>{
+// console.log("doc created");
+// });
+
+
 app.use(
   cors({
     allowedHeaders: ['Content-Type'],
@@ -57,36 +64,36 @@ app.use(patientUpdate);
 app.use(docUpdate);
 
 //Doctor collection created
-const DoctorClassSchema = new mongoose.Schema(
-  {
-    _email: { type: String },
-    _name: { type: String },
-    _password: { type: String },
-    _spespecialisation: { type: Array },
-    _avatar: { type: String },
-    _comments: { type: Array },
-    _experience: {
-      type: Array,
-      _HospitalName: { type: String },
-      _Duration: { type: String },
-    },
-    _education: {
-      type: Array,
-      _UniName: { type: String },
-      _Degree: { type: String },
-    },
-    _AvailableTime: {
-      type: Array,
-      _date: { type: Date },
-      _from: { type: String },
-      _to: { type: String },
-      _Status: { type: String },
-    },
-  },
-  { collection: 'DoctorClass' }
-);
+// const DoctorClassSchema = new mongoose.Schema(
+//   {
+//     _email: { type: String },
+//     _name: { type: String },
+//     _password: { type: String },
+//     _spespecialisation: { type: Array },
+//     _avatar: { type: String },
+//     _comments: { type: Array },
+//     _experience: {
+//       type: Array,
+//       _HospitalName: { type: String },
+//       _Duration: { type: String },
+//     },
+//     _education: {
+//       type: Array,
+//       _UniName: { type: String },
+//       _Degree: { type: String },
+//     },
+//     _AvailableTime: {
+//       type: Array,
+//       _date: { type: Date },
+//       _from: { type: String },
+//       _to: { type: String },
+//       _Status: { type: String },
+//     },
+//   },
+//   { collection: 'DoctorClass' }
+// );
 
-const Doctor = mongoose.model('Doctor', DoctorClassSchema);
+// const Doctor = mongoose.model('Doctor', DoctorClassSchema);
 
 // Here you can add doctors by typing below
 // const doctor = new Doctor({
