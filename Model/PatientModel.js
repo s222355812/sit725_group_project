@@ -19,5 +19,5 @@ const PatientClassSchema = new mongoose.Schema(
       { collection: 'Patient', minimize: false }
     );
     module.exports = {
-        DoctorClassSchema
+        PatientClassSchema
     }
