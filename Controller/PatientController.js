@@ -9,7 +9,7 @@ let {
     database = result;
   });
 
-const createpatient = (req,res) =>{
+const createPatient = (req,res) =>{
     let email = req.body.email;
     let fname = req.body.fname;
     let lname = req.body.fname;
@@ -51,3 +51,4 @@ const createpatient = (req,res) =>{
   
     database.collection('Patient').insertOne(patientData);
 }
+module.exports = { createPatient }

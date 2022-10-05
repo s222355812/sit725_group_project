@@ -4,6 +4,10 @@ const path = require('path');
 const mongoose = require('mongoose');
 const patient = require("../Model/PatientModel");
 let {
+  createPatient
+} =require('../Controller/PatientController')
+
+let {
   getDB
 } = require('../dbConnect');
 let database;
