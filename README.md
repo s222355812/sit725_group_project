@@ -51,13 +51,13 @@ run the homepage.html page
 
 ### Patient Credentials
 
-> | Email             | Password |
-> | :---------------- | :------- |
-> | aubrey@gmail.com  | aubrey   |
-> | philips@gmail.com | philips  |
-> | @gmail.com        |          |
-> | @gmail.com        |          |
-> | @gmail.com        |          |
+> | Email                | Password |
+> | :----------------    | :------- |
+> | aubrey@gmail.com     | aubrey   |
+> | philips@gmail.com    | philips  |
+> | siyadian@gmail.com   | admin    |
+> | elledoe@gmail.com    | admin    |
+> |joanaalbert@gmail.com | admin    |
 
 ### Doctor Credentials
 
