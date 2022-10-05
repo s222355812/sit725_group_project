@@ -23,7 +23,7 @@ router.post('/signup', (req, res) => {
   const birthYear = new Date(dob).getFullYear();
   const currentYear = new Date().getFullYear();
   const age = currentYear - birthYear;
-  
+
   const patientData = new patient({
     _user: 'patient',
     _email: `${email}`,
