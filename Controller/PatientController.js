@@ -50,5 +50,6 @@ const createPatient = (req,res) =>{
     });
   
     database.collection('Patient').insertOne(patientData);
+    res.json({statusCode: 200, message:"Success", data: result})
 }
 module.exports = { createPatient }
