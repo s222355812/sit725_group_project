@@ -15,9 +15,6 @@ const PatientClassSchema = new mongoose.Schema(
         _medicalHistory: { type: Array },
         _schedule: { type: Object },
         _patientRatings: { type: Object },
-      },
-      { collection: 'Patient', minimize: false }
+      } 
     );
-    module.exports = {
-        PatientClassSchema
-    }
+    module.exports = mongoose.model("patient", PatientClassSchema);

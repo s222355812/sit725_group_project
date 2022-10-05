@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const mongoose = require('mongoose');
+const patient = require("../Model/PatientModel");
 let {
   getDB
 } = require('../dbConnect');
@@ -22,9 +23,8 @@ router.post('/signup', (req, res) => {
   const birthYear = new Date(dob).getFullYear();
   const currentYear = new Date().getFullYear();
   const age = currentYear - birthYear;
-  const Patient = mongoose.model('Patient', PatientClassSchema);
   
-  const patientData = new Patient({
+  const patientData = new patient({
     _user: 'patient',
     _email: `${email}`,
     _fname: `${fname}`,
