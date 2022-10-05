@@ -9,7 +9,7 @@ let {
     database = result;
   });
 
-const createPatient = (req,res) =>{
+const createPatient = (req,callback) =>{
     let email = req.body.email;
     let fname = req.body.fname;
     let lname = req.body.fname;
@@ -49,7 +49,7 @@ const createPatient = (req,res) =>{
       },
     });
   
-    database.collection('Patient').insertOne(patientData);
-    res.json({statusCode: 200, message:"Success", data: result})
+    database.collection('Patient').insertOne(patientData, callback);
+    //res.json({statusCode: 200, message:"Success", data: res})
 }
 module.exports = { createPatient }
